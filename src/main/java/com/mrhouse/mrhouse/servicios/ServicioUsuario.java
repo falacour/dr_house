@@ -5,6 +5,7 @@
 package com.mrhouse.mrhouse.servicios;
 
 import com.mrhouse.mrhouse.repositorios.RepositorioUsuario;
+import com.mrhouse.mrhouse.excepciones.MiException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,7 @@ public class ServicioUsuario  implements UserDetailsService{
  
     @Transactional
     public void registrar(MultipartFile archivo, String nombre, String email, 
-            String password, String password2) throws MiExcepcion{
+            String password, String password2) throws MiException{
         validar(nombre, email, password, password2);
         Usuario usuario =new Usuario();
         usuario.setNombre(nombre);
