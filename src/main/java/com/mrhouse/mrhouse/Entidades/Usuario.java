@@ -1,24 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
 package com.mrhouse.mrhouse.entidades;
 
+import com.mrhouse.mrhouse.enumeraciones.Rol;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
-/**
- *
- * @author thell
- */
-@Entity
-
 public class Usuario {
-        @Id
+    @Id
     @GeneratedValue(generator="uuid")
     @GenericGenerator(name="uuid", strategy="uuid2")
     private String id;
@@ -26,8 +17,17 @@ public class Usuario {
     private String email;
     private String password;
     private String password2;
+    private Rol rol;
 
     public Usuario() {
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     public String getId() {
