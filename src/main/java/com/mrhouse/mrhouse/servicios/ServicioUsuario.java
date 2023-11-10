@@ -1,7 +1,7 @@
 
 package com.mrhouse.mrhouse.servicios;
 
-import com.mrhouse.mrhouse.Entidades.Usuario;
+import com.mrhouse.mrhouse.entidades.Usuario;
 import com.mrhouse.mrhouse.enumeraciones.Rol;
 import com.mrhouse.mrhouse.repositorios.RepositorioUsuario;
 import com.mrhouse.mrhouse.excepciones.MiException;
