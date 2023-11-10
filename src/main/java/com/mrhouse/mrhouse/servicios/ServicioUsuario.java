@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
+ 
 @Service
 public class ServicioUsuario  implements UserDetailsService{
   
@@ -26,8 +26,7 @@ public class ServicioUsuario  implements UserDetailsService{
         
         validar(nombre, email, password, password2);
         
-        Usuario usuario = new Usuario();
-        
+        Usuario usuario =new Usuario();
         usuario.setNombre(nombre);
         usuario.setEmail(email);
         usuario.setPassword(password);
@@ -37,24 +36,26 @@ public class ServicioUsuario  implements UserDetailsService{
     }
       public void actualizar(MultipartFile archivo, String idUsuario, String nombre, String email, String password, String password2) throws Exception{
           validar(nombre, email, password, password2);
-          
-        Optional<Usuario> respuesta = repositorioUsuario.findById(idUsuario);
-          
-        if(respuesta.isPresent()){
-            Usuario usuario = respuesta.get();
-            usuario.setNombre(nombre);
-            usuario.setEmail(email);
+          Optional<Usuario> respuesta = repositorioUsuario.findById(idUsuario);
+          if(respuesta.isPresent()){
+              Usuario usuario = respuesta.get();
+              usuario.setNombre(nombre);
+              usuario.setEmail(email);
             usuario.setPassword(password);
-            usuario.setRol(Rol.USER);
-            repositorioUsuario.save(usuario);
-        }   
-    }
+                  usuario.setRol(Rol.USER);
+                  String idImagen=null;
+       repositorioUsuario.save(usuario);
+   
+          }
+          
+          
+      }
       
-    public Usuario getOne(String id){
-        return repositorioUsuario.getOne(id);
-    }
-    
-    @Transactional()
+             public Usuario getOne(String id){
+          
+          return repositorioUsuario.getOne(id);
+      }
+              @Transactional()
     public List<Usuario> listarUsuarios() {
 
         List<Usuario> usuarios = new ArrayList();
@@ -63,42 +64,40 @@ public class ServicioUsuario  implements UserDetailsService{
 
         return usuarios;
     }
-    
-    @Transactional
+       @Transactional
     public void cambiarRol(String id){
         Optional<Usuario> respuesta = repositorioUsuario.findById(id);
     	
     	if(respuesta.isPresent()) {
     		
-            Usuario usuario = respuesta.get();
+    		Usuario usuario = respuesta.get();
     		
-            if(usuario.getRol().equals(Rol.USER)) {
+    		if(usuario.getRol().equals(Rol.USER)) {
     			
-                usuario.setRol(Rol.ADMIN);
+    		usuario.setRol(Rol.ADMIN);
     		
-            }else if(usuario.getRol().equals(Rol.ADMIN)) {
-                
-    		usuario.setRol(Rol.USER);
-            }
+    		}else if(usuario.getRol().equals(Rol.ADMIN)) {
+    			usuario.setRol(Rol.USER);
+    		}
     	}
     }
-    
-    public void validar( String nombre, String email, String password, String password2) throws MiException{
-        if(nombre==null || nombre.isEmpty()){
-            throw new MiException("el nombre no puede estar vacio o ser nulo");
-        }
-        if(email==null || email.isEmpty()){
-            throw new MiException("el email no puede estar vacio o ser nulo");
-        }
-        if(password==null || password.isEmpty() || password.length()<=5){
-            throw new MiException("el password no puede estar vacio o ser nulo y debe tener mas de 5 caracteres");
-        }
-        if(password2==null || password2.isEmpty()){
-            throw new MiException("el password no puede estar vacio o ser nulo");
-        }
-        if(!password.equals(password2)){
-            throw new MiException("Las contraseñas deben ser iguales");
-        }
-    }
+       public void validar( String nombre, String email, String password, String password2) throws MiException{
+           if(nombre==null || nombre.isEmpty()){
+               throw new MiException("el nombre no puede estar vacio o ser nulo");
+           }
+           if(email==null || email.isEmpty()){
+                throw new MiException("el email no puede estar vacio o ser nulo");
+           }
+           if(password==null || password.isEmpty() || password.length()<=5){
+                throw new MiException("el password no puede estar vacio o ser nulo y debe tener mas de 5 caracteres");
+           }
+           if(password2==null || password2.isEmpty()){
+                  throw new MiException("el password no puede estar vacio o ser nulo");
+           }
+           if(!password.equals(password2)){
+                  throw new MiException("Las contraseñas deben ser iguales");
+           }
+       }
+  
 }
 
