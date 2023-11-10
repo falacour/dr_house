@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.mrhouse.mrhouse.entidades;
+package com.mrhouse.mrhouse.Entidades;
 
-/**
- *
- * @author thell
- */
 public class Ente extends Usuario{
     
     
