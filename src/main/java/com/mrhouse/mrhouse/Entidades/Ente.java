@@ -1,4 +1,4 @@
-package com.mrhouse.mrhouse.Entidades;
+package com.mrhouse.mrhouse.entidades;
 
 public class Ente extends Usuario{
     
