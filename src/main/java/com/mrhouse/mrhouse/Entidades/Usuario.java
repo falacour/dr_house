@@ -1,4 +1,4 @@
-package com.mrhouse.mrhouse.Entidades;
+package com.mrhouse.mrhouse.entidades;
 
 import com.mrhouse.mrhouse.enumeraciones.Rol;
 import javax.persistence.Entity;
