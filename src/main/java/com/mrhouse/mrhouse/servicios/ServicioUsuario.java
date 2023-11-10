@@ -12,9 +12,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
  
 @Service
-public class ServicioUsuario  implements UserDetailsService{
+public class ServicioUsuario{
   
 
     @Autowired
