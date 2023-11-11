@@ -21,7 +21,7 @@ public class ServicioUsuario{
     private RepositorioUsuario repositorioUsuario;
  
     @Transactional
-    public void registrar(MultipartFile archivo, String nombre, String email, 
+    public void registrar(String nombre, String email, 
             String password, String password2) throws MiException{
         
         validar(nombre, email, password, password2);
@@ -35,7 +35,7 @@ public class ServicioUsuario{
         repositorioUsuario.save(usuario);
     }
       
-    public void actualizar(MultipartFile archivo, String idUsuario, String nombre, String email, String password, String password2) throws Exception{
+    public void actualizar( String idUsuario, String nombre, String email, String password, String password2) throws Exception{
         validar(nombre, email, password, password2);
         
         Optional<Usuario> respuesta = repositorioUsuario.findById(idUsuario);
