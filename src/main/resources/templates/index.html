@@ -1,11 +1,17 @@
+<!--Cambiar la forma en la que se acceden las carpetas
+VS: /<carpeta>/<archivo>
+Netbeans: /<carpeta>/<archivo>
+-->
 <!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="/css/style.css">
+        <!--carpeta css del proyecto-->
+        <link rel="stylesheet" href="/css/style.css" />
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+        <!--Libreria para carrusel-->
         <link
             rel="stylesheet"
             type="text/css"
@@ -20,7 +26,18 @@
             type="text/javascript"
             src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
         ></script>
-
+        <!--Fuente del titulo-->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Serif+Old+Uyghur&display=swap"
+            rel="stylesheet"
+        />
+        <!--Fuente del body-->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        />
         <title>MrHouse</title>
     </head>
     <body>
@@ -33,9 +50,10 @@
                         class="logo-empresa"
                     />
                 </a>
-                <h1>MrHouse</h1>
+                <h1 class="nombre_Empresa">Mr. House</h1>
             </div>
 
+            <!--forms relacionados a las querys de busqueda-->
             <form class="searcher" action="buscar.php" method="get">
                 <input
                     class="searcher-form"
@@ -46,7 +64,9 @@
                 />
                 <input class="searcher-form" type="submit" value="Buscar" />
                 <select name="Operaciones" class="searcher-form">
-                    <option value="" disabled selected>Tipo de transaccion</option>
+                    <option value="" disabled selected>
+                        Tipo de transaccion
+                    </option>
                     <option value="1">Comprar</option>
                     <option value="2">Alquiler</option>
                     <option value="3">Temporario</option>
@@ -72,39 +92,47 @@
                     <option value="17">Otros</option>
                 </select>
             </form>
-
+            <!--Botones relacionados a ingreso y registro de Usuario-->
             <div class="buttons">
+                <!--Reemplazar estos buttons a -->
                 <button class="log-in" type="button">Inicia Sesión</button>
                 <button class="log-in" type="button">Registrate</button>
             </div>
+            <!--Botones para las redes sociales-->
             <div class="icon-box">
-                <img
-                    class="logo"
-                    src="/img/Instagram_logo_2016.svg.webp"
-                    alt="Instagram logo"
-                />
-                <img
-                    class="logo"
-                    src="/img/584ac2d03ac3a570f94a666d.png"
-                    alt="Facebook logo"
-                />
-                <img
-                    class="logo"
-                    src="/img/580b57fcd9996e24bc43c53e.png"
-                    alt="Twitter logo"
-                />
+                <a href="https://www.instagram.com">
+                    <img
+                        class="logo"
+                        src="/img/Instagram_logo_2016.svg.webp"
+                        alt="Instagram logo"
+                    />
+                </a>
+                <a href="https://www.facebook.com">
+                    <img
+                        class="logo"
+                        src="/img/584ac2d03ac3a570f94a666d.png"
+                        alt="Facebook logo"
+                    />
+                </a>
+                <a href="https://twitter.com">
+                    <img
+                        class="logo"
+                        src="/img/580b57fcd9996e24bc43c53e.png"
+                        alt="Twitter logo"
+                    />
+                </a>
             </div>
         </header>
         <nav>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Ofertas</a></li>
-                <li><a href="#">Reuniones</a></li>
-                <li><a href="#">Reclamos</a></li>
-                <li><a href="#">Boletas de Pago</a></li>
+                <li><a href="#" class="linkAAlgo">Inicio</a></li>
+                <li><a href="#" class="linkAAlgo">Ofertas</a></li>
+                <li><a href="#" class="linkAAlgo">Reuniones</a></li>
+                <li><a href="#" class="linkAAlgo">Reclamos</a></li>
+                <li><a href="#" class="linkAAlgo">Boletas de Pago</a></li>
             </ul>
         </nav>
-
+        <!--Imagenes del slider-->
         <div class="slider">
             <div>
                 <img
@@ -135,12 +163,12 @@
                 />
             </div>
         </div>
+        <!--Codigo del Slider-->
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script
             type="text/javascript"
             src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
         ></script>
-
         <script>
             $(document).ready(function () {
                 $(".slider").slick({
@@ -151,15 +179,19 @@
                 });
             });
         </script>
-
-        <h2>¡Ofertas Especiales!</h2>
+        <!--Seccion de ofertas-->
+        <div class="titulo-seccion"><h2>¡Ofertas Especiales!</h2></div>
         <section class="ofertas">
             <div>
-                <p><a href="">Conoce mas</a></p>
-                <img class="oferta" src="/img/download.jpg" alt="Oferta 1" />
+                <p><a href="#" class="oferta-especial-btn">Conoce más</a></p>
+                <img
+                    class="oferta"
+                    src="/img/download.jpg"
+                    alt="Oferta 1"
+                />
             </div>
             <div>
-                <p><a href="">Conoce mas</a></p>
+                <p><a href="#" class="oferta-especial-btn">Conoce más</a></p>
                 <img
                     class="oferta"
                     src="/img/oferta_inmobiliaria_paquete_diseno_pagina_web_publica_casas_locales_departamentos_terrenos_en_linea_dimension_digital_com_website_sistema.jpg"
@@ -167,20 +199,34 @@
                 />
             </div>
             <div>
-                <p><a href="">Conoce mas</a></p>
-                <img class="oferta" src="/img/images.jpg" alt="Oferta 1" />
+                <p><a href="#" class="oferta-especial-btn">Conoce más</a></p>
+                <img
+                    class="oferta"
+                    src="/img/images.jpg"
+                    alt="Oferta 3"
+                />
             </div>
         </section>
-
+        <!--Seccion del Footer-->
         <footer>
-            <p>&copy; 2023 Mi Sitio Web</p>
-            <p>
-                Somos una empresa comprometida con la creación de experiencias
-                web increíbles.
-            </p>
-            <h2>Contacto</h2>
-            <p>Email: info@example.com</p>
-            <p>Teléfono: (123) 456-7890</p>
+            <div class="contacto">
+                <h2>Contacto</h2>
+                <p>Email: info@example.com</p>
+                <p>Teléfono: (123) 456-7890</p>
+            </div>
+            <div class="disclaimer">
+                <p>&copy; 2023 Mi Sitio Web</p>
+                <p>
+                    Somos una empresa comprometida con la creación de
+                    experiencias web increíbles.
+                </p>
+            </div>
+            <div class="sitios-web">
+                <h2>Sitios Web</h2>
+                <p><a href="#" class="sitio-web">Sitio 1</a></p>
+                <p><a href="#" class="sitio-web">Sitio 2</a></p>
+                <!-- Agrega más enlaces según sea necesario -->
+            </div>
         </footer>
         <script src="index.js"></script>
     </body>
