@@ -6,8 +6,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Created on : 9 nov 2023, 19:50:55
     Author     : thell
 */
-
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -98,4 +96,16 @@ footer {
     padding: 20px;
     background-color: #333;
     color: white;
+}
+
+.logo-empresa{
+    width: 100px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+}
+
+.button-logo{
+    display: contents;
 }
