@@ -24,7 +24,7 @@ public class PortalControlador {
         
         return "index.html";
     }
-     @GetMapping("/registrar")
+     @GetMapping("/registro")
     public String registrar(){
         return "registrar.html";
     }
@@ -34,7 +34,7 @@ public class PortalControlador {
         try {
             servicioUsuario.registrar(nombre, email, password, password2);
             modelo.put("exito", "Usuario registrado correctamente!");
-            
+            return "index.html";
             
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
@@ -42,7 +42,7 @@ public class PortalControlador {
             modelo.put("email",email);
             return "registro.html";
         }
-        return "index.html";
+        
      }
     }
         

@@ -9,22 +9,22 @@
 <body>
     <div class="container">
         <h2>Registro</h2>
-        <form action="#" method="post">
+        <form method="POST" th:action="@{/registrar}" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <input type="text" id="nombre" name="nombre" required th:value="${nombre}">
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" required th:value="${email}">
             </div>
             <div class="form-group">
                 <label for="contrasena">Contraseña:</label>
-                <input type="password" id="contrasena" name="contrasena" required>
+                <input type="password" id="contrasena" name="contrasena" required th:value="${password}">
             </div>
             <div class="form-group">
                 <label for="repetir-contrasena">Repetir Contraseña:</label>
-                <input type="password" id="repetir-contrasena" name="repetir-contrasena" required>
+                <input type="password" id="repetir-contrasena" name="repetir-contrasena" required th:value="${password2}">
             </div>
             <div class="form-group">
                 <input type="submit" value="Registrarse">
