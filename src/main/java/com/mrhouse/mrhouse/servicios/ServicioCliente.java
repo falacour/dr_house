@@ -36,7 +36,7 @@ public class ServicioCliente implements UserDetailsService {
 
     @Autowired
     private RepositorioCliente repositorioCliente;
- 
+
     @Autowired
     private ServicioImagen servicioImagen;
 
@@ -50,37 +50,41 @@ public class ServicioCliente implements UserDetailsService {
         cliente.setEmail(mail);
         cliente.setPassword(password);
         cliente.setRol(Rol.USER);
-       Imagen imagen = servicioImagen.guardar(archivo);
-       cliente.setImagen(imagen);
+        Imagen imagen = servicioImagen.guardar(archivo);
+        cliente.setImagen(imagen);
         repositorioCliente.save(cliente);
 
     }
+
     public void actualizar(MultipartFile archivo, String idCliente, String nombre, String mail,
             String password, String password2) throws MiException {
         validar(nombre, mail, password, password2);
-        Optional<Cliente> respuesta= repositorioCliente.findById(idCliente);
-        if(respuesta.isPresent()){
-            Cliente cliente =respuesta.get();
+        Optional<Cliente> respuesta = repositorioCliente.findById(idCliente);
+        if (respuesta.isPresent()) {
+            Cliente cliente = respuesta.get();
             cliente.setEmail(mail);
             cliente.setPassword(new BCryptPasswordEncoder().encode(password));
-          String idImagen=null;
-          if(cliente.getImagen() != null){
-              idImagen=cliente.getImagen().getId();
-          }
-          Imagen imagen= servicioImagen.actualizar(archivo, idImagen);
-          cliente.setImagen(imagen);
-          repositorioCliente.save(cliente);
+            String idImagen = null;
+            if (cliente.getImagen() != null) {
+                idImagen = cliente.getImagen().getId();
+            }
+            Imagen imagen = servicioImagen.actualizar(archivo, idImagen);
+            cliente.setImagen(imagen);
+            repositorioCliente.save(cliente);
         }
     }
-public Cliente getOne(String id){
-    return repositorioCliente.getOne(id);
-}
-@Transactional
-public List<Cliente> listarClientes(){
-    List<Cliente>clientes=new ArrayList<>();
-    clientes=repositorioCliente.findAll();
-    return clientes;
-}
+
+    public Cliente getOne(String id) {
+        return repositorioCliente.getOne(id);
+    }
+
+    @Transactional
+    public List<Cliente> listarClientes() {
+        List<Cliente> clientes = new ArrayList<>();
+        clientes = repositorioCliente.findAll();
+        return clientes;
+    }
+
     public void validar(String nombre, String email, String password, String password2) throws MiException {
         if (nombre == null || nombre.isEmpty()) {
             throw new MiException("el nombre no puede estar vacio o ser nulo");
@@ -102,20 +106,17 @@ public List<Cliente> listarClientes(){
     @Override
     public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
         Cliente cliente = repositorioCliente.buscarPorEmail(mail);
-        if(cliente != null){
-            List<GrantedAuthority>permisos = new ArrayList<>();
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_"+ cliente.getRol().toString());
+        if (cliente != null) {
+            List<GrantedAuthority> permisos = new ArrayList<>();
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + cliente.getRol().toString());
             permisos.add(p);
-            ServletRequestAttributes attr =(ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
-               HttpSession sesion = attr.getRequest().getSession(true);
-               sesion.setAttribute("clientesession", cliente);
-               return  new User(cliente.getEmail(), cliente.getPassword(), permisos);
-        }
-        else{
-            throw new UsernameNotFoundException("no se encontro el cliente de el email "+ mail);
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession sesion = attr.getRequest().getSession(true);
+            sesion.setAttribute("clientesession", cliente);
+            return new User(cliente.getEmail(), cliente.getPassword(), permisos);
+        } else {
+            throw new UsernameNotFoundException("no se encontro el cliente de el email " + mail);
         }
     }
 
-    
-  
 }

@@ -22,32 +22,36 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Service
 public class ServicioInmueble {
+
     @Autowired
     private RepositorioInmueble repositorioInmueble;
     @Autowired
-   private ServicioImagen servicioImagen;
+    private ServicioImagen servicioImagen;
+
     @Transactional
     public void crearInmueble(MultipartFile archivo, Long id, String tipo, Integer antiguedad, Long mts2,
-            String direccion) throws MiException{
+            String direccion) throws MiException {
         validar(mts2, tipo, antiguedad, mts2, direccion);
         Inmueble inmueble = new Inmueble();
         inmueble.setTipo(tipo);
         inmueble.setAntiguedad(antiguedad);
         inmueble.setMts2(mts2);
         inmueble.setDireccion(direccion);
-        
-        Imagen imagen= servicioImagen.guardar(archivo);
-        
+
+        Imagen imagen = servicioImagen.guardar(archivo);
+
         inmueble.setImagen(imagen);
         repositorioInmueble.save(inmueble);
-        
+
     }
-     public List<Inmueble> listarInmuebles(){
-        List<Inmueble>Inmuebles=new ArrayList<>();
-        Inmuebles=repositorioInmueble.findAll();
+
+    public List<Inmueble> listarInmuebles() {
+        List<Inmueble> Inmuebles = new ArrayList<>();
+        Inmuebles = repositorioInmueble.findAll();
         return Inmuebles;
-        
+
     }
+
     public void modificar(MultipartFile archivo, Long id, String tipo, Integer antiguedad, Long mts2, String direccion) throws MiException {
         validar(id, tipo, antiguedad, mts2, direccion);
         Optional<Inmueble> respuesta = repositorioInmueble.findById(id);
@@ -56,27 +60,28 @@ public class ServicioInmueble {
             Inmueble inmueble = respuesta.get();
             inmueble.setTipo(tipo);
             inmueble.setAntiguedad(antiguedad);
-	    inmueble.setMts2(mts2);
-	    inmueble.setDireccion(direccion);
-            String idImagen=null;
-               if(inmueble.getImagen() != null){
-              idImagen=inmueble.getImagen().getId();
-          }
-          Imagen imagen= servicioImagen.actualizar(archivo, idImagen);
-          inmueble.setImagen(imagen);
+            inmueble.setMts2(mts2);
+            inmueble.setDireccion(direccion);
+            String idImagen = null;
+            if (inmueble.getImagen() != null) {
+                idImagen = inmueble.getImagen().getId();
+            }
+            Imagen imagen = servicioImagen.actualizar(archivo, idImagen);
+            inmueble.setImagen(imagen);
             repositorioInmueble.save(inmueble);
         }
     }
-   
-    public Inmueble getOne(Long id){
+
+    public Inmueble getOne(Long id) {
         return repositorioInmueble.getOne(id);
-        
+
     }
- public void validar(Long id, String tipo, Integer antiguedad, Long mts2, String direccion) throws MiException {
-     if(id==null){
-         throw new MiException("falta el id");
-     }
-        if (tipo == null ) {
+
+    public void validar(Long id, String tipo, Integer antiguedad, Long mts2, String direccion) throws MiException {
+        if (id == null) {
+            throw new MiException("falta el id");
+        }
+        if (tipo == null) {
             throw new MiException("el tipo no puede estar vacio o ser nulo");
         }
         if (antiguedad == null) {
@@ -88,5 +93,5 @@ public class ServicioInmueble {
         if (direccion == null || direccion.isEmpty()) {
             throw new MiException("el password no puede estar vacio o ser nulo");
         }
-}
     }
+}

@@ -1,4 +1,3 @@
-
 package com.mrhouse.mrhouse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +10,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SeguridadWeb extends WebSecurityConfigurerAdapter{
- 
-       @Override
-    protected void configure(HttpSecurity http) throws Exception{
+public class SeguridadWeb extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                            .antMatchers("/css/*","/js/*","/img/*","/**").permitAll();
-                     
-                
+                .antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll();
+
     }
 }

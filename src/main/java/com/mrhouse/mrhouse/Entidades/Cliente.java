@@ -19,7 +19,8 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 public class Cliente {
-       @Id
+
+    @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
@@ -34,7 +35,7 @@ public class Cliente {
 
     @OneToOne
     private Imagen imagen;
-    
+
     public Cliente() {
     }
 
@@ -93,5 +94,5 @@ public class Cliente {
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
     }
- 
+
 }

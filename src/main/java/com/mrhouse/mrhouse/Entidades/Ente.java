@@ -8,9 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 public class Ente {
-      @Id
+
+    @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
@@ -74,8 +76,5 @@ public class Ente {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-    
-    
-    
-    
+
 }

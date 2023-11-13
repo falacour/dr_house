@@ -15,11 +15,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ServicioEnte {
+
     @Autowired
     private RepositorioEnte repositorioEnte;
     @Autowired
     private ServicioImagen servicioImagen;
     @Autowired
     private RepositorioCliente repositorioCliente;
-    
+
 }
