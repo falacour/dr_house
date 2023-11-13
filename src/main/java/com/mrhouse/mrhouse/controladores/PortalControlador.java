@@ -1,9 +1,12 @@
 
 package com.mrhouse.mrhouse.controladores;
 
+import com.mrhouse.mrhouse.Entidades.Usuario;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.servicios.ServicioUsuario;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,9 +47,26 @@ public class PortalControlador {
         }
         return "index.html";
      }
-   @ GetMapping("/login")
-    public String login(){
+   @GetMapping("/login")
+    public String login(@RequestParam(required = false) String error, ModelMap modelo) {
+
+        if (error != null) {
+            modelo.put("error", "usuario o contraseña invalidos");
+        }
+
         return "login.html";
     }
-    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @GetMapping("/inicio")
+    public String inicio(HttpSession session) {
+
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+
+        if (logueado.getRol().toString().equalsIgnoreCase("ADMIN")) {
+            return "redirect:/admin/dashboard";
+        }
         
+        return "index.html";
+    }
+}      

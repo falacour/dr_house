@@ -39,7 +39,7 @@ public class InmuebleControlador {
            modelo.put("error", e.getMessage());
            return "index.html";
        }
-       return "index.html";
+       return "redirect:/";
        
    }
 }
