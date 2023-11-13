@@ -35,25 +35,27 @@ public class PortalControlador {
         
         return "index.html";
     }
-     @GetMapping("/registro")
+     @GetMapping("/registrar")
     public String registrar(){
         return "registrar.html";
     }
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo){
+    public String registro(@RequestParam String nombre, @RequestParam String email, 
+            @RequestParam String password, @RequestParam String password2, ModelMap modelo){
    
         try {
             servicioUsuario.registrar(nombre, email, password, password2);
             modelo.put("exito", "Usuario registrado correctamente!");
-            
+            return "index.html";
            
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre",nombre);
             modelo.put("email",email);
+            modelo.put("password", password);
             return "registrar.html";
         }
-        return "index.html";
+        
      }
    @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
