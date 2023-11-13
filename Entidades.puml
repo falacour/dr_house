@@ -1,0 +1,130 @@
+@startuml
+annotation java.lang.Override
+annotation javax.persistence.Entity
+annotation javax.persistence.Enumerated
+annotation javax.persistence.GeneratedValue
+annotation javax.persistence.Id
+annotation javax.transaction.Transactional
+annotation org.hibernate.annotations.GenericGenerator
+annotation org.springframework.beans.factory.annotation.Autowired
+annotation org.springframework.boot.autoconfigure.SpringBootApplication
+annotation org.springframework.context.annotation.Configuration
+annotation org.springframework.data.jpa.repository.Query
+annotation org.springframework.data.repository.query.Param
+annotation org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
+annotation org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+annotation org.springframework.stereotype.Controller
+annotation org.springframework.stereotype.Repository
+annotation org.springframework.stereotype.Service
+annotation org.springframework.web.bind.annotation.GetMapping
+annotation org.springframework.web.bind.annotation.PostMapping
+annotation org.springframework.web.bind.annotation.RequestMapping
+annotation org.springframework.web.bind.annotation.RequestParam
+class com.mrhouse.mrhouse.Entidades.Cliente
+class com.mrhouse.mrhouse.Entidades.Ente
+class com.mrhouse.mrhouse.Entidades.Inmueble
+class com.mrhouse.mrhouse.Entidades.Usuario
+class com.mrhouse.mrhouse.MrhouseApplication
+class com.mrhouse.mrhouse.SeguridadWeb
+class com.mrhouse.mrhouse.ServletInitializer
+class com.mrhouse.mrhouse.controladores.PortalControlador
+class com.mrhouse.mrhouse.excepciones.MiException
+class com.mrhouse.mrhouse.servicios.ServicioUsuario
+class java.lang.Exception
+class java.util.ArrayList
+class java.util.List
+class java.util.Optional
+class javax.persistence.EnumType
+class org.springframework.boot.SpringApplication
+class org.springframework.boot.builder.SpringApplicationBuilder
+class org.springframework.boot.web.servlet.support.SpringBootServletInitializer
+class org.springframework.security.config.annotation.web.builders.HttpSecurity
+class org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+class org.springframework.security.core.GrantedAuthority
+class org.springframework.security.core.authority.SimpleGrantedAuthority
+class org.springframework.security.core.userdetails.User
+class org.springframework.security.core.userdetails.UserDetails
+class org.springframework.security.core.userdetails.UsernameNotFoundException
+class org.springframework.ui.ModelMap
+enum com.mrhouse.mrhouse.enumeraciones.Rol
+interface com.mrhouse.mrhouse.repositorios.RepositorioCliente
+interface com.mrhouse.mrhouse.repositorios.RepositorioEnte
+interface com.mrhouse.mrhouse.repositorios.RepositorioUsuario
+interface org.springframework.data.jpa.repository.JpaRepository
+interface org.springframework.security.core.userdetails.UserDetailsService
+com.mrhouse.mrhouse.Entidades.Cliente ..> javax.persistence.Entity
+com.mrhouse.mrhouse.Entidades.Cliente ..> javax.persistence.Enumerated
+com.mrhouse.mrhouse.Entidades.Cliente ..> javax.persistence.GeneratedValue
+com.mrhouse.mrhouse.Entidades.Cliente ..> javax.persistence.Id
+com.mrhouse.mrhouse.Entidades.Cliente ..> org.hibernate.annotations.GenericGenerator
+com.mrhouse.mrhouse.Entidades.Cliente ..> javax.persistence.EnumType
+com.mrhouse.mrhouse.Entidades.Cliente ..> com.mrhouse.mrhouse.enumeraciones.Rol
+com.mrhouse.mrhouse.Entidades.Ente ..> javax.persistence.Entity
+com.mrhouse.mrhouse.Entidades.Ente ..> javax.persistence.Enumerated
+com.mrhouse.mrhouse.Entidades.Ente ..> javax.persistence.GeneratedValue
+com.mrhouse.mrhouse.Entidades.Ente ..> javax.persistence.Id
+com.mrhouse.mrhouse.Entidades.Ente ..> org.hibernate.annotations.GenericGenerator
+com.mrhouse.mrhouse.Entidades.Ente ..> javax.persistence.EnumType
+com.mrhouse.mrhouse.Entidades.Ente ..> com.mrhouse.mrhouse.enumeraciones.Rol
+com.mrhouse.mrhouse.Entidades.Inmueble ..> javax.persistence.Entity
+com.mrhouse.mrhouse.Entidades.Inmueble ..> javax.persistence.GeneratedValue
+com.mrhouse.mrhouse.Entidades.Inmueble ..> javax.persistence.Id
+com.mrhouse.mrhouse.Entidades.Inmueble ..> org.hibernate.annotations.GenericGenerator
+com.mrhouse.mrhouse.Entidades.Usuario ..> javax.persistence.Entity
+com.mrhouse.mrhouse.Entidades.Usuario ..> javax.persistence.Enumerated
+com.mrhouse.mrhouse.Entidades.Usuario ..> javax.persistence.GeneratedValue
+com.mrhouse.mrhouse.Entidades.Usuario ..> javax.persistence.Id
+com.mrhouse.mrhouse.Entidades.Usuario ..> org.hibernate.annotations.GenericGenerator
+com.mrhouse.mrhouse.Entidades.Usuario ..> javax.persistence.EnumType
+com.mrhouse.mrhouse.Entidades.Usuario ..> com.mrhouse.mrhouse.enumeraciones.Rol
+com.mrhouse.mrhouse.MrhouseApplication ..> org.springframework.boot.autoconfigure.SpringBootApplication
+com.mrhouse.mrhouse.MrhouseApplication ..> org.springframework.boot.SpringApplication
+com.mrhouse.mrhouse.SeguridadWeb ..> java.lang.Override
+com.mrhouse.mrhouse.SeguridadWeb ..> org.springframework.beans.factory.annotation.Autowired
+com.mrhouse.mrhouse.SeguridadWeb ..> org.springframework.context.annotation.Configuration
+com.mrhouse.mrhouse.SeguridadWeb ..> org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
+com.mrhouse.mrhouse.SeguridadWeb ..> org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+com.mrhouse.mrhouse.SeguridadWeb ..> org.springframework.security.config.annotation.web.builders.HttpSecurity
+com.mrhouse.mrhouse.SeguridadWeb --|> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+com.mrhouse.mrhouse.ServletInitializer ..> java.lang.Override
+com.mrhouse.mrhouse.ServletInitializer ..> org.springframework.boot.builder.SpringApplicationBuilder
+com.mrhouse.mrhouse.ServletInitializer --|> org.springframework.boot.web.servlet.support.SpringBootServletInitializer
+com.mrhouse.mrhouse.controladores.PortalControlador ..> org.springframework.beans.factory.annotation.Autowired
+com.mrhouse.mrhouse.controladores.PortalControlador ..> org.springframework.stereotype.Controller
+com.mrhouse.mrhouse.controladores.PortalControlador ..> org.springframework.web.bind.annotation.GetMapping
+com.mrhouse.mrhouse.controladores.PortalControlador ..> org.springframework.web.bind.annotation.PostMapping
+com.mrhouse.mrhouse.controladores.PortalControlador ..> org.springframework.web.bind.annotation.RequestMapping
+com.mrhouse.mrhouse.controladores.PortalControlador ..> org.springframework.web.bind.annotation.RequestParam
+com.mrhouse.mrhouse.controladores.PortalControlador ..> com.mrhouse.mrhouse.excepciones.MiException
+com.mrhouse.mrhouse.controladores.PortalControlador ..> com.mrhouse.mrhouse.servicios.ServicioUsuario
+com.mrhouse.mrhouse.controladores.PortalControlador ..> org.springframework.ui.ModelMap
+com.mrhouse.mrhouse.excepciones.MiException --|> java.lang.Exception
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> java.lang.Override
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> javax.transaction.Transactional
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> org.springframework.beans.factory.annotation.Autowired
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> org.springframework.stereotype.Service
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> com.mrhouse.mrhouse.Entidades.Usuario
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> com.mrhouse.mrhouse.excepciones.MiException
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> java.util.ArrayList
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> java.util.List
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> java.util.Optional
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> org.springframework.security.core.GrantedAuthority
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> org.springframework.security.core.authority.SimpleGrantedAuthority
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> org.springframework.security.core.userdetails.User
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> org.springframework.security.core.userdetails.UserDetails
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> org.springframework.security.core.userdetails.UsernameNotFoundException
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> com.mrhouse.mrhouse.enumeraciones.Rol
+com.mrhouse.mrhouse.servicios.ServicioUsuario ..> com.mrhouse.mrhouse.repositorios.RepositorioUsuario
+com.mrhouse.mrhouse.servicios.ServicioUsuario --|> org.springframework.security.core.userdetails.UserDetailsService
+com.mrhouse.mrhouse.repositorios.RepositorioCliente ..> org.springframework.stereotype.Repository
+com.mrhouse.mrhouse.repositorios.RepositorioCliente ..> com.mrhouse.mrhouse.Entidades.Cliente
+com.mrhouse.mrhouse.repositorios.RepositorioCliente --|> org.springframework.data.jpa.repository.JpaRepository
+com.mrhouse.mrhouse.repositorios.RepositorioEnte ..> org.springframework.stereotype.Repository
+com.mrhouse.mrhouse.repositorios.RepositorioEnte ..> com.mrhouse.mrhouse.Entidades.Ente
+com.mrhouse.mrhouse.repositorios.RepositorioEnte --|> org.springframework.data.jpa.repository.JpaRepository
+com.mrhouse.mrhouse.repositorios.RepositorioUsuario ..> org.springframework.data.jpa.repository.Query
+com.mrhouse.mrhouse.repositorios.RepositorioUsuario ..> org.springframework.data.repository.query.Param
+com.mrhouse.mrhouse.repositorios.RepositorioUsuario ..> org.springframework.stereotype.Repository
+com.mrhouse.mrhouse.repositorios.RepositorioUsuario ..> com.mrhouse.mrhouse.Entidades.Usuario
+com.mrhouse.mrhouse.repositorios.RepositorioUsuario --|> org.springframework.data.jpa.repository.JpaRepository
+@enduml

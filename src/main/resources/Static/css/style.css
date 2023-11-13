@@ -212,3 +212,28 @@ footer {
     border-bottom: 1px solid #e44d26;
     border-radius: 4px;
 }
+.formulario{
+      background-color: #fff;
+        padding: 60px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+.form-group my-3{
+      margin: 10px 0;
+}
+.mb-2{
+       text-align: center;
+}
+.form-group my-3 label, form-group my-3 input{
+       width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+}
+ input[type="tipo"], input[type="antiguedad"], input[type="mtrs2"], input[type="direccion"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;}                

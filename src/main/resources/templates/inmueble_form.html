@@ -1,8 +1,3 @@
-<!--Cambiar la forma en la que se acceden las carpetas
-VS: /<carpeta>/<archivo>
-Netbeans: /<carpeta>/<archivo>
--->
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
@@ -96,7 +91,7 @@ Netbeans: /<carpeta>/<archivo>
             <div class="buttons">
                 <!--Reemplazar estos buttons a -->
                 <button class="log-in" type="button">Inicia Sesión</button>
-                <a  th:href="@{registrar}">
+                <a href="registrar">
                 <button class="log-in">Registrarse</button>
               </a>
             </div>
@@ -132,84 +127,47 @@ Netbeans: /<carpeta>/<archivo>
                 <li><a href="#" class="linkAAlgo">Reuniones</a></li>
                 <li><a href="#" class="linkAAlgo">Reclamos</a></li>
                 <li><a href="#" class="linkAAlgo">Boletas de Pago</a></li>
-                <li><a th:href="@{inmueble/registrar}" class="linkAAlgo">Cargar Inmueble</a></li>
+                <li><a href="#" class="linkAAlgo">Cargar Inmueble</a></li>
+                
             </ul>
         </nav>
-        <!--Imagenes del slider-->
-        <div class="slider">
-            <div>
-                <img
-                    class="slider-images"
-                    src="/img/AdobeStock_169692156.webp"
-                    alt="Imagen 1"
-                />
-            </div>
-            <div>
-                <img
-                    class="slider-images"
-                    src="/img/architecture-1836070_960_720-1.jpg"
-                    alt="Imagen 2"
-                />
-            </div>
-            <div>
-                <img
-                    class="slider-images"
-                    src="/img/Compraventa-de-bienes-inmuebles-en-Panamá.jpg"
-                    alt="Imagen 3"
-                />
-            </div>
-            <div>
-                <img
-                    class="slider-images"
-                    src="/img/tipos-inmuebles-nexo-inmobiliaria.jpg"
-                    alt="Imagen 3"
-                />
-            </div>
+        <div class="container-fluid m-5 contenedor">
+            
+
+            <form class="formulario" th:action="@{/inmueble/registro}" method="POST">
+
+
+   <label class="mb-2">Cargar Inmueble</label> 
+                <div class="form-group my-3">
+                 
+                    <input type="text" class="form-control" name="tipo" placeholder="Tipo de inmueble">
+                </div>
+
+                <div class="form-group my-3">
+                    <input type="number" class="form-control" name="antiguedad" placeholder="Antiguedad del inmueble">
+                </div>
+              
+                <div class="form-group my-3">
+                    <input type="number" class="form-control" name="mts2" placeholder="Metros cuadrados del inmueble">
+                </div>
+  <div class="form-group my-3">
+                    <input type="text" class="form-control" name="direccion" placeholder="Direccion del inmueble">
+                </div>
+<div class="form-group my-3">
+                    <input type="file" class="form-control" name="archivo" >
+                </div>
+                <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
+            </form>
+
+            <section class=" text-center container">
+                <div class="row mt-3">
+                    <div class="divVolver">
+                        <a th:href="@{/index}" class="botonVolver">Volver</a>
+                    </div>
+                </div>
+            </section>
         </div>
-        <!--Codigo del Slider-->
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script
-            type="text/javascript"
-            src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-        ></script>
-        <script>
-            $(document).ready(function () {
-                $(".slider").slick({
-                    autoplay: true,
-                    autoplaySpeed: 2000,
-                    dots: true,
-                    arrows: true,
-                });
-            });
-        </script>
-        <!--Seccion de ofertas-->
-        <div class="titulo-seccion"><h2>¡Ofertas Especiales!</h2></div>
-        <section class="ofertas">
-            <div>
-                <p><a href="#" class="oferta-especial-btn">Conoce más</a></p>
-                <img
-                    class="oferta"
-                    src="/img/download.jpg"
-                    alt="Oferta 1"
-                />
-            </div>
-            <div>
-                <p><a href="#" class="oferta-especial-btn">Conoce más</a></p>
-                <img
-                    class="oferta"
-                    src="/img/oferta_inmobiliaria_paquete_diseno_pagina_web_publica_casas_locales_departamentos_terrenos_en_linea_dimension_digital_com_website_sistema.jpg"
-                    alt="Oferta 2"
-                />
-            </div>
-            <div>
-                <p><a href="#" class="oferta-especial-btn">Conoce más</a></p>
-                <img
-                    class="oferta"
-                    src="/img/images.jpg"
-                    alt="Oferta 3"
-                />
-            </div>
-        </section>
+        
         <!--Seccion del Footer-->
         <footer>
             <div class="contacto">
