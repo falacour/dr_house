@@ -17,7 +17,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Inmueble {
 
-  @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String tipo;
@@ -26,17 +26,14 @@ public class Inmueble {
     private String direccion;
 //    @ManyToOne
 //    private Ente ente;
-@OneToOne
-private Imagen imagen; 
+    @OneToOne
+    private Imagen imagen;
+
     public Inmueble() {
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTipo() {
@@ -86,6 +83,5 @@ private Imagen imagen;
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
     }
-    
 
 }

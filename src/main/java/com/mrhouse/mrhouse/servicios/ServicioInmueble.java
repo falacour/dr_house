@@ -35,7 +35,9 @@ public class ServicioInmueble {
         inmueble.setAntiguedad(antiguedad);
         inmueble.setMts2(mts2);
         inmueble.setDireccion(direccion);
+        
         Imagen imagen= servicioImagen.guardar(archivo);
+        
         inmueble.setImagen(imagen);
         repositorioInmueble.save(inmueble);
         

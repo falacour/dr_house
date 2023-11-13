@@ -19,14 +19,17 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 public class Imagen {
-         @Id
-    @GeneratedValue(generator="uuid")
-    @GenericGenerator(name="uuid", strategy="uuid2")
+
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String mime;
     private String nombre;
-    @Lob @Column(columnDefinition ="LONGBLOB") @Basic(fetch = FetchType.LAZY)
-    private byte [] contenido; 
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] contenido;
 
     public Imagen() {
     }
@@ -63,5 +66,4 @@ public class Imagen {
         this.contenido = contenido;
     }
 
-    
 }

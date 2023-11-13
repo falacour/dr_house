@@ -25,19 +25,18 @@ public class ServicioImagen {
     private RepositorioImagen repositorioImagen;
 
     public Imagen guardar(MultipartFile archivo) throws MiException {
-        if (archivo != null) {
-            try {
-                Imagen imagen = new Imagen();
-               
-                imagen.setMime(archivo.getContentType());
-                imagen.setNombre(archivo.getName());
-                imagen.setContenido(archivo.getBytes());
-                return repositorioImagen.save(imagen);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+        try {
+            Imagen imagen = new Imagen();
 
+            imagen.setMime(archivo.getContentType());
+            imagen.setNombre(archivo.getName());
+            imagen.setContenido(archivo.getBytes());
+            return repositorioImagen.save(imagen);
+
+        } catch (Exception e) {
+            System.out.println("error al cargar la imagen" + e.getMessage());
         }
+
         return null;
     }
 
@@ -61,7 +60,7 @@ public class ServicioImagen {
         }
         return null;
     }
- 
+
     @Transactional()
     public List<Imagen> listarTodos() {
         return repositorioImagen.findAll();
