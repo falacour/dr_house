@@ -134,26 +134,26 @@
         <div class="container-fluid m-5 contenedor">
             
 
-            <form class="formulario" th:action="@{/inmueble/registro}" method="POST">
+            <form class="formulario" th:action="@{/inmueble/registro}" method="POST" enctype="multipart/form-data">
 
 
-   <label class="mb-2">Cargar Inmueble</label> 
+                <label class="mb-2">Cargar Inmueble</label> 
                 <div class="form-group my-3">
-                 
+
                     <input type="text" class="form-control" name="tipo" placeholder="Tipo de inmueble">
                 </div>
 
                 <div class="form-group my-3">
                     <input type="number" class="form-control" name="antiguedad" placeholder="Antiguedad del inmueble">
                 </div>
-              
+
                 <div class="form-group my-3">
                     <input type="number" class="form-control" name="mts2" placeholder="Metros cuadrados del inmueble">
                 </div>
-  <div class="form-group my-3">
+                <div class="form-group my-3">
                     <input type="text" class="form-control" name="direccion" placeholder="Direccion del inmueble">
                 </div>
-<div class="form-group my-3">
+                <div class="form-group my-3">
                     <input type="file" class="form-control" name="archivo" >
                 </div>
                 <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
@@ -167,7 +167,7 @@
                 </div>
             </section>
         </div>
-        
+
         <!--Seccion del Footer-->
         <footer>
             <div class="contacto">
