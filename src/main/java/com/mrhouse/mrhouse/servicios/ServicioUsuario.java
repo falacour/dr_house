@@ -10,11 +10,16 @@ import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
  
 @Service
-public class ServicioUsuario{
+public class ServicioUsuario implements UserDetailsService{
   
 
     @Autowired
@@ -101,6 +106,20 @@ public class ServicioUsuario{
         if(!password.equals(password2)){
             throw new MiException("Las contraseñas deben ser iguales");
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+      Usuario usuario = repositorioUsuario.buscarPorEmail(email);
+      if(usuario!=null){
+          List<GrantedAuthority> permisos= new ArrayList<>();
+          GrantedAuthority p = new SimpleGrantedAuthority("ROLE_"+ usuario.getRol().toString());
+          permisos.add(p);
+          return new User(usuario.getEmail(), usuario.getPassword(), permisos );
+      }
+      else{
+          throw new UsernameNotFoundException("no se encontro el usuario");
+      }
     }
 }
 
