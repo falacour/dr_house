@@ -15,9 +15,9 @@ import org.springframework.stereotype.Repository;
  * @author thell
  */
 @Repository
-public interface RepositorioInmueble extends JpaRepository<Inmueble, Long>{
-    
-       @Query("SELECT i FROM Inmueble i WHERE i.id = :id ")
-    public Inmueble buscarPorEmail(@Param("id") Long id);
-    
+public interface RepositorioInmueble extends JpaRepository<Inmueble, Long> {
+
+    @Query("SELECT i FROM Inmueble i WHERE i.id = :id ")
+    public Inmueble buscarPorid(@Param("id") Long id);
+
 }
