@@ -50,7 +50,7 @@ public class PortalControlador {
    @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
 
-        if (error != null) {
+        if (error == null) {
             modelo.put("error", "usuario o contraseña invalidos");
         }
 
