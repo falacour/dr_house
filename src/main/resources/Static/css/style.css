@@ -152,6 +152,10 @@ footer {
     flex-wrap: wrap;
     border-top: 5px solid #28505B;
 }
+.linkAWebs{
+    color: white;
+    text-decoration: none;
+}
 .contacto, .sitios-web, .disclaimer {
     flex-basis: calc(33.33% - 20px);
     box-sizing: border-box; 
