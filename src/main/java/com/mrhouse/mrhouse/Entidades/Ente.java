@@ -20,6 +20,7 @@ public class Ente {
     private String nombre;
     private String email;
     private String password;
+    
 //    @OneToMany
 //    private Inmueble inmueble;
 
