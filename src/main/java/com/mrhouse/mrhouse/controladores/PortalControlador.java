@@ -1,9 +1,11 @@
 
 package com.mrhouse.mrhouse.controladores;
 
-import com.mrhouse.mrhouse.Entidades.Usuario;
+import com.mrhouse.mrhouse.Entidades.*;
 import com.mrhouse.mrhouse.excepciones.MiException;
+import com.mrhouse.mrhouse.servicios.ServicioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioUsuario;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,10 +22,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PortalControlador {
     @Autowired
     private ServicioUsuario servicioUsuario;
+    @Autowired
+    private ServicioInmueble servicioInmueble;
  
     
     @GetMapping("/")
-    public String index(){
+    public String index(ModelMap modelo){
+        
+        List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
+
+        modelo.addAttribute("inmuebles", inmuebles);
         
         return "index.html";
     }
