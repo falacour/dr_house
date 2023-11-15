@@ -39,7 +39,7 @@ public class PortalControlador {
     public String registrar(){
         return "registrar.html";
     }
-    @PostMapping("/registrar")
+    @PostMapping("/registro")
     public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo){
    
         try {
@@ -58,14 +58,14 @@ public class PortalControlador {
    @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
 
-        if (error != null) {
+        if (error == null) {
             modelo.put("error", "usuario o contraseña invalidos");
         }
 
         return "login.html";
     }
     
-//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {
 
