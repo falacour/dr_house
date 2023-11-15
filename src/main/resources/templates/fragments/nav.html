@@ -5,6 +5,17 @@
         <li><a th:href="@{/}" class="linkAAlgo">Reuniones</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Reclamos</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Boletas de Pago</a></li>
-        <li><a th:href="@{inmueble/registrar}" class="linkAAlgo">Cargar Inmueble</a></li>
-    </ul>
+        <li class="linkAAlgo">
+                            <a class="linkAAlgo botonInmueble" 
+                                 href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Inmueble
+                            </a>
+                                <ul class="linkAAlgo " aria-labelledby="navbarDropdown">
+                                <li><a class="linkAAlgo"  th:href="@{inmueble/registrar}">Crear Inmueble</a></li>
+                                <li><a class="linkAAlgo" th:href="@{/}">Listar Inmuebles</a></li>
+                                </ul>
+        </li>
+
+
 </nav>
+
