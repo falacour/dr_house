@@ -16,6 +16,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RepositorioEnte extends JpaRepository<Ente, String>{
-    @Query("SELECT e FROM Ente e WHERE e.email = :email")
+     @Query("SELECT e FROM Ente e WHERE e.email = :email")
     public Ente buscarPorEmail(@Param("email") String email);
 }
