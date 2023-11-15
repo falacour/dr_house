@@ -39,7 +39,7 @@ public class PortalControlador {
     public String registrar(){
         return "registrar.html";
     }
-    @PostMapping("/registro")
+    @PostMapping("/registrar")
     public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo){
    
         try {
@@ -65,7 +65,7 @@ public class PortalControlador {
         return "login.html";
     }
     
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {
 
