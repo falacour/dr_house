@@ -5,6 +5,7 @@
 package com.mrhouse.mrhouse.controladores;
 
 import com.mrhouse.mrhouse.Entidades.Imagen;
+import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioImagen;
@@ -53,11 +54,11 @@ public class InmuebleControlador {
    @GetMapping("/lista")
     public String listar(ModelMap modelo) {
 
-        List<Imagen> imagenes = servicioImagen.listarTodos();
+        List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
 
-        modelo.addAttribute("imagenes", imagenes);
+        modelo.addAttribute("inmuebles", inmuebles);
         
-        return "inmobiliaria_list.html";
+        return "inmeueble_list.html";
 
     }
    
