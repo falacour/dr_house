@@ -5,28 +5,18 @@
     <body>
         <header th:replace = "/fragments/header :: header"/>
         <nav th:replace = "/fragments/nav :: nav"/>
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col"> Id del imobiliario</th>
-                        <th scope="col"> tipo de imobiliaria</th>
-                        <th scope="col"> Acciones</th>
-                    </tr>
-                </thead>
-                <tbody th:each="inmueble : ${inmuebles}">
-                    <tr>
-                        <th scope="row" th:text="${inmueble.tipo}"></th>
-                        <td><figure>
+        <div th:each="inmueble : ${inmuebles}">
+            
+                  
                                 <img th:src="@{/imagen/registro/__${inmueble.id}__}" th:alt="${'Imagen de ' + inmueble.tipo}">
-                                <figcaption th:text="${inmueble.tipo}"></figcaption>
-                            </figure></td>
-                        <td>
+                                <figcaption th:text="${inmueble.tipo}"></figcaption><br>
+                                <p th:text="${inmueble.direccion"> </p><br>
+                                <p th:text="${inmueble.mts2"> </p><br>
+                                <p th:text="${inmueble.antiguedad"> </p>
+                                    
+                         
                             <a th:href="@{/inmueble/modificar/__${inmueble.id}__}">Modificar</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                       
         </div>
         <footer th:replace = "/fragments/footer :: footer"/>
         <script src="index.js"></script>
