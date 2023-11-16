@@ -1,0 +1,239 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 9 nov 2023, 19:50:55
+    Author     : thell
+*/
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #4083fa;
+    background: linear-gradient(to bottom, #4083fa, #101f3f);
+}
+/*Header*/
+header {
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding-top: 20px ;
+    
+}
+.header-items{
+    display: flex;
+    justify-content: space-around;
+    background-color: #101f3f;
+    background: linear-gradient(to bottom, #101f3f, #28505b);
+}
+.logo-empresa{
+    width: 100px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+}
+.nombre_Empresa{
+    font-family: 'Noto Serif Old Uyghur', serif;
+}
+.button-logo{
+    display: contents;
+}
+
+.logo{
+    width: 20px;
+    padding-top: 30px ;
+}
+
+.searcher{
+    padding-top: 20px ;
+}
+.searcher-form{
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.log-in{
+    background-color: #4caf50;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    
+}
+.buttons{
+    margin-top: -10px;
+}
+
+/*Navbar*/
+nav {
+    background-color: #333;
+    padding: 10px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+li {
+    display: inline;
+}
+.buttons{
+    margin-right: -150px ;
+    padding-top: 30px ;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+/*slider*/
+.slider-images{
+width: 100%;
+height: 500px;
+}
+h2{
+    text-align: center;
+}
+/*Seccion de ofertas*/
+.ofertas {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.oferta{
+    width: 300px;
+    height: 300px;
+}
+.ofertas div {
+    text-align: center; /* Centra el texto (botón) */
+}
+
+/* Botón de ofertas */
+.oferta-especial-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #e44d26;
+    color: #fff;
+    border: 2px solid #e44d26;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.oferta-especial-btn:hover {
+    background-color: #fff;
+    color: #e44d26;
+}
+/* Imagen de ofertas */
+.oferta {
+    margin: 0 auto; /* Centra la imagen */
+    width: 300px;
+    height: 300px;
+}
+/*Footer*/
+footer {
+    background: linear-gradient(to bottom, 101f3f, #4083fa);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    flex-wrap: wrap;
+    border-top: 5px solid #28505B;
+}
+.contacto, .sitios-web, .disclaimer {
+    flex-basis: calc(33.33% - 20px);
+    box-sizing: border-box; 
+    margin-bottom: 20px;  
+    text-align: center;
+}
+.sitios-web {
+    margin-left: auto;
+}
+.sitio-web{
+    color: lightblue;
+    text-decoration: none;
+}
+.disclaimer {
+    text-align: center;
+}
+/*botones*/
+.linkAAlgo{
+    font-weight: 1000;
+    background-color: bisque;
+    display: inline-block; 
+    padding: 10px;
+    border: 2px #55a09e;
+    text-decoration: none; 
+    color: #55a09e; 
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.linkAAlgo:hover{
+    font-weight: 1000;
+    background-color: #dfc3a1;
+    display: inline-block; 
+    padding: 10px;
+    border: 2px solid #55a09e;
+    text-decoration: none; 
+    color: #55a09e; 
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.linkAAlgo.active {
+    background-color: #555;
+}
+.linkAAlgo:hover, .linkAAlgo.active {
+    color: #e44d26; 
+}
+
+
+.titulo-seccion{
+    color: white;
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+    padding-bottom: 1px;
+    border-bottom: 1px solid #e44d26;
+    border-radius: 4px;
+}
+.formulario{
+      background-color: #fff;
+        padding: 60px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+.form-group my-3{
+      margin: 10px 0;
+}
+.mb-2{
+       text-align: center;
+}
+.form-group my-3 label, form-group my-3 input{
+       width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+}
+ input[type="tipo"], input[type="antiguedad"], input[type="mtrs2"], input[type="direccion"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;}                
