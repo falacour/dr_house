@@ -4,10 +4,8 @@
  */
 package com.mrhouse.mrhouse.controladores;
 
-<<<<<<< Updated upstream
 import com.mrhouse.mrhouse.Entidades.Imagen;
-=======
->>>>>>> Stashed changes
+
 import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
@@ -53,10 +51,7 @@ public class InmuebleControlador {
        return "redirect:/";
        
    }
-<<<<<<< Updated upstream
-   
-=======
->>>>>>> Stashed changes
+
    @GetMapping("/lista")
     public String listar(ModelMap modelo) {
 
@@ -67,8 +62,7 @@ public class InmuebleControlador {
         return "inmeueble_list.html";
 
     }
-<<<<<<< Updated upstream
-   
+
    @GetMapping("/modificar/{id}")
      public String modificar(@PathVariable Long id, ModelMap modelo){
          
@@ -88,6 +82,5 @@ public class InmuebleControlador {
         
         return "redirect:../lista";
      }
-=======
->>>>>>> Stashed changes
+
 }
