@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace = "/fragments/head :: head"/>
+    
+    <body>
+        <head th:replace = "/fragments/header :: header"/>
+        <head th:replace = "/fragments/nav :: nav"/>
+        <div class="container-fluid m-5 contenedor">
+            
+           <div class="container m-5" >
+
+            <table class="table table-dark">
+                
+                <thead>
+                    <tr>
+                        <th scope="col">Id del inmueble</th>
+                        <th scope="col">Tipo de inmueble</th>
+                        <th scope="col" >Direccion </th>
+                        <th scope="col" >Acciones</th>
+
+                    </tr>
+                </thead>
+                <tbody th:each="inmueble : ${Inmuebles}"> 
+                    <tr>
+                        <th scope="row" th:text="${inmueble.id}"></th>
+                        <td th:text="${inmueble.tipo}"></td>
+                        <td>
+                            <a th:href= "@{/}"><i class="fas fa-feather-alt"></i> Modificar </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <section class="py-5 text-center container">
+                <div class="row py-lg-5">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <a th:href="@{/index}" class="btn btn-primary my-2">Volver</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+
+        <!--Seccion del Footer-->
+        <head th:replace = "/fragments/footer :: footer"/>
+        <script src="index.js"></script>
+    </body>
+</html>
