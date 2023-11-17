@@ -1,9 +1,11 @@
 
 package com.mrhouse.mrhouse.controladores;
 
-import com.mrhouse.mrhouse.Entidades.Usuario;
+import com.mrhouse.mrhouse.Entidades.*;
 import com.mrhouse.mrhouse.excepciones.MiException;
+import com.mrhouse.mrhouse.servicios.ServicioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioUsuario;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,10 +22,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PortalControlador {
     @Autowired
     private ServicioUsuario servicioUsuario;
+    @Autowired
+    private ServicioInmueble servicioInmueble;
  
     
     @GetMapping("/")
-    public String index(){
+    public String index(ModelMap modelo){
+        
+        List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
+
+        modelo.addAttribute("inmuebles", inmuebles);
         
         return "index.html";
     }
@@ -32,32 +40,35 @@ public class PortalControlador {
         return "registrar.html";
     }
     @PostMapping("/registrar")
-    public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo){
+    public String registro(@RequestParam String nombre, @RequestParam String email, 
+            @RequestParam String password, @RequestParam String password2, ModelMap modelo){
    
         try {
             servicioUsuario.registrar(nombre, email, password, password2);
             modelo.put("exito", "Usuario registrado correctamente!");
-            
+            return "redirect:/";
            
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre",nombre);
             modelo.put("email",email);
+            modelo.put("password", password);
+            modelo.put("password", password2);
             return "registrar.html";
         }
-        return "index.html";
+        
      }
    @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
 
         if (error != null) {
-            modelo.put("error", "usuario o contraseña invalidos");
+            modelo.put("error", "Usuario o Contraseña invalidos!");
         }
 
         return "login.html";
     }
     
-//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {
 

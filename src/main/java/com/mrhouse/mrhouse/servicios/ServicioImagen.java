@@ -5,6 +5,7 @@
 package com.mrhouse.mrhouse.servicios;
 
 import com.mrhouse.mrhouse.Entidades.Imagen;
+import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioImagen;
 import java.util.List;
@@ -14,10 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- *
- * @author thell
- */
 @Service
 public class ServicioImagen {
 
@@ -61,6 +58,11 @@ public class ServicioImagen {
         return null;
     }
 
+    public Imagen getOne(String id) {
+        return repositorioImagen.getOne(id);
+
+    }
+    
     @Transactional()
     public List<Imagen> listarTodos() {
         return repositorioImagen.findAll();

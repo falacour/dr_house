@@ -4,13 +4,19 @@
  */
 package com.mrhouse.mrhouse.controladores;
 
+import com.mrhouse.mrhouse.Entidades.Imagen;
+
+import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
+import com.mrhouse.mrhouse.servicios.ServicioImagen;
 import com.mrhouse.mrhouse.servicios.ServicioInmueble;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +30,9 @@ public class InmuebleControlador {
     private ServicioInmueble servicioInmueble;
     @Autowired
     private RepositorioInmueble repositorioInmueble;
+    @Autowired
+    private ServicioImagen servicioImagen;
+    
    @GetMapping("/registrar")
    public String registrar(ModelMap modelo){
        return "inmueble_form.html";
@@ -42,4 +51,36 @@ public class InmuebleControlador {
        return "redirect:/";
        
    }
+
+   @GetMapping("/lista")
+    public String listar(ModelMap modelo) {
+
+        List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
+
+        modelo.addAttribute("inmuebles", inmuebles);
+        
+        return "inmeueble_list.html";
+
+    }
+
+   @GetMapping("/modificar/{id}")
+     public String modificar(@PathVariable Long id, ModelMap modelo){
+         
+         modelo.put("inmuebles", servicioInmueble.getOne(id));
+         
+         return "inmueble_modificar.html";
+     }
+     
+     @PostMapping("/modificar/{id}")
+     public String modificar(@PathVariable MultipartFile archivo, String id, ModelMap modelo){
+        try {
+            servicioImagen.actualizar(archivo, id);
+        } catch (MiException ex) {
+            modelo.put("error", ex);
+            return "editorial_modificar.html";
+        }
+        
+        return "redirect:../lista";
+     }
+
 }
