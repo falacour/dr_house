@@ -21,13 +21,13 @@ public class Ente {
     private String nombre;
     private String email;
     private String password;
-<<<<<<< Updated upstream
+
 //    @OneToMany
 //    private Inmueble inmueble;
-=======
+
 //    private List<Inmueble> inmueble;
     
->>>>>>> Stashed changes
+
 @ManyToOne
 private Imagen imagen;
     @Enumerated(EnumType.STRING)
@@ -35,7 +35,7 @@ private Imagen imagen;
 
     public Ente() {
     }
-<<<<<<< Updated upstream
+
 //
 //    public Inmueble getInmueble() {
 //        return inmueble;
@@ -44,7 +44,7 @@ private Imagen imagen;
 //    public void setInmueble(Inmueble inmueble) {
 //        this.inmueble = inmueble;
 //    }
-=======
+
 
 //    public List<Inmueble> getInmueble() {
 //        return inmueble;
@@ -54,7 +54,7 @@ private Imagen imagen;
 //        this.inmueble = inmueble;
 //    }
 
->>>>>>> Stashed changes
+
 
     public String getId() {
         return id;
