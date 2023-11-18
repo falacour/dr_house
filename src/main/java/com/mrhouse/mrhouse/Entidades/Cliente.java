@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.mrhouse.mrhouse.Entidades;
 
 import com.mrhouse.mrhouse.enumeraciones.Rol;
@@ -6,11 +10,15 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ *
+ * @author thell
+ */
 @Entity
-public class Ente {
+public class Cliente {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -18,26 +26,18 @@ public class Ente {
     private String id;
 
     private String nombre;
+    private Integer dni;
     private String email;
     private String password;
-   
-//    private List<Inmueble> inmueble;
-@ManyToOne
-private Imagen imagen;
+
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
-    public Ente() {
+    @OneToOne
+    private Imagen imagen;
+
+    public Cliente() {
     }
-
-//    public List<Inmueble> getInmueble() {
-//        return inmueble;
-//    }
-//
-//    public void setInmueble(List<Inmueble> inmueble) {
-//        this.inmueble = inmueble;
-//    }
-
 
     public String getId() {
         return id;
@@ -53,6 +53,14 @@ private Imagen imagen;
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Integer getDni() {
+        return dni;
+    }
+
+    public void setDni(Integer dni) {
+        this.dni = dni;
     }
 
     public String getEmail() {

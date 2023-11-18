@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/registrar.css" />
+        <title>Formulario de Registro</title>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Registro</h2>
+            <form method="POST" th:action="@{/logincheck}">
+
+                <div>
+                    <input type="text" name="email" placeholder="Correo">
+                    <input type="password" name="password" placeholder="Contraseña">
+                </div>
+
+                <button type="submit">comprobar</button>
+
+            </form>
+
+            <p th:text="${error}"></p>
+        </div>
+
+    </body>
+</html>
