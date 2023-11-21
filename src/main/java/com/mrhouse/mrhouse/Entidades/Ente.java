@@ -1,7 +1,6 @@
 package com.mrhouse.mrhouse.Entidades;
 
 import com.mrhouse.mrhouse.enumeraciones.Rol;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -23,6 +22,7 @@ public class Ente {
     private String password;
     //private List<Inmueble> inmueble;
     
+
 @ManyToOne
 private Imagen imagen;
     @Enumerated(EnumType.STRING)

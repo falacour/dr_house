@@ -114,6 +114,6 @@ public class ServicioEnte {
             throw new MiException("El email ya se encuentra registrado para otro ente");
         }
     }
-       
+    
 
 }
