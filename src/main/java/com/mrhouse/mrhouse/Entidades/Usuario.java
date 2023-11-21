@@ -19,7 +19,6 @@ public class Usuario {
     private String nombre;
     private String email;
     private String password;
-    private String password2;
 
     @Enumerated(EnumType.STRING)
     private Rol rol;
@@ -53,14 +52,6 @@ public class Usuario {
     }
     public void setRol(Rol rol) {
         this.rol = rol;
-    }
-
-    public String getPassword2() {
-        return password2;
-    }
-
-    public void setPassword2(String password2) {
-        this.password2 = password2;
     }
 
 }

@@ -53,11 +53,22 @@
     <div class="buttons">
         <!--Reemplazar estos buttons a -->
         <a th:href="@{login}">
-            <button class="log-in" type="button">Inicia Sesión</button>
+            <button class="log-in" th:if="${session.usuariosession == null}" type="button">Inicia Sesión</button>
         </a>
 
         <a  th:href="@{registro}">
-            <button class="log-in">Registrarse</button>
+            <button class="log-in"th:if="${session.usuariosession == null}" type="button">Registrarse</button>
+        </a>
+        <a  th:href="@{/}">
+            <button class="log-in" th:if="${session.usuariosession != null}" type="button">Perfil</button>
+        </a>
+
+                <a  th:href="@{/}">
+            <button class="log-in" th:if="${session.usuariosession != null}" type="button">Pasarse Ente</button>
+        </a>
+        
+        <a  th:href="@{/}">
+            <button class="log-in" th:if="${session.usuariosession != null}" type="button">CheckOut</button>
         </a>
     </div>
 </header>

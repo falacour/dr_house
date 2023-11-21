@@ -20,10 +20,8 @@ public class Ente {
     private String nombre;
     private String email;
     private String password;
-
    
 //    private List<Inmueble> inmueble;
-
 @ManyToOne
 private Imagen imagen;
     @Enumerated(EnumType.STRING)

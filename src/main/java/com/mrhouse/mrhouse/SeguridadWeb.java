@@ -1,6 +1,5 @@
 package com.mrhouse.mrhouse;
 
-import com.mrhouse.mrhouse.repositorios.RepositorioUsuario;
 import com.mrhouse.mrhouse.servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SeguridadWeb extends WebSecurityConfigurerAdapter {
-@Autowired
+@Autowired 
 private ServicioUsuario servicioUsuario;
-   @Autowired
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(servicioUsuario)
                      
@@ -31,7 +30,7 @@ private ServicioUsuario servicioUsuario;
                 .permitAll();
                     http
                 .authorizeRequests()
-//                            .antMatchers("/admin/*").hasAnyRole("ADMIN")
+                            .antMatchers("/admin/*").hasAnyRole("ADMIN")
                            .antMatchers("/css/*", "/js/*", "img/*", "/**")
                             .permitAll()
                  .and().formLogin()
@@ -43,7 +42,7 @@ private ServicioUsuario servicioUsuario;
                         .permitAll()
                 .and().logout()
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("/login")
                         .permitAll()
                 .and().csrf()
                         .disable();
