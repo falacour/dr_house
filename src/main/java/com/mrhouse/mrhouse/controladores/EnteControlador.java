@@ -1,8 +1,10 @@
 package com.mrhouse.mrhouse.controladores;
 
 import com.mrhouse.mrhouse.Entidades.Ente;
+import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.servicios.ServicioEnte;
+import com.mrhouse.mrhouse.servicios.ServicioInmueble;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class EnteControlador {
     @Autowired
     private ServicioEnte servicioEnte;
+    
+    @Autowired
+    private ServicioInmueble servicioInmueble;
     
     @GetMapping("/registrar")
     public String registrar(){    

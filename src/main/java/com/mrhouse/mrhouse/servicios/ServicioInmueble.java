@@ -51,6 +51,17 @@ public class ServicioInmueble {
         return Inmuebles;
 
     }
+    
+    //se deberia obtener el usuario de la session para poder llamar a este evento
+    //en la navegacion previa a la visualizacion de la lista de los inmuebles del ente
+    //Ej: si se mostrase la lista en la vista de perfil, obtener sesion al navegar a /perfil 
+    //loadUserByUsername usuarioservicio
+    // Ente ente = (Ente) session.getAttribute("entesession");
+    public List<Inmueble> inmueblesPorEnte(String id) {
+        List<Inmueble> lstInmuebles  = repositorioInmueble.inmueblesPorEnte(id);
+        return lstInmuebles;
+
+    }
 
     public void modificar(MultipartFile archivo, Long id, String tipo, Integer antiguedad, Long mts2, String direccion) throws MiException {
         validar(id, tipo, antiguedad, mts2, direccion);
