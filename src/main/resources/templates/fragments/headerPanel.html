@@ -11,7 +11,7 @@
     </div>
 
     <!--forms relacionados a las querys de busqueda-->
-    <form sec:authorize="hasRole('CLIENTE')" class="searcher" action="buscar.php" method="get">
+    <form class="searcher" action="buscar.php" method="get">
         <input
             class="searcher-form"
             type="text"
@@ -52,23 +52,8 @@
     <!--Botones relacionados a ingreso y registro de Usuario-->
     <div class="buttons">
         <!--Reemplazar estos buttons a -->
-        <a th:href="@{login}">
-            <button class="log-in" th:if="${session.usuariosession == null}" type="button">Inicia Sesión</button>
-        </a>
-
-        <a  th:href="@{registro}">
-            <button class="log-in"th:if="${session.usuariosession == null}" type="button">Registrarse</button>
-        </a>
-        <a  th:href="@{/}">
-            <button class="log-in" th:if="${session.usuariosession != null}" type="button">Perfil</button>
-        </a>
-
-                <a  th:href="@{/}">
-            <button class="log-in" th:if="${session.usuariosession != null}" type="button">Pasarse Ente</button>
-        </a>
-        
-        <a  th:href="@{/}">
-            <button class="log-in" th:if="${session.usuariosession != null}" type="button">CheckOut</button>
+        <a th:href="@{logout}">
+            <button class="log-in" th:if="${session.usuariosession == null}" type="button">Cerrar sesion</button>
         </a>
     </div>
 </header>

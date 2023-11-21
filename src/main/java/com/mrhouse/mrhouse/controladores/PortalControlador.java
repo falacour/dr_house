@@ -1,4 +1,3 @@
-
 package com.mrhouse.mrhouse.controladores;
 
 import com.mrhouse.mrhouse.Entidades.*;
@@ -15,15 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping ("/")
+@RequestMapping("/")
 
 public class PortalControlador {
+
     @Autowired
     private ServicioUsuario servicioUsuario;
     @Autowired
     private ServicioInmueble servicioInmueble;
- 
-    
+
 //    @GetMapping("/")
 //    public String index(ModelMap modelo){
 //        
@@ -33,27 +32,28 @@ public class PortalControlador {
 //        
 //        return "index.html";
 //    }
-     @GetMapping("/registro")
-    public String registrar(){
+    @GetMapping("/registro")
+    public String registrar() {
         return "registrar.html";
     }
+
     @PostMapping("/registrar")
-    public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo){
-   
+    public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) {
+
         try {
             servicioUsuario.registrar(nombre, email, password, password2);
             modelo.put("exito", "Usuario registrado correctamente!");
-            
-           
+
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
-            modelo.put("nombre",nombre);
-            modelo.put("email",email);
+            modelo.put("nombre", nombre);
+            modelo.put("email", email);
             return "registrar.html";
         }
         return "index.html";
-     }
-   @GetMapping("/login")
+    }
+
+    @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
 
         if (error != null) {
@@ -62,17 +62,23 @@ public class PortalControlador {
 
         return "login.html";
     }
-    
+
 //    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {
 
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
-//
-//        if (logueado.getRol().toString().equalsIgnoreCase("ADMIN")) {
-//            return "redirect:/admin/dashboard";
-//        }
-        
-        return "inicio.html";
+/*
+        if (logueado.getRol().toString().equalsIgnoreCase("ADMIN")) {
+            return "index.html";
+        }
+        if (logueado.getRol().toString().equalsIgnoreCase("ENTE")) {
+            return "index.html";
+        }
+        if (logueado.getRol().toString().equalsIgnoreCase("CLIENTE")) {
+            return "index.html";
+        }
+*/
+        return "index.html";
     }
-}      
+}
