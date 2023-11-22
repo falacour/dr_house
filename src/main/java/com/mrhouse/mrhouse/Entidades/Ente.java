@@ -33,6 +33,7 @@ public class Ente {
     public Ente() {
     }
 
+
     public String getId() {
         return id;
     }

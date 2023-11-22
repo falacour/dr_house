@@ -53,35 +53,23 @@
     <div class="buttons">
         <!--Reemplazar estos buttons a -->
         <a th:href="@{login}">
-            <button class="log-in" type="button">Inicia Sesión</button>
+            <button class="log-in" th:if="${session.usuariosession == null}" type="button">Inicia Sesión</button>
         </a>
 
         <a  th:href="@{registro}">
-            <button class="log-in">Registrarse</button>
+            <button class="log-in"th:if="${session.usuariosession == null}" type="button">Registrarse</button>
         </a>
-    </div>
-    <!--Botones para las redes sociales-->
-    <div class="icon-box">
-        <a href="https://www.instagram.com">
-            <img
-                class="logo"
-                src="/img/Instagram_logo_2016.svg.webp"
-                alt="Instagram logo"
-                />
+        <a  th:href="@{/}">
+            <button class="log-in" th:if="${session.usuariosession != null}" type="button">Perfil</button>
         </a>
-        <a href="https://www.facebook.com">
-            <img
-                class="logo"
-                src="/img/584ac2d03ac3a570f94a666d.png"
-                alt="Facebook logo"
-                />
+
+                <a  th:href="@{/}">
+            <button class="log-in" th:if="${session.usuariosession != null}" type="button">Pasarse Ente</button>
         </a>
-        <a href="https://twitter.com">
-            <img
-                class="logo"
-                src="/img/580b57fcd9996e24bc43c53e.png"
-                alt="Twitter logo"
-                />
+        
+        <a  th:href="@{/}">
+            <button class="log-in" th:if="${session.usuariosession != null}" type="button">CheckOut</button>
         </a>
+          <p  th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p>
     </div>
 </header>
