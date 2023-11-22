@@ -5,6 +5,7 @@
 package com.mrhouse.mrhouse.repositorios;
 
 import com.mrhouse.mrhouse.Entidades.Inmueble;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,5 +20,8 @@ public interface RepositorioInmueble extends JpaRepository<Inmueble, Long> {
 
     @Query("SELECT i FROM Inmueble i WHERE i.id = :id ")
     public Inmueble buscarPorid(@Param("id") Long id);
+    
+    @Query("SELECT i FROM Inmueble i WHERE i.ente.id = :id")
+    public List inmueblesPorEnte(@Param("id") String id);
 
 }

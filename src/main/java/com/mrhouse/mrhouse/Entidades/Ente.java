@@ -1,13 +1,12 @@
 package com.mrhouse.mrhouse.Entidades;
 
 import com.mrhouse.mrhouse.enumeraciones.Rol;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -29,14 +28,6 @@ private Imagen imagen;
     private Rol rol;
 
     public Ente() {
-    }
-
-    public List<Inmueble> getInmueble() {
-        return inmueble;
-    }
-
-    public void setInmueble(List<Inmueble> inmueble) {
-        this.inmueble = inmueble;
     }
 
 
@@ -86,6 +77,5 @@ private Imagen imagen;
 
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
-    }
-
+    }   
 }
