@@ -75,6 +75,11 @@ public class EnteControlador {
         try {
             servicioEnte.modificarEnte(archivo, id, nombre, email, password, password2);
             
+            System.out.println("id : "+id);
+            System.out.println("nombre : "+nombre);
+            System.out.println("email : "+email);
+            System.out.println("password : "+password);
+            
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             

@@ -12,14 +12,14 @@
         <div class="container">
             <h2>Modificar</h2>
             <form th:action="@{/ente/modificar/__${ente.id}__}" method="post">
-                <input type="text" id="id" name="id" hidden/>
+                <input type="text" th:value="${ente.id}" id="id" name="id" hidden/>
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre"/>
+                    <input type="text" th:value="${ente.nombre}" id="nombre" name="nombre"/>
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email"/>
+                    <input type="email" th:value="${ente.email}" id="email" name="email"/>
                 </div>
                 <div class="form-group">
                     <label for="contrasena">Contraseña:</label>
