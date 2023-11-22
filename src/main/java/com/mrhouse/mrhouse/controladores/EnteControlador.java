@@ -7,6 +7,7 @@ package com.mrhouse.mrhouse.controladores;
 import com.mrhouse.mrhouse.Entidades.Ente;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.servicios.ServicioEnte;
+import com.mrhouse.mrhouse.servicios.ServicioInmueble;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
