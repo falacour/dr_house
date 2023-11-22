@@ -49,7 +49,7 @@ public class ServicioCliente implements UserDetailsService {
         cliente.setDni(dni);
         cliente.setEmail(mail);
         cliente.setPassword(password);
-        cliente.setRol(Rol.USER);
+        cliente.setRol(Rol.CLIENTE);
         Imagen imagen = servicioImagen.guardar(archivo);
         cliente.setImagen(imagen);
         repositorioCliente.save(cliente);
