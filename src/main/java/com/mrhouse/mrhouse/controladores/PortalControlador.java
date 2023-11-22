@@ -73,6 +73,14 @@ public class PortalControlador {
 //            return "redirect:/admin/dashboard";
 //        }
         
+
+ 
+        
+
+        if (logueado.getRol().toString().equalsIgnoreCase("CLIENTE")) {
+            return "redirect:/cliente/inicio";
+        }
+        
         return "inicio.html";
     }
 }      
