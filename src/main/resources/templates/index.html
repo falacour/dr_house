@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head th:replace="/fragments/head :: head"/>
 
@@ -54,12 +56,12 @@
     <!--NO BORREN ESTA PARTE DEL CODIGO, ES PARA LA LISTA-->
     <div th:each="inmueble : ${inmuebles}">
         <div th:if="@{/imagen/inmueble/__${inmueble.id}__} != null">
-            <img th:src="@{/imagen/inmueble/__${inmueble.id}__}" alt="imagen inmueble">
+            <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
+            <p th:text="${inmueble.imagen.id}"></p>
         </div>
         <div th:if="@{/imagen/inmueble/__${inmueble.id}__} == null" >
             <p>error</p>
         </div>
-        
     </div>
     <!-- Seccion de ofertas -->
     <div class="titulo-seccion">
