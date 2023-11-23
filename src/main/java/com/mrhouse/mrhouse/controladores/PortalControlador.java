@@ -23,35 +23,37 @@ public class PortalControlador {
     @Autowired
     private ServicioInmueble servicioInmueble;
 
-    // @GetMapping("/")
-    // public String index(ModelMap modelo){
-    //
-    // List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
-    //
-    // modelo.addAttribute("inmuebles", inmuebles);
-    //
-    // return "index.html";
-    // }
+//    @GetMapping("/")
+//    public String index(ModelMap modelo){
+//        
+//        List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
+//
+//        modelo.addAttribute("inmuebles", inmuebles);
+//        
+//        return "index.html";
+//    }
     @GetMapping("/registro")
     public String registrar() {
         return "registrar.html";
     }
 
     @PostMapping("/registrar")
-    public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password,
-            @RequestParam String password2, ModelMap modelo) {
+    public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) {
 
         try {
             servicioUsuario.registrar(nombre, email, password, password2);
             modelo.put("exito", "Usuario registrado correctamente!");
+            return "redirect:/";
 
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("email", email);
+            modelo.put("password", password);
+            modelo.put("password", password2);
             return "registrar.html";
         }
-        return "index.html";
+
     }
 
     @GetMapping("/login")
@@ -64,16 +66,18 @@ public class PortalControlador {
         return "login.html";
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
-    public String inicio(HttpSession session) {
+    public String inicio(HttpSession session, ModelMap modelo) {
 
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        
+        return "index.html";
+    }
 
-        if (logueado.getRol().toString().equalsIgnoreCase("CLIENTE")) {
-            return "redirect:/cliente/inicio";
-        }
+    @GetMapping("/vistaInmueble")
+    public String vistaInmueble() {
 
-        return "inicio.html";
+        return "vistaInmueble.html";
     }
 }

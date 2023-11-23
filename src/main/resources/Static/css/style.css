@@ -19,7 +19,7 @@ header {
     color: #fff;
     text-align: center;
     padding-top: 20px ;
-    
+
 }
 .header-items{
     display: flex;
@@ -64,7 +64,7 @@ header {
     padding: 10px;
     cursor: pointer;
     font-size: 16px;
-    
+
 }
 .buttons{
     margin-top: -10px;
@@ -75,32 +75,32 @@ nav {
     background-color: #333;
     padding: 10px 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    
+
 }
 .dropdown {
-      position: relative;
-      display: inline-block;
-    }
+    position: relative;
+    display: inline-block;
+}
 
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-      z-index: 1;
-    }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
 
-    .dropdown-content li {
-      padding: 12px;
-      display: block;
-      text-decoration: none;
-      color: #333;
-    }
+.dropdown-content li {
+    padding: 12px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+}
 
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
 
 
@@ -125,8 +125,8 @@ nav ul li a {
 }
 /*slider*/
 .slider-images{
-width: 100%;
-height: 500px;
+    width: 100%;
+    height: 500px;
 }
 h2{
     text-align: center;
@@ -176,15 +176,15 @@ footer {
     color: white;
     padding: 20px;
     display: flex;
-    justify-content: space-between; 
-    align-items: center; 
+    justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
     border-top: 5px solid #28505B;
 }
 .contacto, .sitios-web, .disclaimer {
     flex-basis: calc(33.33% - 20px);
-    box-sizing: border-box; 
-    margin-bottom: 20px;  
+    box-sizing: border-box;
+    margin-bottom: 20px;
     text-align: center;
 }
 .sitios-web {
@@ -201,11 +201,11 @@ footer {
 .linkAAlgo{
     font-weight: 1000;
     background-color: bisque;
-    display: inline-block; 
+    display: inline-block;
     padding: 10px;
     border: 2px #55a09e;
-    text-decoration: none; 
-    color: #55a09e; 
+    text-decoration: none;
+    color: #55a09e;
     border: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
@@ -214,11 +214,11 @@ footer {
 .linkAAlgo:hover{
     font-weight: 1000;
     background-color: #dfc3a1;
-    display: inline-block; 
+    display: inline-block;
     padding: 10px;
     border: 2px solid #55a09e;
-    text-decoration: none; 
-    color: #55a09e; 
+    text-decoration: none;
+    color: #55a09e;
     border: none;
     border-radius: 5px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -227,7 +227,7 @@ footer {
     background-color: #555;
 }
 .linkAAlgo:hover, .linkAAlgo.active {
-    color: #e44d26; 
+    color: #e44d26;
 }
 
 
@@ -242,27 +242,52 @@ footer {
     border-radius: 4px;
 }
 .formulario{
-      background-color: #fff;
-        padding: 60px;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    padding: 60px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 .form-group my-3{
-      margin: 10px 0;
+    margin: 10px 0;
 }
 .mb-2{
-       text-align: center;
+    text-align: center;
 }
 .form-group my-3 label, form-group my-3 input{
-       width: 100%;
-        padding: 10px;
-        margin: 5px 0;
-        border: 1px solid #ccc;
-        border-radius: 3px;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
- input[type="tipo"], input[type="antiguedad"], input[type="mtrs2"], input[type="direccion"] {
-        width: 100%;
-        padding: 10px;
-        margin: 5px 0;
-        border: 1px solid #ccc;
-        border-radius: 3px;}                
+input[type="tipo"], input[type="antiguedad"], input[type="mtrs2"], input[type="direccion"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/*Tarjeta de los inmuebles*/
+.tarjeta {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.tarjeta :hover {
+    transform: scale(1.1);
+}
+
+.boton-inmueble{
+    display: block;
+    padding: 15px;
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+}

@@ -7,6 +7,7 @@ import com.mrhouse.mrhouse.excepciones.MiException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,6 +18,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
 public class ServicioUsuario implements UserDetailsService {
@@ -111,11 +114,22 @@ public class ServicioUsuario implements UserDetailsService {
         Usuario usuario = repositorioUsuario.buscarPorEmail(email);
         if (usuario != null) {
             List<GrantedAuthority> permisos = new ArrayList<>();
+
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+
             permisos.add(p);
-            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
+
+            //Guardar usuario logueado en la sesion web
+            //recupera atributos del request de la solicitud http
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+            HttpSession sesion = attr.getRequest().getSession(true);
+            // se cargan datos de ususario logueado en la sesion
+            sesion.setAttribute("usuariosession", usuario);
+
+            return new User(usuario.getEmail(), usuario.getPassword(), permisos);//transformamos nuestra clase a una clase reconocida por spring
         } else {
-            throw new UsernameNotFoundException("no se encontro el usuario");
+            return null;
         }
     }
 }

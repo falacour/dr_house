@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -24,10 +25,11 @@ public class Inmueble {
     private Integer antiguedad;
     private Long mts2;
     private String direccion;
-//    @ManyToOne
-//    private Ente ente;
+    @ManyToOne
+    private Ente ente;
     @OneToOne
     private Imagen imagen;
+    
 
     public Inmueble() {
     }
@@ -67,14 +69,14 @@ public class Inmueble {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-//
-//    public Ente getEnte() {
-//        return ente;
-//    }
-//
-//    public void setEnte(Ente ente) {
-//        this.ente = ente;
-//    }
+ 
+    public Ente getEnte() {
+        return ente;
+    }
+
+    public void setEnte(Ente ente) {
+        this.ente = ente;
+    }
 
     public Imagen getImagen() {
         return imagen;
