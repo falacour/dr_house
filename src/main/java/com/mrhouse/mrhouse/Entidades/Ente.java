@@ -1,11 +1,13 @@
 package com.mrhouse.mrhouse.Entidades;
 
 import com.mrhouse.mrhouse.enumeraciones.Rol;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -20,19 +22,15 @@ public class Ente {
     private String nombre;
     private String email;
     private String password;
-    @OneToOne
-    private Imagen imagen;  
-    //Esto no hace falta, ya que el Ente no deberia conocer sus inmuebles, basta con que el inmueble tenga el id del ente
-    //asi que debe ir en Inmueble a que ente esta asociado(Hacer query personalizada para listar inmuebles por id del ente)
-//    @OneToMany
-//    private List<Inmueble> inmueble;
+    private List<Inmueble> inmueble;
 
+    @ManyToOne
+    private Imagen imagen;
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
     public Ente() {
     }
-
 
     public String getId() {
         return id;
@@ -80,5 +78,5 @@ public class Ente {
 
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
-    }   
+    }
 }

@@ -23,22 +23,23 @@ public class PortalControlador {
     @Autowired
     private ServicioInmueble servicioInmueble;
 
-//    @GetMapping("/")
-//    public String index(ModelMap modelo){
-//        
-//        List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
-//
-//        modelo.addAttribute("inmuebles", inmuebles);
-//        
-//        return "index.html";
-//    }
+    // @GetMapping("/")
+    // public String index(ModelMap modelo){
+    //
+    // List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
+    //
+    // modelo.addAttribute("inmuebles", inmuebles);
+    //
+    // return "index.html";
+    // }
     @GetMapping("/registro")
     public String registrar() {
         return "registrar.html";
     }
 
     @PostMapping("/registrar")
-    public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) {
+    public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password,
+            @RequestParam String password2, ModelMap modelo) {
 
         try {
             servicioUsuario.registrar(nombre, email, password, password2);
@@ -66,12 +67,12 @@ public class PortalControlador {
         return "login.html";
     }
 
-//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    // @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session, ModelMap modelo) {
 
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
-        
+
         return "index.html";
     }
 
