@@ -53,9 +53,14 @@
     </script>
     <!--NO BORREN ESTA PARTE DEL CODIGO, ES PARA LA LISTA-->
     <div th:each="inmueble : ${inmuebles}">
-        <a th:src="@{/imagen/inmueble/__${inmueble.id}__}" > <img th:src="@{/imagen/inmueble/__${inmueble.id}__}"> </a>
+        <div th:if="@{/imagen/inmueble/__${inmueble.id}__} != null">
+            <img th:src="@{/imagen/inmueble/__${inmueble.id}__}" alt="imagen inmueble">
+        </div>
+        <div th:if="@{/imagen/inmueble/__${inmueble.id}__} == null" >
+            <p>error</p>
+        </div>
+        
     </div>
-
     <!-- Seccion de ofertas -->
     <div class="titulo-seccion">
         <h2>¡Ofertas Especiales!</h2>

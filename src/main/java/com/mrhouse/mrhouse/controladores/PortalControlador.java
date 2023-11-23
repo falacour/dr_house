@@ -27,7 +27,7 @@ public class PortalControlador {
     @GetMapping("/")
     public String index(ModelMap modelo) {
         List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
-        modelo.put("inmuebles", inmuebles);
+        modelo.addAttribute("inmuebles", inmuebles);
         return "index.html";
     }
 
