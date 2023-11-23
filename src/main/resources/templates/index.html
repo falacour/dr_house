@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head th:replace="/fragments/head :: head"/>
 
     <body>
-    <head th:replace="/fragments/header :: header" />
-    <head th:replace="/fragments/nav :: nav"/>
+    <header th:replace="/fragments/header :: header" />
+    <nav th:replace="/fragments/nav :: nav"/>
     <!-- Imagenes del slider -->
     <div class="slider">
         <div>
@@ -54,12 +56,12 @@
     <!--NO BORREN ESTA PARTE DEL CODIGO, ES PARA LA LISTA-->
     <div th:each="inmueble : ${inmuebles}">
         <div th:if="@{/imagen/inmueble/__${inmueble.id}__} != null">
-            <img th:src="@{/imagen/inmueble/__${inmueble.id}__}" alt="imagen inmueble">
+            <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
+            <p th:text="${inmueble.imagen.id}"></p>
         </div>
         <div th:if="@{/imagen/inmueble/__${inmueble.id}__} == null" >
             <p>error</p>
         </div>
-        
     </div>
     <!-- Seccion de ofertas -->
     <div class="titulo-seccion">
@@ -105,7 +107,7 @@
     </section>
 
     <!-- Seccion del Footer -->
-    <head th:replace="/fragments/footer :: footer" />
+    <footer th:replace="/fragments/footer :: footer" />
     <script src="index.js"></script>
 </body>
 
