@@ -2,6 +2,7 @@
 import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.servicios.ServicioInmueble;
 import java.util.List;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.http.HttpHeaders;
@@ -20,30 +21,17 @@ public class ImagenControlador {
     @Autowired
     ServicioInmueble servicioInmueble;
 
-    @GetMapping("/registro/{id}")
-    public ResponseEntity<byte[]> imagenUsuario(@PathVariable Long id, ModelMap modelo) {
-        
-        if (id != null) {
-            
-            System.out.println("id existe");
-            
-            Inmueble inmueble = servicioInmueble.getOne(id);
-
+    @GetMapping("/inmueble/{id}")
+    public ResponseEntity<byte[]> imagenUsuario(@PathVariable Long id) {
+    try {
+        Inmueble inmueble = servicioInmueble.getOne(id);
         byte[] imagen = inmueble.getImagen().getContenido();
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
-
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
-        } else {
-            
-            System.out.println("no existe el id");
-            
-            return null;
-        }
-        
-        
-        
+    } catch (EntityNotFoundException e) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+}
 
 }

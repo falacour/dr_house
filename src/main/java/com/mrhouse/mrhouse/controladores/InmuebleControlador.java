@@ -44,7 +44,7 @@ public class InmuebleControlador {
            modelo.put("exelente", "se cargo tu inmueble");
        } catch (MiException e) {
            modelo.put("error", e.getMessage());
-           return "index.html";
+           return "inmueble_form.html";
        }
        return "redirect:/";
        
