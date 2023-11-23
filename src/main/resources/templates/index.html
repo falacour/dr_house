@@ -51,6 +51,10 @@
             });
         });
     </script>
+    <!--NO BORREN ESTA PARTE DEL CODIGO, ES PARA LA LISTA-->
+    <div th:each="inmueble : ${inmuebles}">
+        <a th:src="@{/imagen/inmueble/__${inmueble.id}__}" > <img th:src="@{/imagen/inmueble/__${inmueble.id}__}"> </a>
+    </div>
 
     <!-- Seccion de ofertas -->
     <div class="titulo-seccion">

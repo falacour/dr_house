@@ -20,30 +20,25 @@ public class ImagenControlador {
     @Autowired
     ServicioInmueble servicioInmueble;
 
-    @GetMapping("/registro/{id}")
-    public ResponseEntity<byte[]> imagenUsuario(@PathVariable Long id, ModelMap modelo) {
-        
+    @GetMapping("/inmueble/{id}")
+    public byte[] imagenUsuario(@PathVariable Long id, ModelMap modelo) {
+
         if (id != null) {
-            
+
             System.out.println("id existe");
-            
+
             Inmueble inmueble = servicioInmueble.getOne(id);
 
-        byte[] imagen = inmueble.getImagen().getContenido();
+            byte[] imagen = inmueble.getImagen().getContenido();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-
-        return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
+            return imagen;
         } else {
-            
+
             System.out.println("no existe el id");
-            
+
             return null;
         }
-        
-        
-        
+
     }
 
 }

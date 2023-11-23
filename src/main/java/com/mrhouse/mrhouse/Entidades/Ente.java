@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -22,9 +23,11 @@ public class Ente {
     private String nombre;
     private String email;
     private String password;
+    
+    @OneToMany
     private List<Inmueble> inmueble;
 
-    @ManyToOne
+    @OneToOne
     private Imagen imagen;
     @Enumerated(EnumType.STRING)
     private Rol rol;

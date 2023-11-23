@@ -4,6 +4,7 @@ import com.mrhouse.mrhouse.Entidades.*;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.servicios.ServicioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioUsuario;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,15 +24,13 @@ public class PortalControlador {
     @Autowired
     private ServicioInmueble servicioInmueble;
 
-    // @GetMapping("/")
-    // public String index(ModelMap modelo){
-    //
-    // List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
-    //
-    // modelo.addAttribute("inmuebles", inmuebles);
-    //
-    // return "index.html";
-    // }
+    @GetMapping("/")
+    public String index(ModelMap modelo) {
+        List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
+        modelo.put("inmuebles", inmuebles);
+        return "index.html";
+    }
+
     @GetMapping("/registro")
     public String registrar() {
         return "registrar.html";
