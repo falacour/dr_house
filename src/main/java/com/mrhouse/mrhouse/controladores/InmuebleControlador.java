@@ -4,7 +4,7 @@
  */
 package com.mrhouse.mrhouse.controladores;
 
-import com.mrhouse.mrhouse.Entidades.Imagen;
+import com.mrhouse.mrhouse.Entidades.*;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioImagen;
@@ -49,42 +49,38 @@ public class InmuebleControlador {
            modelo.put("error", e.getMessage());
            return "inmueble_form.html";
        }
-       return "redirect:/";
-       
+       return "redirect:/"; 
    }
    
    @GetMapping("/lista")
     public String listar(ModelMap modelo) {
-
-        List<Imagen> imagenes = servicioImagen.listarTodos();
-
-        modelo.addAttribute("imagenes", imagenes);
-        
-        return "inmobiliaria_list.html";
-
+        List <Inmueble> inmuebles = servicioInmueble.listarInmuebles();
+        modelo.addAttribute("inmuebles", inmuebles);
+        return "inmueble_lista.html";
     }
    
    @GetMapping("/modificar/{id}")
      public String modificar(@PathVariable Long id, ModelMap modelo){
          
-         modelo.put("inmuebles", servicioInmueble.getOne(id));
+         modelo.put("inmueble", servicioInmueble.getOne(id));
          
          return "inmueble_modificar.html";
      }
      
      @PostMapping("/modificar/{id}")
-     public String modificar(@PathVariable MultipartFile archivo, String id, ModelMap modelo,
-             Long idInmueble,String tipo,Integer antiguedad, Long mts2, String direccion,
-             Double precio, String provincia, String departamento){
+     public String modificar(@PathVariable MultipartFile archivo, Long id, ModelMap modelo,
+             String idImagen,String tipo,Integer antiguedad, Long mts2, String direccion,
+             Double precio, String provincia, String departamento, String alta){
          
         try {
-            servicioInmueble.modificar(archivo, mts2, tipo, antiguedad, mts2, direccion, precio, provincia, departamento);
-            servicioImagen.actualizar(archivo, id);
+            servicioInmueble.modificar(archivo, mts2, tipo, antiguedad, mts2,
+                    direccion, precio, provincia, departamento, alta);
+            servicioImagen.actualizar(archivo, idImagen);
         } catch (MiException ex) {
             modelo.put("error", ex);
-            return "editorial_modificar.html";
+            return "inmueble_modificar.html";
         }
         
-        return "redirect:../lista";
+        return "redirect:/inmueble/lista";
      }
 }

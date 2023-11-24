@@ -40,6 +40,7 @@ public class ServicioInmueble {
         inmueble.setPrecio(precio);
         inmueble.setProvincia(provincia);
         inmueble.setDepartamento(departamento);
+        inmueble.setAlta(Boolean.FALSE);
 
         Imagen imagen = servicioImagen.guardar(archivo);
 
@@ -67,8 +68,8 @@ public class ServicioInmueble {
     }
 
     public void modificar(MultipartFile archivo, Long id, String tipo, Integer antiguedad,
-            Long mts2, String direccion, Double precio, String provincia, String departamento)
-            throws MiException {
+            Long mts2, String direccion, Double precio, String provincia, String departamento,
+            String alta)throws MiException {
 
         validar(id, tipo, antiguedad, mts2, direccion, precio, provincia, departamento);
 
@@ -83,6 +84,13 @@ public class ServicioInmueble {
             inmueble.setPrecio(precio);
             inmueble.setProvincia(provincia);
             inmueble.setDepartamento(departamento);
+            
+            if (alta.equals("dar de alta")) {
+                inmueble.setAlta(Boolean.TRUE);
+            } else {
+                inmueble.setAlta(Boolean.TRUE);
+            }
+            
             String idImagen = null;
             if (inmueble.getImagen() != null) {
                 idImagen = inmueble.getImagen().getId();
