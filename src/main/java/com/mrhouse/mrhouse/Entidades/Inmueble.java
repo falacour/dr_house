@@ -32,7 +32,7 @@ public class Inmueble {
     private Ente ente;
     @OneToOne
     private Imagen imagen;
-    
+    private Booleano alta;
 
     public Inmueble() {
     }
@@ -111,5 +111,13 @@ public class Inmueble {
 
     public void setDepartamento(String departamento) {
         this.departamento = departamento;
+    }
+
+    public Booleano getAlta() {
+        return alta;
+    }
+
+    public void setAlta(Booleano alta) {
+        this.alta = alta;
     }
 }
