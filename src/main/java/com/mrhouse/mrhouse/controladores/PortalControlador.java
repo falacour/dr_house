@@ -1,7 +1,10 @@
 package com.mrhouse.mrhouse.controladores;
 
 import com.mrhouse.mrhouse.Entidades.*;
+import com.mrhouse.mrhouse.enumeraciones.Rol;
 import com.mrhouse.mrhouse.excepciones.MiException;
+import com.mrhouse.mrhouse.servicios.ServicioCliente;
+import com.mrhouse.mrhouse.servicios.ServicioEnte;
 import com.mrhouse.mrhouse.servicios.ServicioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioUsuario;
 import java.util.List;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/")
@@ -23,6 +27,10 @@ public class PortalControlador {
     private ServicioUsuario servicioUsuario;
     @Autowired
     private ServicioInmueble servicioInmueble;
+    @Autowired
+    private ServicioEnte servicioEnte;
+    @Autowired
+    private ServicioCliente servicioCliente;
 
     @GetMapping("/")
     public String index(ModelMap modelo) {
@@ -38,10 +46,19 @@ public class PortalControlador {
 
     @PostMapping("/registrar")
     public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password,
-            @RequestParam String password2, ModelMap modelo) {
+            @RequestParam String password2, ModelMap modelo, String rol) {
 
+        MultipartFile archivo = null;
+        
         try {
-            servicioUsuario.registrar(nombre, email, password, password2);
+            if (rol.equalsIgnoreCase("cliente")) {
+                servicioCliente.registrar(archivo, nombre, Integer.SIZE, email, password, password2);
+            } else if (rol.equalsIgnoreCase("ente")) {
+                servicioEnte.crearEnte(archivo, nombre, email, password, password2);
+            } else {
+                servicioUsuario.registrar(nombre, email, password, password2);
+            }
+
             modelo.put("exito", "Usuario registrado correctamente!");
             return "redirect:/";
 
@@ -65,7 +82,6 @@ public class PortalControlador {
 
         return "login.html";
     }
-    
 
     // @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
