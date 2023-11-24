@@ -30,6 +30,8 @@ public class Inmueble {
     private Double precio;
     @ManyToOne
     private Ente ente;
+    @ManyToOne
+    private Cliente cliente;
     @OneToOne
     private Imagen imagen;
     private Boolean alta;
@@ -119,5 +121,13 @@ public class Inmueble {
 
     public void setAlta(Boolean alta) {
         this.alta = alta;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }
