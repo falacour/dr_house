@@ -2,79 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <!--<head th:replace = "~{fragments/head :: head}"></head>-->
     <head th:replace = "/fragments/head :: head"/>
 
     <body>        
         <header th:replace = "/fragments/header :: header"/>
         <nav th:replace = "/fragments/nav :: nav"/>
 
-
-        <style>
-            body {
-                background-color: black;
-                color: white;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                margin: 0;
-                font-family: Arial, sans-serif;
-            }
-
-            .container {
-                text-align: center;
-            }
-
-            .form-group {
-                margin-bottom: 20px;
-            }
-
-            label {
-                display: block;
-                margin-bottom: 5px;
-            }
-
-            input[type="text"],
-            input[type="email"],
-            input[type="password"],
-            input[type="submit"] {
-                width: 100%;
-                padding: 10px;
-                margin-top: 5px;
-                margin-bottom: 10px;
-                border-radius: 5px;
-                border: 1px solid white;
-                background-color: black;
-                color: white;
-                box-sizing: border-box;
-            }
-
-            input[type="submit"] {
-                background-color: white;
-                color: black;
-                cursor: pointer;
-            }
-        </style>
         </head>
         <body>
             <div class="container">
                 <h2>Registro</h2>
                 <form action="registro" method="post">
                     <div class="form-group">
-                        <label for="nombre">Nombre:</label>
+                        <label class="label" for="nombre">Nombre:</label>
                         <input type="text" id="nombre" name="nombre" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email:</label>
+                        <label class="label" for="email">Email:</label>
                         <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="contrasena">Contraseña:</label>
+                        <label class="label" for="contrasena">Contraseña:</label>
                         <input type="password" id="contrasena" name="password" required>
                     </div>
                     <div class="form-group">
-                        <label for="repetir-contrasena">Repetir Contraseña:</label>
+                        <label class="label" for="repetir-contrasena">Repetir Contraseña:</label>
                         <input type="password" id="repetir-contrasena" name="password2" required>
                             <div class="form-group">
                                 <input type="submit" value="Registrarse">
