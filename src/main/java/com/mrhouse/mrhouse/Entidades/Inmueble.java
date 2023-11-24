@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -24,10 +25,14 @@ public class Inmueble {
     private Integer antiguedad;
     private Long mts2;
     private String direccion;
-//    @ManyToOne
-//    private Ente ente;
+    private String provincia;
+    private String departamento;
+    private Double precio;
+    @ManyToOne
+    private Ente ente;
     @OneToOne
     private Imagen imagen;
+    private Boolean alta;
 
     public Inmueble() {
     }
@@ -67,14 +72,14 @@ public class Inmueble {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-//
-//    public Ente getEnte() {
-//        return ente;
-//    }
-//
-//    public void setEnte(Ente ente) {
-//        this.ente = ente;
-//    }
+ 
+    public Ente getEnte() {
+        return ente;
+    }
+
+    public void setEnte(Ente ente) {
+        this.ente = ente;
+    }
 
     public Imagen getImagen() {
         return imagen;
@@ -84,4 +89,35 @@ public class Inmueble {
         this.imagen = imagen;
     }
 
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public Boolean getAlta() {
+        return alta;
+    }
+
+    public void setAlta(Boolean alta) {
+        this.alta = alta;
+    }
 }

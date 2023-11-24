@@ -1,6 +1,6 @@
 <nav>
-    <ul>
-        <li><a th:href="@{/inicio}" class="linkAAlgo">Inicio</a></li>
+    <ul sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE', 'USER')">
+        <li><a th:href="@{/}" class="linkAAlgo">Inicio</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Ofertas</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Reuniones</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Reclamos</a></li>
@@ -11,8 +11,19 @@
                                 Inmueble
                             </a>
                                 <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
-                                <li><a class="linkAAlgo"  th:href="@{inmueble/registrar}">Crear Inmueble</a></li>
-                                <li><a class="linkAAlgo" th:href="@{/}">Listar Inmuebles</a></li>
+                                <li><a class="linkAAlgo"  th:href="@{/registrar}">Crear Inmueble</a></li>
+                                <li><a class="linkAAlgo" th:href="@{/lista}">Listar Inmuebles</a></li>
+                                </ul>
+        </div>
+        
+        <div class=" dropdown" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'USER')">
+                            <a class="linkAAlgo botonInmueble" 
+                                 href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Ente
+                            </a>
+                                <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
+                                <li><a class="linkAAlgo"  th:href="@{/registrar}">Crear Ente</a></li>
+                                <li><a class="linkAAlgo" th:href="@{/lista}">Listar Entes</a></li>
                                 </ul>
         </div>
 </nav>

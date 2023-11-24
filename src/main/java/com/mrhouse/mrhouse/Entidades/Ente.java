@@ -1,12 +1,15 @@
 package com.mrhouse.mrhouse.Entidades;
 
 import com.mrhouse.mrhouse.enumeraciones.Rol;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -20,24 +23,17 @@ public class Ente {
     private String nombre;
     private String email;
     private String password;
-   
-//    private List<Inmueble> inmueble;
-@ManyToOne
-private Imagen imagen;
+    
+    @OneToMany
+    private List<Inmueble> inmueble;
+
+    @OneToOne
+    private Imagen imagen;
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
     public Ente() {
     }
-
-//    public List<Inmueble> getInmueble() {
-//        return inmueble;
-//    }
-//
-//    public void setInmueble(List<Inmueble> inmueble) {
-//        this.inmueble = inmueble;
-//    }
-
 
     public String getId() {
         return id;
@@ -86,5 +82,4 @@ private Imagen imagen;
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
     }
-
 }

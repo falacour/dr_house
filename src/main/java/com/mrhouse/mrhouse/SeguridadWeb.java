@@ -38,7 +38,7 @@ private ServicioUsuario servicioUsuario;
                         .loginProcessingUrl("/logincheck")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/inicio")
+                        .defaultSuccessUrl("/")
                         .permitAll()
                 .and().logout()
                         .logoutUrl("/logout")

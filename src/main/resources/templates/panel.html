@@ -1,12 +1,11 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-    <head th:replace="/fragments/head :: head"/>
+    <head th:replace = "/fragments/head :: head"/>
 
     <body>
-    <head th:replace="/fragments/header :: header" />
-    <head th:replace="/fragments/nav :: nav"/>
-    <!-- Imagenes del slider -->
+    <head th:replace = "/fragments/headerPanel :: headerPanel"/>
+    <head th:replace = "/fragments/navPanel :: navPanel"/>
+    <!--Imagenes del slider-->
     <div class="slider">
         <div>
             <img
@@ -37,10 +36,12 @@
                 />
         </div>
     </div>
-
-    <!-- Codigo del Slider -->
+    <!--Codigo del Slider-->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script
+        type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
     <script>
         $(document).ready(function () {
             $(".slider").slick({
@@ -51,10 +52,14 @@
             });
         });
     </script>
+    <!--Seccion de ofertas-->
+    <div class="titulo-seccion"><h2>¡Ofertas Especiales!</h2></div>
 
-    <!-- Seccion de ofertas -->
-    <div class="titulo-seccion">
-        <h2>¡Ofertas Especiales!</h2>
+    <div th:each="inmueble : ${inmuebles}">
+        <figure>
+            <img th:src="@{/imagen/registro/__${inmueble.id}__}" th:alt="${'Imagen de ' + inmueble.tipo}">
+            <figcaption th:text="${inmueble.tipo}"></figcaption>
+        </figure>
     </div>
 
     <section class="ofertas">
@@ -82,22 +87,9 @@
                 alt="Oferta 3"
                 />
         </div>
-    </section> 
-
-    <div class="titulo-seccion">
-        <h2>Inmuebles</h2>
-    </div>
-    <section class="inmuebles">
-        <div class="tarjeta">
-            <a th:href="@{/vistaInmueble}">
-                <button class="boton-inmueble">Ver Inmueble</button>
-            </a>
-        </div>
     </section>
-
-    <!-- Seccion del Footer -->
-    <head th:replace="/fragments/footer :: footer" />
+    <!--Seccion del Footer-->
+    <head th:replace = "/fragments/footer :: footer"/>
     <script src="index.js"></script>
 </body>
-
 </html>
