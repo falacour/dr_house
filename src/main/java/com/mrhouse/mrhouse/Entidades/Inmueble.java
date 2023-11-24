@@ -25,6 +25,9 @@ public class Inmueble {
     private Integer antiguedad;
     private Long mts2;
     private String direccion;
+    private String provincia;
+    private String departamento;
+    private Double precio;
     @ManyToOne
     private Ente ente;
     @OneToOne
@@ -86,4 +89,27 @@ public class Inmueble {
         this.imagen = imagen;
     }
 
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
 }

@@ -37,10 +37,13 @@ public class InmuebleControlador {
        
    }
    @PostMapping("/registro")
-   public String registro(@RequestParam(required = false) Long id, @RequestParam String tipo, @RequestParam(required = false)Integer antiguedad,
-           @RequestParam(required = false ) Long mts2, @RequestParam String direccion, ModelMap modelo, MultipartFile archivo ){
+   public String registro(@RequestParam(required = false) Long id, @RequestParam String tipo,
+           @RequestParam(required = false)Integer antiguedad, @RequestParam(required = false ) Long mts2,
+           @RequestParam String direccion, ModelMap modelo, MultipartFile archivo, Double precio,
+           String provincia, String departamento){
        try {
-           servicioInmueble.crearInmueble(archivo, id, tipo, antiguedad, mts2, direccion);
+           servicioInmueble.crearInmueble(archivo, id, tipo, antiguedad, mts2, direccion,
+                   precio, provincia, departamento);
            modelo.put("exelente", "se cargo tu inmueble");
        } catch (MiException e) {
            modelo.put("error", e.getMessage());
@@ -70,8 +73,12 @@ public class InmuebleControlador {
      }
      
      @PostMapping("/modificar/{id}")
-     public String modificar(@PathVariable MultipartFile archivo, String id, ModelMap modelo){
+     public String modificar(@PathVariable MultipartFile archivo, String id, ModelMap modelo,
+             Long idInmueble,String tipo,Integer antiguedad, Long mts2, String direccion,
+             Double precio, String provincia, String departamento){
+         
         try {
+            servicioInmueble.modificar(archivo, mts2, tipo, antiguedad, mts2, direccion, precio, provincia, departamento);
             servicioImagen.actualizar(archivo, id);
         } catch (MiException ex) {
             modelo.put("error", ex);

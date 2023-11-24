@@ -3,26 +3,22 @@
     <div>
             <form method="POST" th:action="@{/inmueble/modificar/__${inmueble.id}__}">
                 
-                <input hidden th:value="${id}" name="id">
+                <input hidden th:value="${inmueble.id}" name="idInmueble">
                 
                 <div>
-                    <label>Cargar inmueble</label>
+                    <label>Modificar</label>
                     <input type="file" class="form-control" name="archivo" >>
                 </div>
                 <div>
-                    <label>Cargar inmueble</label>
                     <input type="file" class="form-control" name="archivo" >>
                 </div>
                 <div>
-                    <label>Cargar inmueble</label>
                     <input type="file" class="form-control" name="archivo" >>
                 </div>
                 <div>
-                    <label>Cargar inmueble</label>
                     <input type="file" class="form-control" name="archivo" >>
                 </div>
                 <div>
-                    <label>Cargar inmueble</label>
                     <input type="file" class="form-control" name="archivo" >>
                 </div>
                 <button type="submit"> Actualizar</button>
