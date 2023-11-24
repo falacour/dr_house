@@ -9,6 +9,9 @@
             <form class="formulario" th:action="@{/inmueble/modificar/__${inmueble.id}__}" method="POST" enctype="multipart/form-data">
 
                 <label class="mb-2">Modificar Inmueble</label> 
+                
+                <input hidden th:value="${inmueble.id}" name="idInmueble">
+                
                 <div class="form-group my-3">
 
                     <input type="text" class="form-control" name="tipo" placeholder="Tipo de inmueble">

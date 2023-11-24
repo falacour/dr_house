@@ -68,14 +68,16 @@ public class InmuebleControlador {
      }
      
      @PostMapping("/modificar/{id}")
-     public String modificar(@PathVariable MultipartFile archivo, Long id, ModelMap modelo,
+     public String modificar(@PathVariable MultipartFile archivo, Long idInmueble, ModelMap modelo,
              String idImagen,String tipo,Integer antiguedad, Long mts2, String direccion,
              Double precio, String provincia, String departamento, String alta){
-         
+ 
         try {
-            servicioInmueble.modificar(archivo, mts2, tipo, antiguedad, mts2,
-                    direccion, precio, provincia, departamento, alta);
             servicioImagen.actualizar(archivo, idImagen);
+            Imagen imagen = servicioImagen.getOne(idImagen);
+            servicioInmueble.modificar(archivo, idInmueble, tipo, antiguedad, mts2,
+                    direccion, precio, provincia, departamento, alta, imagen);
+            
         } catch (MiException ex) {
             modelo.put("error", ex);
             return "inmueble_modificar.html";
