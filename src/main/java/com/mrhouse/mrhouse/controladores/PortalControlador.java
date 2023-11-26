@@ -46,13 +46,13 @@ public class PortalControlador {
 
     @PostMapping("/registrar")
     public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password,
-            @RequestParam String password2, ModelMap modelo, String rol) {
+            @RequestParam String password2, ModelMap modelo, String rol, String dni) {
 
         MultipartFile archivo = null;
         
         try {
             if (rol.equalsIgnoreCase("cliente")) {
-                servicioCliente.registrar(archivo, nombre, Integer.SIZE, email, password, password2);
+                servicioCliente.registrar(archivo, nombre, dni, email, password, password2);
             } else if (rol.equalsIgnoreCase("ente")) {
                 servicioEnte.crearEnte(archivo, nombre, email, password, password2);
             } else {
@@ -79,6 +79,7 @@ public class PortalControlador {
         if (error != null) {
             modelo.put("error", "usuario o contraseña invalidos");
         }
+        
 
         return "login.html";
     }

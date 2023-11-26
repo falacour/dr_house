@@ -30,7 +30,7 @@ private ServicioCliente servicioCliente;
     }
 
     @PostMapping("/registro")
-    public String registro(MultipartFile archivo, @RequestParam String nombre, @RequestParam Integer dni, @RequestParam String email,
+    public String registro(MultipartFile archivo, @RequestParam String nombre, @RequestParam String dni, @RequestParam String email,
             @RequestParam String password, @RequestParam String password2, ModelMap modelo) {
         try {
             servicioCliente.registrar(archivo, nombre, dni, email, password, password2);

@@ -1,5 +1,5 @@
 <nav>
-    <ul sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE', 'USER')">
+    <ul sec:authorize="!isAuthenticated()">
         <li><a th:href="@{/}" class="linkAAlgo">Inicio</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Ofertas</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Reuniones</a></li>
@@ -21,8 +21,8 @@
                                  href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Ente
                             </a>
-                                <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
-                                <li><a class="linkAAlgo"  th:href="@{/registrar}">Crear Ente</a></li>
+                                <ul class=" dropdown-content " aria-labelledby="navbarDropdown" sec:authorize="hasRole('ADMIN')>
+                                <li "><a class="linkAAlgo"  th:href="@{/registrar}">Crear Ente</a></li>
                                 <li><a class="linkAAlgo" th:href="@{/lista}">Listar Entes</a></li>
                                 </ul>
         </div>

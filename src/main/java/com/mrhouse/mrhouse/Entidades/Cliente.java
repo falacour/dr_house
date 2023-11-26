@@ -5,6 +5,7 @@
 package com.mrhouse.mrhouse.Entidades;
 
 import com.mrhouse.mrhouse.enumeraciones.Rol;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -27,7 +28,7 @@ public class Cliente {
     private String id;
 
     private String nombre;
-    private Integer dni;
+    private String dni;
     private String email;
     private String password;
     
@@ -37,7 +38,7 @@ public class Cliente {
     @OneToOne
     private Imagen imagen;
     @OneToMany
-    private Inmueble inmueble;
+    private List<Inmueble> inmueble;
 
     public Cliente() {
     }
@@ -58,11 +59,11 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public Integer getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(Integer dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -98,11 +99,11 @@ public class Cliente {
         this.imagen = imagen;
     }
 
-    public Inmueble getInmueble() {
+    public List<Inmueble> getInmueble() {
         return inmueble;
     }
 
-    public void setInmueble(Inmueble inmueble) {
+    public void setInmueble(List<Inmueble> inmueble) {
         this.inmueble = inmueble;
     }
 }
