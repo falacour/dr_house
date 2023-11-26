@@ -66,8 +66,18 @@
         <a  th:href="@{/}">
             <button class="log-in" th:if="${session.usuariosession != null}" type="button">Perfil</button>
         </a>
+        <!--  ESTO ES PARA PASARSE DE ROL PERO POR AHORA LO DEJEMOS COMENTADO
+        <div th:if="${cliente.permiso}">
+            <div th:if="${cliente.rol == CLIENTE}">
                 <a  th:href="@{/}">
-            <button class="log-in" th:if="${session.usuariosession != null}" type="button">Pasarse Ente</button>
+                    <button class="log-in" th:if="${session.usuariosession != null}" type="button">Pasarse Propitario</button>
+            </div>
+            <div th:if="${cliente.rol == ENTE}">
+                <a  th:href="@{/}">
+                    <button class="log-in" th:if="${session.usuariosession != null}" type="button">Pasarse Cliente</button>
+            </div>
+        </div>
+        -->
         </a>
         <a  th:href="@{/logout}">
             <button class="log-in" th:if="${session.usuariosession != null}" type="button" >Cerrar sesion</button>

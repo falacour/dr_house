@@ -39,6 +39,9 @@ public class Cliente {
     private Imagen imagen;
     @OneToMany
     private List<Inmueble> inmueble;
+    private Boolean permiso;
+    @OneToMany
+    private List<Cliente> cliente;
 
     public Cliente() {
     }
@@ -106,4 +109,21 @@ public class Cliente {
     public void setInmueble(List<Inmueble> inmueble) {
         this.inmueble = inmueble;
     }
+
+    public Boolean getPermiso() {
+        return permiso;
+    }
+
+    public void setPermiso(Boolean permiso) {
+        this.permiso = permiso;
+    }
+
+    public List<Cliente> getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(List<Cliente> cliente) {
+        this.cliente = cliente;
+    }
+    
 }

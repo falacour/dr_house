@@ -22,8 +22,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/cliente")
 public class ClienteControlador {
-@Autowired
-private ServicioCliente servicioCliente;
+
+    @Autowired
+    private ServicioCliente servicioCliente;
+
     @GetMapping("/registrar")
     public String registrar() {
         return "cliente_form.html";
@@ -34,24 +36,46 @@ private ServicioCliente servicioCliente;
             @RequestParam String password, @RequestParam String password2, ModelMap modelo) {
         try {
             servicioCliente.registrar(archivo, nombre, dni, email, password, password2);
-          modelo.put("exito", "Tu usuario de cliente fue guardado con exito");
+            modelo.put("exito", "Tu usuario de cliente fue guardado con exito");
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
-            modelo.put("nombre",nombre);
-            modelo.put("email",email);
-            return  "cliente_form.html";
+            modelo.put("nombre", nombre);
+            modelo.put("email", email);
+            return "cliente_form.html";
         }
         return "index.html";
     }
- @GetMapping("/login")
+
+    @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
 
         if (error != null) {
             modelo.put("error", "usuario o contraseña invalidos");
-            
+
         }
-return "login.html";
-        
+        return "login.html";
     }
     
+    @GetMapping("/perfil")
+    public String perfil(){
+        return "perfil.html";
+    }
+    
+    @GetMapping("/modificar/{id}")
+    public String modificar(){
+        return "perfil_modificar.html";
+    }
+    
+    @PostMapping("/modificar/{id}")
+    public String modificado(MultipartFile archivo, String nombre, String dni, String email,
+            String password, String password2, ModelMap modelo, String id){
+        try {
+            
+            servicioCliente.actualizar(archivo, id, nombre, email, password, password2, dni);
+            
+            return "redirect:/modificar";
+        } catch (Exception e) {
+            return "perfil_modificar.html";
+        }
+    }
 }
