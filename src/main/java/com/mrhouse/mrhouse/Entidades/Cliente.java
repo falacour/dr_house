@@ -10,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -29,12 +30,14 @@ public class Cliente {
     private Integer dni;
     private String email;
     private String password;
-
+    
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
     @OneToOne
     private Imagen imagen;
+    @OneToMany
+    private Inmueble inmueble;
 
     public Cliente() {
     }
@@ -95,4 +98,11 @@ public class Cliente {
         this.imagen = imagen;
     }
 
+    public Inmueble getInmueble() {
+        return inmueble;
+    }
+
+    public void setInmueble(Inmueble inmueble) {
+        this.inmueble = inmueble;
+    }
 }
