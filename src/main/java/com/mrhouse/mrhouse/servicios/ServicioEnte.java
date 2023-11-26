@@ -1,29 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mrhouse.mrhouse.servicios;
 
+import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.Entidades.Ente;
 import com.mrhouse.mrhouse.Entidades.Imagen;
 import com.mrhouse.mrhouse.enumeraciones.Rol;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
 import com.mrhouse.mrhouse.repositorios.RepositorioEnte;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import javax.transaction.Transactional;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- *
- * @author thell
- */
 @Service
-public class ServicioEnte {
-  
+public class ServicioEnte implements UserDetailsService{
+    
     @Autowired
     private RepositorioEnte repositorioEnte;
     @Autowired
@@ -43,7 +47,7 @@ public class ServicioEnte {
         
         ente.setEmail(email);
         ente.setNombre(nombre);
-        ente.setPassword(password);
+        ente.setPassword(new BCryptPasswordEncoder().encode(password));
         ente.setRol(Rol.ENTE);
         
         Imagen imagen = servicioImagen.guardar(archivo);
@@ -115,5 +119,20 @@ public class ServicioEnte {
         }
     }
     
-
+    @Override
+    public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+        Ente ente = repositorioEnte.buscarPorEmail(mail);
+        if (ente != null) {
+            List<GrantedAuthority> permisos = new ArrayList<>();
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + ente.getRol().toString());
+            permisos.add(p);
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession sesion = attr.getRequest().getSession(true);
+            sesion.setAttribute("clientesession", ente);
+            return new User(ente.getEmail(), ente.getPassword(), permisos);
+        } else {
+            throw new UsernameNotFoundException("no se encontro el cliente de el email " + mail);
+        }
+    }
+    
 }

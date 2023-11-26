@@ -5,11 +5,13 @@
 package com.mrhouse.mrhouse.Entidades;
 
 import com.mrhouse.mrhouse.enumeraciones.Rol;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,15 +28,20 @@ public class Cliente {
     private String id;
 
     private String nombre;
-    private Integer dni;
+    private String dni;
     private String email;
     private String password;
-
+    
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
     @OneToOne
     private Imagen imagen;
+    @OneToMany
+    private List<Inmueble> inmueble;
+    private Boolean permiso;
+    @OneToMany
+    private List<Cliente> cliente;
 
     public Cliente() {
     }
@@ -55,11 +62,11 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public Integer getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(Integer dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -95,4 +102,28 @@ public class Cliente {
         this.imagen = imagen;
     }
 
+    public List<Inmueble> getInmueble() {
+        return inmueble;
+    }
+
+    public void setInmueble(List<Inmueble> inmueble) {
+        this.inmueble = inmueble;
+    }
+
+    public Boolean getPermiso() {
+        return permiso;
+    }
+
+    public void setPermiso(Boolean permiso) {
+        this.permiso = permiso;
+    }
+
+    public List<Cliente> getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(List<Cliente> cliente) {
+        this.cliente = cliente;
+    }
+    
 }
