@@ -31,6 +31,7 @@ public class Cliente {
     private String dni;
     private String email;
     private String password;
+
     
     @Enumerated(EnumType.STRING)
     private Rol rol;
@@ -40,8 +41,7 @@ public class Cliente {
     @OneToMany
     private List<Inmueble> inmueble;
     private Boolean permiso;
-    @OneToMany
-    private List<Cliente> cliente;
+
 
     public Cliente() {
     }
@@ -118,12 +118,5 @@ public class Cliente {
         this.permiso = permiso;
     }
 
-    public List<Cliente> getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(List<Cliente> cliente) {
-        this.cliente = cliente;
-    }
     
 }

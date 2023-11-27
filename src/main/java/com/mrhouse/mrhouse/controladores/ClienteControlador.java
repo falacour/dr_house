@@ -56,10 +56,7 @@ public class ClienteControlador {
         return "login.html";
     }
     
-    @GetMapping("/perfil")
-    public String perfil(){
-        return "perfil.html";
-    }
+   
     
     @GetMapping("/modificar/{id}")
     public String modificar(){

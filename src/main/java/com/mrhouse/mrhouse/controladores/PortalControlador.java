@@ -98,4 +98,9 @@ public class PortalControlador {
 
         return "vistaInmueble.html";
     }
+    
+     @GetMapping("/perfil")
+    public String perfil(){
+        return "perfil.html";
+    }
 }

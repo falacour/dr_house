@@ -63,7 +63,7 @@
     </div>
     <!--Sesion iniciada-->
     <div sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE', 'USER')">
-        <a  th:href="@{/}">
+        <a  th:href="@{/perfil}">
             <button class="log-in"  type="button">Perfil</button>
         </a>
 
