@@ -33,9 +33,11 @@ public class PortalControlador {
     private ServicioCliente servicioCliente;
 
     @GetMapping("/")
-    public String index(ModelMap modelo) {
+    public String index(ModelMap modelo, HttpSession session) {
         List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
         modelo.addAttribute("inmuebles", inmuebles);
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        modelo.addAttribute("cliente", cliente);
         return "index.html";
     }
 
@@ -104,7 +106,7 @@ public class PortalControlador {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
         List<Inmueble> inmuebles = cliente.getInmueble();
         modelo.addAttribute("cliente", cliente);
-        modelo.addAttribute("inmuebles", inmuebles);
+        modelo.put("inmuebles", inmuebles);
         
         return "perfil.html";
     }

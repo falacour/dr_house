@@ -19,23 +19,21 @@
     private Imagen imagen;
     @OneToMany
     private List<Inmueble> inmueble;-->
-<!-- 
+        <!-- 
         <div> 
             <h1 th:text="Bienvenido de nuevo + ${cliente.nombre}"></h1>
             <img th:src="@{/imagen/inmueble/__${cliente.imagen.id}__}" alt="imagen de perfil"/>
-            <a th:href="@{/cliente/modificar/__{id}__}">Editar perfil</a>
+            <a th:href="@{/cliente/modificar/__${id}__}">Editar perfil</a>
         </div> -->
 
         <div>
             <p>Inmuebles que posees:</p>
-            <!-- Hay que editar esta parte -->
             <div th:each="inmueble : ${inmuebles}">
                 <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
                 <p th:text="${inmueble.tipo}"></p>
                 <!-- opcion para hablar con el ente y dar de baja el inmueble -->
             </div> 
         </div> 
-    <a th:href= "@{/cliente/modificar/__${id}__}">< Modificar perfil</a>
 
         <footer th:replace = "/fragments/footer :: footer"/>
     </body>

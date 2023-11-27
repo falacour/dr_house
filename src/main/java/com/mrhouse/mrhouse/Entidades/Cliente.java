@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -38,7 +39,9 @@ public class Cliente {
 
     @OneToOne
     private Imagen imagen;
-    @OneToMany
+    //El mappedBy y el fetch es para que podamos acceder a la lista de inmuebles
+    //sin problemas al cargarla desde cliente 
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     private List<Inmueble> inmueble;
     private Boolean permiso;
 

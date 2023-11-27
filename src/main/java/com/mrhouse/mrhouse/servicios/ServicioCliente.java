@@ -6,9 +6,11 @@ package com.mrhouse.mrhouse.servicios;
 
 import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.Entidades.Imagen;
+import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.enumeraciones.Rol;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
+import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +41,9 @@ public class ServicioCliente implements UserDetailsService {
 
     @Autowired
     private ServicioImagen servicioImagen;
+    
+    @Autowired
+    private ServicioInmueble servicioInmueble;
 
     @Transactional
     public void registrar(MultipartFile archivo, String nombre, String dni, String mail,
@@ -83,6 +88,16 @@ public class ServicioCliente implements UserDetailsService {
         List<Cliente> clientes = new ArrayList<>();
         clientes = repositorioCliente.findAll();
         return clientes;
+    }
+    
+    @Transactional
+    public void compra(Long idInmueble, String id){
+        Inmueble inmueble = servicioInmueble.getOne(idInmueble);
+        Cliente cliente = repositorioCliente.getOne(id);
+        List<Inmueble> inmuebles = cliente.getInmueble();
+        inmuebles.add(inmueble);
+        cliente.setInmueble(inmuebles);
+        
     }
 
     public void validar(String nombre, String email, String password, String password2, String dni) throws MiException {
