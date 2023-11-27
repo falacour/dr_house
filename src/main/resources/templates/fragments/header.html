@@ -51,7 +51,7 @@
     </form>
     <!--Botones relacionados a ingreso y registro de Usuario-->
     <!--Sin iniciar sesion-->
-    <div class="buttons">
+    <div class="buttons" sec:authorize="!hasAnyRole('ENTE', 'ADMIN', 'CLIENTE', 'USER')">
         <!--Reemplazar estos buttons a -->
         <a th:href="@{login}">
             <button class="log-in"  type="button">Inicia Sesión</button>
