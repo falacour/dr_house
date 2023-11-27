@@ -36,11 +36,8 @@ public class PortalControlador {
     public String index(ModelMap modelo, HttpSession session) {
         List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
         modelo.addAttribute("inmuebles", inmuebles);
-        System.out.println("entro index");
         //Cliente cliente = (Cliente) session.getAttribute("clientesession");
-        System.out.println("salio index");
         //modelo.addAttribute("cliente", cliente);
-        System.out.println("re index");
         return "index.html";
     }
 
