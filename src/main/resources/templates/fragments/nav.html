@@ -1,5 +1,5 @@
 <nav>
-    <ul sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'USER')">
+    <ul sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'USER', 'CLIENTE')">
         <li><a th:href="@{/}" class="linkAAlgo">Inicio</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Ofertas</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Reuniones</a></li>
@@ -16,7 +16,7 @@
                                 </ul>
         </div>
         
-        <div class=" dropdown" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'USER')">
+        <div class=" dropdown" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'USER', 'CLIENTE')">
                             <a class="linkAAlgo botonInmueble" 
                                  href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Ente
