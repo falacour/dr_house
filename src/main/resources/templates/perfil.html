@@ -28,12 +28,12 @@
 
         <div>
             <p>Inmuebles que posees:</p>
-            <!-- Hay que editar esta parte
+            <!-- Hay que editar esta parte -->
             <div th:each="inmueble : ${inmuebles}">
                 <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
-                <p th:text="${inmueble.imagen.id}"></p>
-                <!-- opcion para hablar con el ente y dar de baja el inmueble 
-            </div> -->
+                <p th:text="${inmueble.tipo}"></p>
+                <!-- opcion para hablar con el ente y dar de baja el inmueble -->
+            </div> 
         </div> 
     <a th:href= "@{/cliente/modificar/__${id}__}">< Modificar perfil</a>
 

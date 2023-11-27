@@ -100,7 +100,12 @@ public class PortalControlador {
 
     @GetMapping("/perfil")
     public String perfil(ModelMap modelo, HttpSession session) {
+        
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List<Inmueble> inmuebles = cliente.getInmueble();
+        modelo.addAttribute("cliente", cliente);
+        modelo.addAttribute("inmuebles", inmuebles);
+        
         return "perfil.html";
     }
 }
