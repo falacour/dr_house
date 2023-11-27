@@ -12,14 +12,14 @@
 
     <!--forms relacionados a las querys de busqueda-->
     <form class="searcher" action="buscar.php" method="get" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE', 'USER')">
-        <input
+       <!-- <input
             class="searcher-form"
             type="text"
             id="busqueda"
             name="q"
             placeholder="Escribe tu búsqueda..."
-            />
-        <input class="searcher-form" type="submit" value="Buscar" />
+            />-->
+        
         <select name="Operaciones" class="searcher-form">
             <option value="" disabled selected>
                 Tipo de transaccion
@@ -48,6 +48,20 @@
             <option value="16">Edificio</option>
             <option value="17">Otros</option>
         </select>
+       
+        <select name="Zona" class="searcher-form">
+            <option value="" disabled selected>
+                Zona
+            </option>
+            <option value="1">Cordoba</option>
+            <option value="2">San Luis</option>
+            <option value="3">Mendoza</option>
+            <option value="3">Buenos Aires</option>
+            <option value="3">Corrientes</option>
+            <option value="3">Santa Fe</option>
+            <option value="3">Neuquén</option>
+        </select>
+        <input class="searcher-form" type="submit" value="Buscar" />
     </form>
     <!--Botones relacionados a ingreso y registro de Usuario-->
     <!--Sin iniciar sesion-->

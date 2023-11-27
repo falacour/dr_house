@@ -5,7 +5,7 @@
         <li><a th:href="@{/}" class="linkAAlgo">Reuniones</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Reclamos</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Boletas de Pago</a></li>
-        <div class=" dropdown">
+        <div class=" dropdown" sec:authorize="hasAnyRole('ENTE')">
                             <a class="linkAAlgo botonInmueble" 
                                  href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Inmueble
@@ -16,7 +16,7 @@
                                 </ul>
         </div>
         
-        <div class=" dropdown" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'USER', 'CLIENTE')">
+        <div class=" dropdown" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'USER')">
                             <a class="linkAAlgo botonInmueble" 
                                  href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Ente
