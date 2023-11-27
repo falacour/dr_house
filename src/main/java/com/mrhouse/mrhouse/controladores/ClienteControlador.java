@@ -4,8 +4,10 @@
  */
 package com.mrhouse.mrhouse.controladores;
 
+import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.servicios.ServicioCliente;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -59,7 +61,9 @@ public class ClienteControlador {
    
     
     @GetMapping("/modificar/{id}")
-    public String modificar(){
+    public String modificar(ModelMap modelo, HttpSession session){
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        modelo.put("cliente",cliente);
         return "perfil_modificar.html";
     }
     
@@ -70,7 +74,7 @@ public class ClienteControlador {
             
             servicioCliente.actualizar(archivo, id, nombre, email, password, password2, dni);
             
-            return "redirect:/modificar";
+            return "index.html";
         } catch (Exception e) {
             return "perfil_modificar.html";
         }

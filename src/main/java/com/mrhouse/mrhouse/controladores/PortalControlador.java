@@ -49,7 +49,7 @@ public class PortalControlador {
             @RequestParam String password2, ModelMap modelo, String rol, String dni) {
 
         MultipartFile archivo = null;
-        
+
         try {
             if (rol.equalsIgnoreCase("cliente")) {
                 servicioCliente.registrar(archivo, nombre, dni, email, password, password2);
@@ -79,7 +79,6 @@ public class PortalControlador {
         if (error != null) {
             modelo.put("error", "usuario o contraseña invalidos");
         }
-        
 
         return "login.html";
     }
@@ -98,9 +97,10 @@ public class PortalControlador {
 
         return "vistaInmueble.html";
     }
-    
-     @GetMapping("/perfil")
-    public String perfil(){
+
+    @GetMapping("/perfil")
+    public String perfil(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
         return "perfil.html";
     }
 }
