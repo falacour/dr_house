@@ -36,8 +36,11 @@ public class PortalControlador {
     public String index(ModelMap modelo, HttpSession session) {
         List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
         modelo.addAttribute("inmuebles", inmuebles);
-        Cliente cliente = (Cliente) session.getAttribute("clientesession");
-        modelo.addAttribute("cliente", cliente);
+        System.out.println("entro index");
+        //Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        System.out.println("salio index");
+        //modelo.addAttribute("cliente", cliente);
+        System.out.println("re index");
         return "index.html";
     }
 
@@ -77,7 +80,6 @@ public class PortalControlador {
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
-
         if (error != null) {
             modelo.put("error", "usuario o contraseña invalidos");
         }
@@ -88,7 +90,6 @@ public class PortalControlador {
     // @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session, ModelMap modelo) {
-
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
 
         return "index.html";
