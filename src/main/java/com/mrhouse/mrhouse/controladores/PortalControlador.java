@@ -33,9 +33,14 @@ public class PortalControlador {
     private ServicioCliente servicioCliente;
 
     @GetMapping("/")
-    public String index(ModelMap modelo) {
+    public String index(ModelMap modelo, HttpSession session) {
         List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
         modelo.addAttribute("inmuebles", inmuebles);
+        System.out.println("entro index");
+        //Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        System.out.println("salio index");
+        //modelo.addAttribute("cliente", cliente);
+        System.out.println("re index");
         return "index.html";
     }
 
@@ -46,13 +51,13 @@ public class PortalControlador {
 
     @PostMapping("/registrar")
     public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password,
-            @RequestParam String password2, ModelMap modelo, String rol) {
+            @RequestParam String password2, ModelMap modelo, String rol, String dni) {
 
         MultipartFile archivo = null;
-        
+
         try {
             if (rol.equalsIgnoreCase("cliente")) {
-                servicioCliente.registrar(archivo, nombre, Integer.SIZE, email, password, password2);
+                servicioCliente.registrar(archivo, nombre, dni, email, password, password2);
             } else if (rol.equalsIgnoreCase("ente")) {
                 servicioEnte.crearEnte(archivo, nombre, email, password, password2);
             } else {
@@ -75,7 +80,6 @@ public class PortalControlador {
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
-
         if (error != null) {
             modelo.put("error", "usuario o contraseña invalidos");
         }
@@ -86,7 +90,6 @@ public class PortalControlador {
     // @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session, ModelMap modelo) {
-
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
 
         return "index.html";
@@ -96,5 +99,16 @@ public class PortalControlador {
     public String vistaInmueble() {
 
         return "vistaInmueble.html";
+    }
+
+    @GetMapping("/perfil")
+    public String perfil(ModelMap modelo, HttpSession session) {
+        
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List<Inmueble> inmuebles = cliente.getInmueble();
+        modelo.addAttribute("cliente", cliente);
+        modelo.put("inmuebles", inmuebles);
+        
+        return "perfil.html";
     }
 }

@@ -7,6 +7,7 @@ package com.mrhouse.mrhouse.controladores;
 import com.mrhouse.mrhouse.Entidades.*;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
+import com.mrhouse.mrhouse.servicios.ServicioCliente;
 import com.mrhouse.mrhouse.servicios.ServicioImagen;
 import com.mrhouse.mrhouse.servicios.ServicioInmueble;
 import java.util.List;
@@ -30,6 +31,8 @@ public class InmuebleControlador {
     private RepositorioInmueble repositorioInmueble;
     @Autowired
     private ServicioImagen servicioImagen;
+    @Autowired
+    private ServicioCliente servicioCliente;
     
    @GetMapping("/registrar")
    public String registrar(ModelMap modelo){
@@ -84,5 +87,13 @@ public class InmuebleControlador {
         }
         
         return "redirect:/inmueble/lista";
+     }
+     
+     @GetMapping("/comprar/{id}")
+     public String comprar(Long idInmueble, String id){
+         
+         servicioCliente.compra(idInmueble, id);
+         
+         return "index.html";
      }
 }

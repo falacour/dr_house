@@ -1,6 +1,7 @@
 package com.mrhouse.mrhouse.Entidades;
 
 import com.mrhouse.mrhouse.enumeraciones.Rol;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,9 +23,9 @@ public class Ente {
     private String password;
 
     @OneToMany
-    private Inmueble inmueble;
+    private List<Inmueble> inmueble;
     @OneToMany
-    private Cliente cliente;
+    private List<Cliente> cliente;
 
     @OneToOne
     private Imagen imagen;
@@ -82,19 +83,19 @@ public class Ente {
         this.imagen = imagen;
     }
 
-    public Inmueble getInmueble() {
+    public List<Inmueble> getInmueble() {
         return inmueble;
     }
 
-    public void setInmueble(Inmueble inmueble) {
+    public void setInmueble(List<Inmueble> inmueble) {
         this.inmueble = inmueble;
     }
 
-    public Cliente getCliente() {
+    public List<Cliente> getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(List<Cliente> cliente) {
         this.cliente = cliente;
     }
 }

@@ -1,15 +1,40 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace = "/fragments/head :: head"/>
+
     <body>
-        <div>TODO write content</div>
+        <header th:replace = "/fragments/header :: header"/>
+        <nav th:replace = "/fragments/nav :: nav"/>
+        <!-- private String id;
+
+    private String nombre;
+    private String dni;
+    private String email;
+    private String password;
+    
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
+
+    @OneToOne
+    private Imagen imagen;
+    @OneToMany
+    private List<Inmueble> inmueble;-->
+        <!-- 
+        <div> 
+            <h1 th:text="Bienvenido de nuevo + ${cliente.nombre}"></h1>
+            <img th:src="@{/imagen/inmueble/__${cliente.imagen.id}__}" alt="imagen de perfil"/>
+            <a th:href="@{/cliente/modificar/__${id}__}">Editar perfil</a>
+        </div> -->
+
+        <div>
+            <p>Inmuebles que posees:</p>
+            <div th:each="inmueble : ${inmuebles}">
+                <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
+                <p th:text="${inmueble.tipo}"></p>
+                <!-- opcion para hablar con el ente y dar de baja el inmueble -->
+            </div> 
+        </div> 
+
+        <footer th:replace = "/fragments/footer :: footer"/>
     </body>
 </html>
