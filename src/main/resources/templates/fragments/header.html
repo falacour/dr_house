@@ -68,13 +68,11 @@
     </form>
     <!--Botones relacionados a ingreso y registro de Usuario-->
     <!--Sin iniciar sesion-->
-    <div class="buttons" sec:authorize="!hasAnyRole('ENTE', 'ADMIN', 'CLIENTE', 'USER')">
-        <!--Reemplazar estos buttons a -->
-        <a th:href="@{/login}">
+    <div sec:authorize="!hasAnyRole('ENTE', 'ADMIN', 'CLIENTE', 'USER')">
+        <a th:href="@{login}">
             <button class="log-in"  type="button">Inicia Sesión</button>
         </a>
-
-        <a  th:href="@{/registro}">
+        <a  th:href="@{registro}">
             <button class="log-in" th:if="${session.usuariosession == null}" type="button">Registrarse</button>
         </a>
     </div>
