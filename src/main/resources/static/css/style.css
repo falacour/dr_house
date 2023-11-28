@@ -10,16 +10,19 @@ header {
     background-color: black;
     color: #fff;
     text-align: center;
-    padding-top: 20px ;
+    padding-top: 5px ;
 }
 .header-items{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between; 
+    align-items: center; 
     background-color: #101f3f;
     background: linear-gradient(to bottom, #101f3f, #28505b);
+    padding-left: 1rem; 
+    padding-right: 1rem; 
 }
 .logo-empresa{
-    width: 100px;
+    width: 60px;
     height: auto;
     display: flex;
     align-items: center;
@@ -27,6 +30,7 @@ header {
 }
 .nombre_Empresa{
     font-family: 'Noto Serif Old Uyghur', serif;
+    white-space: nowrap; 
 }
 .button-logo{
     display: contents;
@@ -34,19 +38,50 @@ header {
 
 .logo{
     width: 20px;
-    padding-top: 30px ;
+    padding-top: 10px ;
 }
 
 .searcher{
-    padding-top: 20px ;
+    padding-top: 10px ;
+    width: 600px; /* Establecer el ancho */
+    justify-content: space-between; 
+    align-items: center; 
+   padding-left: 5rem; 
 }
 .searcher-form{
+    
     background-color: white;
     color: black;
     border-radius: 10px;
     padding: 10px 15px;
     cursor: pointer;
     font-size: 16px;
+    display:inline;
+    width: 150px; /* Establecer el ancho */
+    height: 40px; 
+    
+}
+header.searcher-form,
+.buscar{
+   background-color: white;
+    color: black;
+    border-radius: 10px;
+    padding: 10px ;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline;
+    width: 50px; /* Ajusta el ancho según sea necesario */
+    height: 40px;
+}
+.buscar{
+    width: 80px; /* Ajusta el ancho según sea necesario */
+    height: 40px;
+    
+}
+
+.buscar:hover {
+    background-color: #333;
+    color: #fff
 }
 .log-in{
     background-color: #4caf50;
@@ -238,7 +273,7 @@ footer {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
-.form-group my-3{
+.form-group .my-3{
     margin: 10px 0;
 }
 .mb-2{

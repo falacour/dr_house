@@ -3,7 +3,6 @@ package com.mrhouse.mrhouse.Entidades;
 import javax.persistence.*;
 import lombok.*;
 
-
 @Entity
 @Data
 @NoArgsConstructor

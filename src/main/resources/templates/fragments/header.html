@@ -12,14 +12,14 @@
 
     <!--forms relacionados a las querys de busqueda-->
     <form class="searcher" action="buscar.php" method="get" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE', 'USER')">
-        <input
+       <!-- <input
             class="searcher-form"
             type="text"
             id="busqueda"
             name="q"
             placeholder="Escribe tu búsqueda..."
-            />
-        <input class="searcher-form" type="submit" value="Buscar" />
+            />-->
+        
         <select name="Operaciones" class="searcher-form">
             <option value="" disabled selected>
                 Tipo de transaccion
@@ -48,16 +48,33 @@
             <option value="16">Edificio</option>
             <option value="17">Otros</option>
         </select>
+       
+        <select name="Zona" class="searcher-form">
+            <option value="" disabled selected>
+                Zona
+            </option>
+            <option value="1">Cordoba</option>
+            <option value="2">San Luis</option>
+            <option value="3">Mendoza</option>
+            <option value="3">Buenos Aires</option>
+            <option value="3">Corrientes</option>
+            <option value="3">Santa Fe</option>
+            <option value="3">Neuquén</option>
+        </select>
+      
+       <button class="buscar" type="submit" value="Buscar">Buscar</button>
+      
+
     </form>
     <!--Botones relacionados a ingreso y registro de Usuario-->
     <!--Sin iniciar sesion-->
     <div class="buttons" sec:authorize="!hasAnyRole('ENTE', 'ADMIN', 'CLIENTE', 'USER')">
         <!--Reemplazar estos buttons a -->
-        <a th:href="@{login}">
+        <a th:href="@{/login}">
             <button class="log-in"  type="button">Inicia Sesión</button>
         </a>
 
-        <a  th:href="@{registro}">
+        <a  th:href="@{/registro}">
             <button class="log-in" th:if="${session.usuariosession == null}" type="button">Registrarse</button>
         </a>
     </div>
@@ -67,8 +84,8 @@
             <button class="log-in"  type="button">Perfil</button>
         </a>
 
-        <a  th:href="@{/}">
-            <button class="log-in"  type="button">Pasarse Propitario</button>
+        <a sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/}">
+            <button class="log-in" type="button">Pasarse Propietario</button>
 
 
             <!--  ESTO ES PARA PASARSE DE ROL PERO POR AHORA LO DEJEMOS COMENTADO
@@ -85,7 +102,7 @@
             -->
         </a>
         <a  th:href="@{/logout}">
-            <button class="log-in" th:if="${session.usuariosession != null}" type="button" >Cerrar sesion</button>
+            <button class="log-in" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE')" type="button" >Cerrar sesion</button>
         </a>
         <p  th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p>
     </div>
