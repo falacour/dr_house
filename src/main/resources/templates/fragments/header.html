@@ -61,7 +61,10 @@
             <option value="3">Santa Fe</option>
             <option value="3">Neuquén</option>
         </select>
-        <input class="searcher-form" type="submit" value="Buscar" />
+      
+       <button class="buscar" type="submit" value="Buscar">Buscar</button>
+      
+
     </form>
     <!--Botones relacionados a ingreso y registro de Usuario-->
     <!--Sin iniciar sesion-->
@@ -82,7 +85,7 @@
         </a>
 
         <a sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/}">
-            <button class="log-in"  type="button">Pasarse Propitario</button>
+            <button class="log-in" type="button">Pasarse Propietario</button>
 
 
             <!--  ESTO ES PARA PASARSE DE ROL PERO POR AHORA LO DEJEMOS COMENTADO
