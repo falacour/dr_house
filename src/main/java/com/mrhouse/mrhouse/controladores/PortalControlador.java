@@ -3,6 +3,7 @@ package com.mrhouse.mrhouse.controladores;
 import com.mrhouse.mrhouse.Entidades.*;
 import com.mrhouse.mrhouse.enumeraciones.Rol;
 import com.mrhouse.mrhouse.excepciones.MiException;
+import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import com.mrhouse.mrhouse.servicios.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,8 @@ public class PortalControlador {
     private ServicioEnte servicioEnte;
     @Autowired
     private ServicioCliente servicioCliente;
+    @Autowired
+    private RepositorioInmueble repositorioInmueble;
 
     @GetMapping("/")
     public String index(ModelMap modelo, HttpSession session) {
@@ -104,7 +107,7 @@ public class PortalControlador {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
 
         if (cliente != null) {
-            List<Inmueble> inmuebles = cliente.getInmueble();
+            List<Inmueble> inmuebles = repositorioInmueble.inmueblesPorCliente(cliente.getId());
 
             if (inmuebles != null) {
                 modelo.put("cliente", cliente);

@@ -92,12 +92,7 @@ public class ServicioCliente implements UserDetailsService {
     
     @Transactional
     public void compra(Long idInmueble, String id){
-        Inmueble inmueble = servicioInmueble.getOne(idInmueble);
-        Cliente cliente = repositorioCliente.getOne(id);
-        List<Inmueble> inmuebles = cliente.getInmueble();
-        inmuebles.add(inmueble);
-        cliente.setInmueble(inmuebles);
-        
+        servicioInmueble.compra(id, idInmueble);
     }
 
     public void validar(String nombre, String email, String password, String password2, String dni) throws MiException {

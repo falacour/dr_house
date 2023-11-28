@@ -62,7 +62,8 @@
                     <form th:action="@{/inmueble/comprar/__${inmueble.id}__}">
                         <input type="text" th:value="${cliente.id}" id="idInmueble" name="id" hidden/>
                         <input type="text" th:value="${inmueble.id}" id="idInmueble" name="idInmueble" hidden/>
-                        <button type="submit" >Comprar</button>
+                        <button th:if="inmueble.clinte.id == null" type="submit" >Comprar</button>
+                        <button th:if="inmueble.clinte.id != null" type="submit" disabled >Vendido</button>
                     </form>
                 </div>
                 <div th:if="@{/imagen/inmueble/__${inmueble.id}__} == null" >
@@ -76,7 +77,8 @@
                     <p th:text="${inmueble.tipo}"></p>
                     <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
                     <form th:action="@{/login}">
-                        <button type="submit">Comprar</button>
+                        <button th:if="inmueble.clinte.id == null" type="submit" >Comprar</button>
+                        <button th:if="inmueble.clinte.id != null" type="submit" disabled >Vendido</button>
                     </form>
                 </div>
                 <div th:if="@{/imagen/inmueble/__${inmueble.id}__} == null" >
