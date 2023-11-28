@@ -16,12 +16,11 @@
         private Imagen imagen;
         @OneToMany
         private List<Inmueble> inmueble;-->
-        <!-- 
         <div> 
-            <h1 th:text="Bienvenido de nuevo + ${cliente.nombre}"></h1>
-            <img th:src="@{/imagen/inmueble/__${cliente.imagen.id}__}" alt="imagen de perfil"/>
+            <h1 th:text="'Bienvenido de nuevo ' + ${cliente?.nombre}"></h1>
+            <img th:src="@{/imagen/inmueble/__${cliente?.imagen?.id}__}" alt="imagen de perfil"/>
             <a th:href="@{/cliente/modificar/__${id}__}">Editar perfil</a>
-        </div> -->
+        </div> 
 
         <div>
             <p>Inmuebles que posees:</p>
