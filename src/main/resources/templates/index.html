@@ -54,7 +54,7 @@
             });
         </script>
         <!--ES PARA LA LISTA-->
-        <div th:if="${cliente} != null">
+        <div th:if="${cliente} != null ">
             <div th:each="inmueble : ${inmuebles}">
                 <div th:if="@{/imagen/inmueble/__${inmueble.id}__} != null">
                     <p th:text="${inmueble.tipo}"></p>
