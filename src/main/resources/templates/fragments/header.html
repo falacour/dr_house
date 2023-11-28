@@ -81,7 +81,7 @@
             <button class="log-in"  type="button">Perfil</button>
         </a>
 
-        <a  th:href="@{/}">
+        <a sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/}">
             <button class="log-in"  type="button">Pasarse Propitario</button>
 
 
@@ -99,7 +99,7 @@
             -->
         </a>
         <a  th:href="@{/logout}">
-            <button class="log-in" th:if="${session.usuariosession != null}" type="button" >Cerrar sesion</button>
+            <button class="log-in" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE')" type="button" >Cerrar sesion</button>
         </a>
         <p  th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p>
     </div>
