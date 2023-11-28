@@ -39,11 +39,11 @@
                 </div>
                 
                 <div class="form-group my-3">
-                    <input hidden th:value="${inmueble.imagen.id}" name="idImagen">
-                    <input type="file" class="form-control" name="archivo" >
+                    <input hidden required th:value="${inmueble.imagen.id}" name="idImagen">
+                    <input type="file" class="form-control" name="archivo" th:value="${inmueble.imagen.id}" >
                 </div>
                 <div class="form-group my-3">
-                    <select name="alta" class="searcher-form">
+                    <select name="alta" class="searcher-form" th:value="${inmueble.alta}">
                         <option value="">No dar de Alta</option>
                         <option value="dar de alta">Dar de Alta</option>
                     </select>
