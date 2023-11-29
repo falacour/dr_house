@@ -3,15 +3,19 @@ package com.mrhouse.mrhouse.controladores;
 import com.mrhouse.mrhouse.Entidades.*;
 import com.mrhouse.mrhouse.enumeraciones.Rol;
 import com.mrhouse.mrhouse.excepciones.MiException;
-import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
-import com.mrhouse.mrhouse.servicios.*;
-import java.util.ArrayList;
+import com.mrhouse.mrhouse.servicios.ServicioCliente;
+import com.mrhouse.mrhouse.servicios.ServicioEnte;
+import com.mrhouse.mrhouse.servicios.ServicioInmueble;
+import com.mrhouse.mrhouse.servicios.ServicioUsuario;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -25,20 +29,16 @@ public class PortalControlador {
  
     @Autowired
     private ServicioCliente servicioCliente;
-    @Autowired
-    private RepositorioInmueble repositorioInmueble;
 
     @GetMapping("/")
     public String index(ModelMap modelo, HttpSession session) {
         List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
         modelo.addAttribute("inmuebles", inmuebles);
-        if (session != null) {
-            Cliente cliente = (Cliente) session.getAttribute("clientesession");
-            modelo.addAttribute("cliente", cliente);
-        } else {
-            Cliente cliente = null;
-            modelo.addAttribute("cliente", cliente);
-        }
+        System.out.println("entro index");
+        //Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        System.out.println("salio index");
+        //modelo.addAttribute("cliente", cliente);
+        System.out.println("re index");
         return "index.html";
     }
 
@@ -99,22 +99,12 @@ public class PortalControlador {
 
     @GetMapping("/perfil")
     public String perfil(ModelMap modelo, HttpSession session) {
-
+        
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
-
-        if (cliente != null) {
-            List<Inmueble> inmuebles = repositorioInmueble.inmueblesPorCliente(cliente.getId());
-
-            if (inmuebles != null) {
-                modelo.put("cliente", cliente);
-                modelo.put("inmuebles", inmuebles);
-            } else {
-                //caso en que la lista de inmuebles sea null
-                modelo.put("cliente", cliente);
-                ArrayList<Inmueble> vacio = new ArrayList<>();
-                modelo.put("inmuebles", vacio);
-            }
-        }
+        List<Inmueble> inmuebles = cliente.getInmueble();
+        modelo.addAttribute("cliente", cliente);
+        modelo.put("inmuebles", inmuebles);
+        
         return "perfil.html";
     }
 }
