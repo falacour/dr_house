@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,10 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class PortalControlador {
 
-  
     @Autowired
     private ServicioInmueble servicioInmueble;
- 
+
     @Autowired
     private ServicioCliente servicioCliente;
 
@@ -89,20 +89,21 @@ public class PortalControlador {
         return "index.html";
     }
 
-    @GetMapping("/vistaInmueble")
-    public String vistaInmueble() {
-
-        return "vistaInmueble.html";
-    }
-
     @GetMapping("/perfil")
     public String perfil(ModelMap modelo, HttpSession session) {
-        
+
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
         List<Inmueble> inmuebles = cliente.getInmueble();
         modelo.addAttribute("cliente", cliente);
         modelo.put("inmuebles", inmuebles);
-        
+
         return "perfil.html";
     }
+
+    @GetMapping("/vistaInmueble/{id}")
+    public String vistaInmueble(@PathVariable Long id, ModelMap modelo) {
+         modelo.put("inmueble", servicioInmueble.getOne(id));
+        return "inmueble.html";
+    }
 }
+    

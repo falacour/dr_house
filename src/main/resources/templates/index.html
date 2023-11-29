@@ -45,12 +45,12 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
         <script>
             $(document).ready(function () {
-                $(".slider").slick({
-                    autoplay: true,
-                    autoplaySpeed: 2000,
-                    dots: true,
-                    arrows: false
-                });
+            $(".slider").slick({
+            autoplay: true,
+            autoplaySpeed: 2000,
+            dots: true,
+            arrows: false
+            });
             });
         </script>
         <!--ES PARA LA LISTA-->
@@ -61,33 +61,38 @@
         </div>
         <section>
             <div class="contenedorTarjetas" th:each="inmueble : ${inmuebles}">
-                <div class="tarjeta" th:if="@{/imagen/inmueble/__${inmueble.id}__} != null">
-                    <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
-                    <!-- Otros elementos de la tarjeta -->
-                    <p th:text="'Tipo:  ' + ${inmueble.tipo}"></p>
-                    <p th:text="'Provincia:  ' + ${inmueble.provincia}"></p>
-                    <p th:text="'Departamento:  ' + ${inmueble.departamento}"></p>
-                    <p th:text="'Precio:  ' + ${inmueble.precio} + '$'"></p>
-                        
-                    <div th:if="${cliente != null}">
+                <a  th:href="@{/vistaInmueble/__${inmueble.id}__}">
+                     
+                    <div class="tarjeta" th:if="@{/imagen/inmueble/__${inmueble.id}__} != null">
+                        <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
+                        <!-- Otros elementos de la tarjeta -->
+                        <p th:text="'Tipo:  ' + ${inmueble.tipo}"></p>
+                        <p th:text="'Provincia:  ' + ${inmueble.provincia}"></p>
+                        <p th:text="'Departamento:  ' + ${inmueble.departamento}"></p>
+                        <p th:text="'Precio:  ' + ${inmueble.precio} + '$'"></p>
+
                         <!-- Formulario para cliente autenticado -->
-                        <form th:action="@{/inmueble/comprar/__${inmueble.id}__}" method="post">
-                            <input type="hidden" th:value="${cliente.id}" name="idCliente"/>
-                            <input type="hidden" th:value="${inmueble.id}" name="idInmueble"/>
-                            <button type="submit">Comprar</button>
-                        </form>
+                        <div th:if="${cliente != null}">
+                            <form th:action="@{/inmueble/comprar/__${inmueble.id}__}" method="post">
+                                <input type="hidden" th:value="${cliente.id}" name="idCliente"/>
+                                <input type="hidden" th:value="${inmueble.id}" name="idInmueble"/>
+                                <button type="submit">Comprar</button>
+                            </form>
+
+                        </div>
+                        <!-- Formulario para cliente no autenticado -->
+                        <div th:if="${cliente == null}">
+                            <!-- Formulario para cliente no autenticado -->
+                            <form th:action="@{/login}" method="get">
+                                <button type="submit">Comprar</button>
+                            </form>
+                        </div>
                     </div>
 
-                    <div th:if="${cliente == null}">
-                        <!-- Formulario para cliente no autenticado -->
-                        <form th:action="@{/login}" method="get">
-                            <button type="submit">Comprar</button>
-                        </form>
-                    </div>
-                </div>
-                <div th:if="@{/imagen/inmueble/__${inmueble.id}__} == null" >
-                    <p>error</p>
-                </div>
+
+                    <div th:if="@{/imagen/inmueble/__${inmueble.id}__} == null" >
+                        <p>error</p>
+                    </div></a>
             </div>
         </section>
 
