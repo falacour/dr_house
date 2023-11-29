@@ -19,12 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class PortalControlador {
 
-    @Autowired
-    private ServicioUsuario servicioUsuario;
+  
     @Autowired
     private ServicioInmueble servicioInmueble;
-    @Autowired
-    private ServicioEnte servicioEnte;
+ 
     @Autowired
     private ServicioCliente servicioCliente;
     @Autowired
@@ -57,11 +55,9 @@ public class PortalControlador {
 
         try {
             if (rol.equalsIgnoreCase("cliente")) {
-                servicioCliente.registrar(archivo, nombre, dni, email, password, password2);
+                servicioCliente.registrar(archivo, nombre, dni, email, password, password2, Rol.CLIENTE);
             } else if (rol.equalsIgnoreCase("ente")) {
-                servicioEnte.crearEnte(archivo, nombre, email, password, password2);
-            } else {
-                servicioUsuario.registrar(nombre, email, password, password2);
+                servicioCliente.registrar(archivo, nombre, dni, email, password, password2, Rol.ENTE);
             }
 
             modelo.put("exito", "Usuario registrado correctamente!");
@@ -90,7 +86,7 @@ public class PortalControlador {
     // @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session, ModelMap modelo) {
-        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        Cliente logueado = (Cliente) session.getAttribute("usuariosession");
 
         return "index.html";
     }
