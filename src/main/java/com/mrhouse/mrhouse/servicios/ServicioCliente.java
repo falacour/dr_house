@@ -6,11 +6,9 @@ package com.mrhouse.mrhouse.servicios;
 
 import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.Entidades.Imagen;
-import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.enumeraciones.Rol;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
-import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -47,14 +45,14 @@ public class ServicioCliente implements UserDetailsService {
 
     @Transactional
     public void registrar(MultipartFile archivo, String nombre, String dni, String mail,
-            String password, String password2) throws MiException {
+            String password, String password2, Rol rol) throws MiException {
         validar(nombre, mail, password, password2, dni);
         Cliente cliente = new Cliente();
         cliente.setNombre(nombre);
         cliente.setDni(dni);
         cliente.setEmail(mail);
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
-        cliente.setRol(Rol.CLIENTE);
+        cliente.setRol(rol);
         Imagen imagen = servicioImagen.guardar(archivo);
         cliente.setImagen(imagen);
         repositorioCliente.save(cliente);
@@ -92,12 +90,7 @@ public class ServicioCliente implements UserDetailsService {
     
     @Transactional
     public void compra(Long idInmueble, String id){
-        Inmueble inmueble = servicioInmueble.getOne(idInmueble);
-        Cliente cliente = repositorioCliente.getOne(id);
-        List<Inmueble> inmuebles = cliente.getInmueble();
-        inmuebles.add(inmueble);
-        cliente.setInmueble(inmuebles);
-        
+        servicioInmueble.compra(id, idInmueble);
     }
 
     public void validar(String nombre, String email, String password, String password2, String dni) throws MiException {

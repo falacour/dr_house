@@ -1,6 +1,13 @@
-<html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace = "/fragments/head :: head"/>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <head th:replace = "/fragments/head :: head"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/inmueble_lista.css"/>
+        <title>lista de inmueble</title>
+    </head>
 
+    
     <body>
         <header th:replace = "/fragments/header :: header"/>
         <nav th:replace = "/fragments/nav :: nav"/>
@@ -13,6 +20,12 @@
                         <tr>
                             <th scope="col"> tipo de inmueble</th>
                             <th scope="col"> Vista previa del inmueble</th>
+                            <th scope="col"> Provincia</th>
+                             <th scope="col"> Departamento</th>
+                              <th scope="col"> Direccion</th>
+                            <th scope="col"> Mts2</th>
+                            <th scope="col"> Precio</th>
+                             <th scope="col"> Estado</th>
                             <th scope="col"> Acciones</th>
                         </tr>
                     </thead>
@@ -22,8 +35,14 @@
                             <td><figure>
                                     <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
                                 </figure></td>
+                             <th scope="row" th:text="${inmueble.direccion}"></th>
+                             <th scope="row" th:text="${inmueble.provincia}"></th>
+                             <th scope="row" th:text="${inmueble.departamento}"></th>
+                             <th scope="row" th:text="${inmueble.mts2}"></th>
+                             <th scope="row" th:text="${inmueble.precio}"></th>
+                             <th scope="row" th:text="${inmueble.alta}"></th>
                             <td>
-                                <a th:href="@{/inmueble/modificar/__${inmueble.id}__}">Modificar</a>
+                                <a class="boton-modificar" th:href="@{/inmueble/modificar/__${inmueble.id}__}">Modificar</a>
                             </td>
                         </tr>
                     </tbody>

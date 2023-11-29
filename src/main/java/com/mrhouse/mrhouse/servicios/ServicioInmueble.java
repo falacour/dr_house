@@ -4,9 +4,11 @@
  */
 package com.mrhouse.mrhouse.servicios;
 
+import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.Entidades.Imagen;
 import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.excepciones.MiException;
+import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import java.util.ArrayList;
@@ -16,21 +18,20 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- *
- * @author thell
- */
 @Service
 public class ServicioInmueble {
 
     @Autowired
     private RepositorioInmueble repositorioInmueble;
     @Autowired
+    private RepositorioCliente repositorioCliente;
+    @Autowired
     private ServicioImagen servicioImagen;
 
     @Transactional
     public void crearInmueble(MultipartFile archivo, Long id, String tipo, Integer antiguedad, Long mts2,
-            String direccion, Double precio, String provincia, String departamento) throws MiException {
+            String direccion, Double precio, String provincia, String departamento, String descripcion,
+            String idEnte) throws MiException {
         validar(mts2, tipo, antiguedad, mts2, direccion, precio, provincia, departamento);
         Inmueble inmueble = new Inmueble();
         inmueble.setTipo(tipo);
@@ -40,6 +41,12 @@ public class ServicioInmueble {
         inmueble.setPrecio(precio);
         inmueble.setProvincia(provincia);
         inmueble.setDepartamento(departamento);
+        inmueble.setEnte(repositorioCliente.getOne(idEnte));
+        if (descripcion != null){
+            inmueble.setDescripcion(descripcion);
+        }else{
+            inmueble.setDescripcion("");
+        }
         inmueble.setAlta(Boolean.FALSE);
 
         Imagen imagen = servicioImagen.guardar(archivo);
@@ -100,6 +107,18 @@ public class ServicioInmueble {
     public Inmueble getOne(Long id) {
         return repositorioInmueble.getOne(id);
 
+    }
+    
+    public void compra(String id, Long idInmueble) {
+        Optional<Inmueble> respuesta = repositorioInmueble.findById(idInmueble);
+
+        if (respuesta.isPresent()) {
+            Inmueble inmueble = respuesta.get();
+            inmueble.setCliente(repositorioCliente.getOne(id));
+            Cliente ente = null;
+            inmueble.setEnte(ente);
+            repositorioInmueble.save(inmueble);
+        }
     }
 
     public void validar(Long id, String tipo, Integer antiguedad, Long mts2, String direccion,
