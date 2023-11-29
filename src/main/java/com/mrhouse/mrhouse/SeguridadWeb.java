@@ -1,8 +1,6 @@
 package com.mrhouse.mrhouse;
 
 import com.mrhouse.mrhouse.servicios.ServicioCliente;
-import com.mrhouse.mrhouse.servicios.ServicioEnte;
-import com.mrhouse.mrhouse.servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,18 +16,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SeguridadWeb extends WebSecurityConfigurerAdapter {
 @Autowired 
 private ServicioCliente servicioCliente;
-@Autowired 
-private ServicioEnte servicioEnte;
-@Autowired 
-private ServicioUsuario servicioUsuario;
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(servicioCliente)
                         .passwordEncoder(new BCryptPasswordEncoder());
-        auth.userDetailsService(servicioEnte)
-                        .passwordEncoder(new BCryptPasswordEncoder());
-        auth.userDetailsService(servicioUsuario)
-                        .passwordEncoder(new BCryptPasswordEncoder());
+   
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {

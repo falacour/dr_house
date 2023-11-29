@@ -18,9 +18,10 @@ public class Inmueble {
     private String provincia;
     private String departamento;
     private Double precio;
-    @ManyToOne
-    private Ente ente;
-    @ManyToOne
+    private String descripcion;
+  @OneToOne
+    private Cliente ente;
+    @OneToOne
     private Cliente cliente;
     @OneToOne
     private Imagen imagen;
