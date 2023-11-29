@@ -7,6 +7,7 @@ package com.mrhouse.mrhouse.servicios;
 import com.mrhouse.mrhouse.Entidades.Imagen;
 import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.excepciones.MiException;
+import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class ServicioInmueble {
 
     @Autowired
     private RepositorioInmueble repositorioInmueble;
+    @Autowired
+    private RepositorioCliente repositorioCliente;
     @Autowired
     private ServicioImagen servicioImagen;
 
@@ -100,6 +103,16 @@ public class ServicioInmueble {
     public Inmueble getOne(Long id) {
         return repositorioInmueble.getOne(id);
 
+    }
+    
+    public void compra(String id, Long idInmueble) {
+        Optional<Inmueble> respuesta = repositorioInmueble.findById(idInmueble);
+
+        if (respuesta.isPresent()) {
+            Inmueble inmueble = respuesta.get();
+            inmueble.setCliente(repositorioCliente.getOne(id));
+            repositorioInmueble.save(inmueble);
+        }
     }
 
     public void validar(Long id, String tipo, Integer antiguedad, Long mts2, String direccion,
