@@ -1,11 +1,19 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.mrhouse.mrhouse.servicios;
 
-import com.mrhouse.mrhouse.Entidades.*;
+import com.mrhouse.mrhouse.Entidades.Cliente;
+import com.mrhouse.mrhouse.Entidades.Imagen;
+import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +30,8 @@ public class ServicioInmueble {
 
     @Transactional
     public void crearInmueble(MultipartFile archivo, Long id, String tipo, Integer antiguedad, Long mts2,
-            String direccion, Double precio, String provincia, String departamento) throws MiException {
+            String direccion, Double precio, String provincia, String departamento, String descripcion,
+            String idEnte) throws MiException {
         validar(mts2, tipo, antiguedad, mts2, direccion, precio, provincia, departamento);
         Inmueble inmueble = new Inmueble();
         inmueble.setTipo(tipo);
@@ -32,6 +41,12 @@ public class ServicioInmueble {
         inmueble.setPrecio(precio);
         inmueble.setProvincia(provincia);
         inmueble.setDepartamento(departamento);
+        inmueble.setEnte(repositorioCliente.getOne(idEnte));
+        if (descripcion != null){
+            inmueble.setDescripcion(descripcion);
+        }else{
+            inmueble.setDescripcion("");
+        }
         inmueble.setAlta(Boolean.FALSE);
 
         Imagen imagen = servicioImagen.guardar(archivo);
@@ -94,13 +109,14 @@ public class ServicioInmueble {
 
     }
     
-    @Transactional
-    public void compra(String idCliente, Long id){
-        Optional<Inmueble> respuesta = repositorioInmueble.findById(id);
-        
+    public void compra(String id, Long idInmueble) {
+        Optional<Inmueble> respuesta = repositorioInmueble.findById(idInmueble);
+
         if (respuesta.isPresent()) {
             Inmueble inmueble = respuesta.get();
-            inmueble.setCliente(repositorioCliente.getOne(idCliente));
+            inmueble.setCliente(repositorioCliente.getOne(id));
+            Cliente ente = null;
+            inmueble.setEnte(ente);
             repositorioInmueble.save(inmueble);
         }
     }

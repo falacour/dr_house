@@ -18,6 +18,7 @@ public class Inmueble {
     private String provincia;
     private String departamento;
     private Double precio;
+    private String descripcion;
   @OneToOne
     private Cliente ente;
     @OneToOne
