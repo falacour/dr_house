@@ -45,12 +45,12 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
         <script>
             $(document).ready(function () {
-            $(".slider").slick({
-            autoplay: true,
-            autoplaySpeed: 2000,
-            dots: true,
-            arrows: false
-            });
+                $(".slider").slick({
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                    dots: true,
+                    arrows: false
+                });
             });
         </script>
         <!--ES PARA LA LISTA-->
@@ -62,8 +62,8 @@
         <section>
             <div class="contenedorTarjetas" th:each="inmueble : ${inmuebles}">
                 <a  th:href="@{/vistaInmueble/__${inmueble.id}__}">
-                     
-                    <div class="tarjeta" th:if="@{/imagen/inmueble/__${inmueble.id}__} != null">
+
+                    <div class="tarjeta" th:if="@{/imagen/inmueble/__${inmueble.imagen.id}__} != null">
                         <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
                         <!-- Otros elementos de la tarjeta -->
                         <p th:text="'Tipo:  ' + ${inmueble.tipo}"></p>
@@ -73,18 +73,17 @@
 
                         <!-- Formulario para cliente autenticado -->
                         <div th:if="${cliente != null}">
-                            <form th:action="@{/inmueble/comprar/__${inmueble.id}__}" method="post">
-                                <input type="hidden" th:value="${cliente.id}" name="idCliente"/>
+                            <form th:action="@{/inmueble/comprar/__${inmueble.id}__}" method="get">
+                                <input type="hidden" th:value="${cliente.id}" name="id"/>
                                 <input type="hidden" th:value="${inmueble.id}" name="idInmueble"/>
-                                <button type="submit">Comprar</button>
+                                <button type="submit" th:if="${cliente.rol == rol}">Comprar</button>
                             </form>
-
                         </div>
                         <!-- Formulario para cliente no autenticado -->
                         <div th:if="${cliente == null}">
                             <!-- Formulario para cliente no autenticado -->
                             <form th:action="@{/login}" method="get">
-                                <button type="submit">Comprar</button>
+                                <button type="submit" th:if="${inmueble.ente != '' }">Comprar</button>
                             </form>
                         </div>
                     </div>

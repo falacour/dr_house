@@ -43,10 +43,10 @@ public class InmuebleControlador {
    public String registro(@RequestParam(required = false) Long id, @RequestParam String tipo,
            @RequestParam(required = false)Integer antiguedad, @RequestParam(required = false ) Long mts2,
            @RequestParam String direccion, ModelMap modelo, MultipartFile archivo, Double precio,
-           String provincia, String departamento){
+           String provincia, String departamento, String descripcion, String idEnte){
        try {
            servicioInmueble.crearInmueble(archivo, id, tipo, antiguedad, mts2, direccion,
-                   precio, provincia, departamento);
+                   precio, provincia, departamento, descripcion, idEnte);
            modelo.put("exelente", "se cargo tu inmueble");
        } catch (MiException e) {
            modelo.put("error", e.getMessage());
@@ -94,6 +94,6 @@ public class InmuebleControlador {
          
          servicioCliente.compra(idInmueble, id);
          
-         return "index.html";
+         return "redirect:/..";
      }
 }

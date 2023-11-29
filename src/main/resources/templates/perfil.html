@@ -5,23 +5,12 @@
     <body>
         <header th:replace = "/fragments/header :: header"/>
         <nav th:replace = "/fragments/nav :: nav"/>
-        <!-- private String id;
-        private String nombre;
-        private String dni;
-        private String email;
-        private String password;
-        @Enumerated(EnumType.STRING)
-        private Rol rol;
-        @OneToOne
-        private Imagen imagen;
-        @OneToMany
-        private List<Inmueble> inmueble;-->
-        <!-- 
         <div> 
-            <h1 th:text="Bienvenido de nuevo + ${cliente.nombre}"></h1>
-            <img th:src="@{/imagen/inmueble/__${cliente.imagen.id}__}" alt="imagen de perfil"/>
-            <a th:href="@{/cliente/modificar/__${id}__}">Editar perfil</a>
-        </div> -->
+            <h1 th:text="'Bienvenido de nuevo ' + ${cliente.nombre}"></h1>
+            <img th:src="@{/imagen/inmueble/__${cliente.imagen.id}__}" alt="imagen de perfil"
+                 th:if='${cliente.imagen != null}'/>
+            <a th:href="@{/cliente/modificar/__${cliente.id}__}">Editar perfil</a>
+        </div> 
 
         <div>
             <p>Inmuebles que posees:</p>

@@ -13,33 +13,33 @@
             <label class="mb-2">Cargar Inmueble</label> 
             <div class="form-group my-3">
 
-                <input type="text" class="form-control" name="tipo" placeholder="Tipo de inmueble">
+                <input type="text" class="form-control" name="tipo" placeholder="Tipo de inmueble" th:value="${tipo}">
             </div>
 
             <div class="form-group my-3">
-                <input type="number" class="form-control" name="antiguedad" placeholder="Antiguedad del inmueble">
+                <input type="number" class="form-control" name="antiguedad" placeholder="Antiguedad del inmueble" th:value="${antiguedad}">
             </div>
 
             <div class="form-group my-3">
-                <input type="number" class="form-control" name="mts2" placeholder="Metros cuadrados del inmueble">
+                <input type="number" class="form-control" name="mts2" placeholder="Metros cuadrados del inmueble" th:value="${mts2}">
             </div>
             <div class="form-group my-3">
-                <input type="text" class="form-control" name="provincia" placeholder="Provincia">
+                <input type="text" class="form-control" name="provincia" placeholder="Provincia" th:value="${provincia}">
             </div>
             <div class="form-group my-3">
-                <input type="text" class="form-control" name="departamento" placeholder="Departamento">
+                <input type="text" class="form-control" name="departamento" placeholder="Departamento" th:value="${departamento}">
             </div>
             <div class="form-group my-3">
-                <input type="text" class="form-control" name="direccion" placeholder="Direccion del inmueble">
+                <input type="text" class="form-control" name="direccion" placeholder="Direccion del inmueble" th:value="${direccion}">
             </div>
             <div class="form-group my-3">
-                <input type="number" class="form-control" name="precio" placeholder="Valor del Inmueble">
+                <input type="number" class="form-control" name="precio" placeholder="Valor del Inmueble" th:value="${precio}">
             </div>
             <div class="form-group my-3">
-                <input type="file" class="form-control" name="archivo" >
+                <input type="file" class="form-control" name="archivo" th:value="${archivo}" >
             </div>
             <div class="form-group my-3">
-                <input type="text" class="form-control" name="descripcion" placeholder="Descripcion del inmueble"required th:value="${inmueble.descripcion}">
+                <input type="text" class="form-control" name="descripcion" placeholder="Descripcion del inmueble" th:value="${descripcion}">
             </div>
 
             <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
