@@ -3,6 +3,7 @@ package com.mrhouse.mrhouse.controladores;
 import com.mrhouse.mrhouse.Entidades.*;
 import com.mrhouse.mrhouse.enumeraciones.Rol;
 import com.mrhouse.mrhouse.excepciones.MiException;
+import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioCliente;
 import com.mrhouse.mrhouse.servicios.ServicioInmueble;
 import java.util.List;
@@ -27,6 +28,8 @@ public class PortalControlador {
 
     @Autowired
     private ServicioCliente servicioCliente;
+    @Autowired
+    private RepositorioInmueble repositorioInmueble;
 
     @GetMapping("/")
     public String index(ModelMap modelo, HttpSession session) {
@@ -91,18 +94,27 @@ public class PortalControlador {
     @GetMapping("/perfil")
     public String perfil(ModelMap modelo, HttpSession session) {
 
+        List<Inmueble> inmuebles;
+        
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
-        List<Inmueble> inmuebles = cliente.getInmueble();
+        if(cliente.getRol() == Rol.CLIENTE){
+            inmuebles = repositorioInmueble.inmueblesPorCliente(cliente.getId());
+        } else if (cliente.getRol() == Rol.ENTE){
+            inmuebles = repositorioInmueble.inmueblesPorEnte(cliente.getId());
+        } else {
+            inmuebles = null;
+        }
+        
+        Rol rol = Rol.CLIENTE;
         modelo.put("cliente", cliente);
         modelo.put("inmuebles", inmuebles);
-
+        modelo.addAttribute("rol", rol);
         return "perfil.html";
     }
 
     @GetMapping("/vistaInmueble/{id}")
     public String vistaInmueble(@PathVariable Long id, ModelMap modelo) {
-         modelo.put("inmueble", servicioInmueble.getOne(id));
+        modelo.put("inmueble", servicioInmueble.getOne(id));
         return "inmueble.html";
     }
 }
-    

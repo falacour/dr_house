@@ -14,10 +14,12 @@
 
         <div>
             <p>Inmuebles que posees:</p>
-            <div th:each="inmueble : ${inmuebles}">
-                <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
-                <p th:text="${inmueble.tipo}"></p>
-                <!-- opcion para hablar con el ente y dar de baja el inmueble -->
+            <div>
+                <div th:each="inmueble : ${inmuebles}">
+                    <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
+                    <p th:text="${inmueble.tipo}"></p>
+                    <!-- opcion para hablar con el ente y dar de baja el inmueble -->
+                </div> 
             </div> 
         </div> 
 
