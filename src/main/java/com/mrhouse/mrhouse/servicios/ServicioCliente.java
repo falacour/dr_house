@@ -92,6 +92,25 @@ public class ServicioCliente implements UserDetailsService {
     public void compra(Long idInmueble, String id){
         servicioInmueble.compra(id, idInmueble);
     }
+ public void cambiarRol(String id){
+        Optional<Cliente> respuesta = repositorioCliente.findById(id);
+    	
+    	if(respuesta.isPresent()) {
+    		
+    		Cliente cliente = respuesta.get();
+    		
+    		if(cliente.getRol().equals(Rol.CLIENTE)) {
+    			
+    		cliente.setRol(Rol.ENTE);
+    		
+    		}else if(cliente.getRol().equals(Rol.ENTE)) {
+    			cliente.setRol(Rol.CLIENTE);
+    		
+    		
+    	}
+        }
+ }
+
 
     public void validar(String nombre, String email, String password, String password2, String dni) throws MiException {
         if (nombre == null || nombre.isEmpty()) {
