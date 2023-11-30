@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import lombok.*;
+import com.mrhouse.Entidades.Cita;
 
 @Entity
 @Data
@@ -25,6 +26,10 @@ public class Cliente {
     private Imagen imagen;
     //El mappedBy y el fetch es para que podamos acceder a la lista de inmuebles
     //sin problemas al cargarla desde cliente 
+    
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    private List<Cita> citas;
+       
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     private List<Inmueble> inmueble;
     private Boolean permiso;
