@@ -1,11 +1,11 @@
 <nav>
-    <ul sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'USER', 'CLIENTE')">
+    <ul sec:authorize="hasAnyRole('ENTE', 'ADMIN',  'CLIENTE')">
         <li><a th:href="@{/}" class="linkAAlgo">Inicio</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Ofertas</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Reuniones</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Reclamos</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Boletas de Pago</a></li>
-        <div class=" dropdown" sec:authorize="hasAnyRole('ENTE')">
+        <div class=" dropdown" sec:authorize="hasAnyRole('ENTE','ADMIN')">
                             <a class="linkAAlgo botonInmueble" 
                                  href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Inmueble
