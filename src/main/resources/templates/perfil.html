@@ -5,23 +5,54 @@
     <body>
         <header th:replace = "/fragments/header :: header"/>
         <nav th:replace = "/fragments/nav :: nav"/>
-        <div> 
-            <h1 th:text="'Bienvenido de nuevo ' + ${cliente.nombre}"></h1>
-            <img th:src="@{/imagen/inmueble/__${cliente.imagen.id}__}" alt="imagen de perfil"
-                 th:if='${cliente.imagen != null}'/>
+        <h1 th:text="'Hola ' + ${cliente.nombre}+'!' "  ></h1>
+
+        <div class="contenedor-perfil"> 
+            <div >
+                <img th:src="@{/imagen/inmueble/__${cliente.imagen.id}__}" alt="imagen de perfil"
+                     th:if='${cliente.imagen != null}'/>
+            </div>
+            <div >
+                <img src="/img/img-de-perfil.jpg" alt="imagen de perfil"
+                     th:if='${cliente.imagen == null}'/>
+            </div>
+            <br>
+            <br>
+            <strong>Nombre:</strong> <span th:text="${cliente.nombre}"></span>
+            <br>
+            <br>
+            <strong>DNI:</strong> <span th:text="${cliente.dni}"></span>
+            <br>
+            <br>
+            <strong>Email:</strong> <span th:text="${cliente.email}"></span>
+            <br>
+            <br>
             <a th:href="@{/cliente/modificar/__${cliente.id}__}">Editar perfil</a>
         </div> 
 
+        <br>
         <div>
-            <p>Inmuebles que posees:</p>
-            <div>
-                <div th:each="inmueble : ${inmuebles}">
-                    <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
-                    <p th:text="${inmueble.tipo}"></p>
-                    <!-- opcion para hablar con el ente y dar de baja el inmueble -->
-                </div> 
+            <H2>Inmuebles que posees:</h2>
+        </div> 
+        <div class="contenedorTarjetas">
+
+
+            <div class= "tarjeta" th:each="inmueble : ${inmuebles}">
+                <img  th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
+                <p th:text="'Tipo:  ' + ${inmueble.tipo}"></p>
+                <p th:text="'Provincia:  ' + ${inmueble.provincia}"></p>
+                <p th:text="'Departamento:  ' + ${inmueble.departamento}"></p>
+                <p th:text="'Precio:  ' + ${inmueble.precio} + '$'"></p>
+
+                <!-- opcion para hablar con el ente y dar de baja el inmueble -->
             </div> 
         </div> 
+        <br>
+        <div>
+            <H2>Reuniones:</h2>
+            <button class= "btn-cancelar" type="submit" >cancelar</button>
+        </div> 
+
 
         <footer th:replace = "/fragments/footer :: footer"/>
     </body>
