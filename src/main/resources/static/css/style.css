@@ -46,7 +46,7 @@ header {
     width: fit-content; /* Establecer el ancho */
     justify-content: space-between; 
     align-items: center; 
-   padding-left: 5rem; 
+    padding-left: 5rem; 
 }
 .searcher-form{
     background-color: white;
@@ -58,11 +58,11 @@ header {
     display:inline;
     width: 150px; /* Establecer el ancho */
     height: 40px; 
-    
+
 }
 header.searcher-form,
 .buscar{
-   background-color: white;
+    background-color: white;
     color: black;
     border-radius: 10px;
     padding: 10px ;
@@ -75,7 +75,7 @@ header.searcher-form,
 .buscar{
     width: 80px; /* Ajusta el ancho según sea necesario */
     height: 40px;
-    
+
 }
 
 .buscar:hover {
@@ -313,7 +313,7 @@ input[type="tipo"], input[type="antiguedad"], input[type="mtrs2"], input[type="d
 }
 
 .contenedorTarjetas .tarjeta:hover {
-    
+
     transform: translateY(-15px);
     box-shadow: 0 2px 2px rgba(0,0,0,0.2);
 }
@@ -341,4 +341,31 @@ input[type="tipo"], input[type="antiguedad"], input[type="mtrs2"], input[type="d
     color: #fff;
     text-align: center;
     text-decoration: none;
+}
+
+
+
+.contenedor-perfil {
+    max-width: 300px;
+    margin: 0 auto;
+    border: 2px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+}
+.contenedor-perfil img{
+        width: 300px; /* ajusta el tamaño deseado */
+        height: 300px; /* ajusta el tamaño deseado */
+        object-fit: cover; /* maneja el tamaño de la imagen manteniendo su relación de aspecto */
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+    
+}
+.contenedor-perfil p{
+     font-family: 'Roboto', sans-serif;
+}
+.btn-cancelar{
+            display: flex;
+            align-items: center;
+            justify-content: center;
 }

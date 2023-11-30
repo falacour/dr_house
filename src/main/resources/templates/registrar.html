@@ -39,11 +39,15 @@
                         <option value="cliente">Comprar</option>
                     </select>
                 </div>
+
+                <div class="form-group my-3">
+                    <input type="file" class="form-control" name="archivo" th:value="${archivo}" >
+                </div>
                 <div class="form-group">
                     <input type="submit" value="Registrarse">
                 </div>
                 <div>
-                    <a th:href="@{/login}">ya tienes una cuenta?</a>
+                    <a th:href="@{/login}">YA TIENES CUENTA?</a>
                 </div>
             </form>
         </div>
