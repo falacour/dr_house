@@ -1,7 +1,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace = "/fragments/head :: head"/><!--
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!--Fuente del titulo-->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Serif+Old+Uyghur&display=swap"
+            rel="stylesheet"
+            />
+        <!--Fuente del body-->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            />
+        <title>MrHouse</title>
         <link href="/css/inmueble_form.css" rel="stylesheet" type="text/css"/>
-    </head>-->
+        <link rel="stylesheet" href="/css/style.css" />
+    </head>
     <body>
         <header th:replace="/fragments/header :: header"></header>
         <nav th:replace="/fragments/nav :: nav"></nav>
@@ -113,14 +129,12 @@
 
                     <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
                 </form>
-            </div>
-            <section class="text-center container">
-                <div class="row mt-3">
-                    <div class="divVolver">
-                        <a th:href="@{/}" class="botonVolver">Volver</a>
+                <div>
+                    <div>
+                        <a th:href="@{/}" class="volver">Volver</a>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
         <!-- Sección del Footer -->
         <footer th:replace="/fragments/footer :: footer"></footer>
