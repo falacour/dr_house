@@ -76,9 +76,9 @@ public class ServicioPublicacion {
     }
     
     //listar todas las publicaciones de un cliente en especifico
-//    public List listarPublicacionesPorId(){
-//       return  repositorioPublicacion.findAll();   
-//    }
+    public List listarPublicacionesPorId(String id){
+       return  repositorioPublicacion.buscarTodasPorId(id);   
+    }
 
     private void validar(String asunto, String mensaje, String idEmisor, String idReceptor) throws MiException {
         if (asunto == null || asunto.isEmpty()) {

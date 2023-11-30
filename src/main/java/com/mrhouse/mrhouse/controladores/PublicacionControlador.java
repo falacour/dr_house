@@ -1,11 +1,13 @@
 package com.mrhouse.mrhouse.controladores;
 
+import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.Entidades.Publicacion;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.servicios.ServicioPublicacion;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -43,9 +45,13 @@ public class PublicacionControlador {
         return "redirect:/";
     }
     
+    //Se listaran todas las publicaciones dirigidas al id del cliente registrado
+    //no se necesitan parametros ya que se toman del session
     @GetMapping("/lista")
-    public String listar(ModelMap modelo) {
-        List <Publicacion> publicaciones = servicioPublicacion.listarPublicaciones();
+    public String listarPublicacionesMias(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        
+        List <Publicacion> publicaciones = servicioPublicacion.listarPublicacionesPorId(cliente.getId());
         modelo.addAttribute("publicaciones", publicaciones);
         return "publicacion_lista.html";
     }
@@ -75,8 +81,5 @@ public class PublicacionControlador {
         }       
         
         return "redirect:/lista";
-    }
-    
-    //mostrar publicaciones para el administrador o ente
-    
+    }    
 }
