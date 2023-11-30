@@ -33,7 +33,7 @@ public class PortalControlador {
 
     @GetMapping("/")
     public String index(ModelMap modelo, HttpSession session) {
-        List<Inmueble> inmuebles = servicioInmueble.listarInmuebles();
+        List<Inmueble> inmuebles = repositorioInmueble.inmueblesNoComprados();
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
         Rol rol = Rol.CLIENTE;
         modelo.addAttribute("inmuebles", inmuebles);
