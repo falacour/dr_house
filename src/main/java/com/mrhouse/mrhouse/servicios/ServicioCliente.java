@@ -60,12 +60,14 @@ public class ServicioCliente implements UserDetailsService {
     }
 
     public void actualizar(MultipartFile archivo, String idCliente, String nombre, String mail,
-            String password, String password2, String dni) throws MiException {
+            String password, String password2, String dni, Rol rol) throws MiException {
         validar(nombre, mail, password, password2,dni);
         Optional<Cliente> respuesta = repositorioCliente.findById(idCliente);
         if (respuesta.isPresent()) {
             Cliente cliente = respuesta.get();
             cliente.setEmail(mail);
+          cliente.setRol(rol);
+           
             cliente.setPassword(new BCryptPasswordEncoder().encode(password));
             String idImagen = null;
             if (cliente.getImagen() != null) {

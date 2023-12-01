@@ -5,6 +5,7 @@
 package com.mrhouse.mrhouse.controladores;
 
 import com.mrhouse.mrhouse.Entidades.Cliente;
+import com.mrhouse.mrhouse.enumeraciones.Rol;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.servicios.ServicioCliente;
 import javax.servlet.http.HttpSession;
@@ -68,10 +69,10 @@ public class ClienteControlador {
     
     @PostMapping("/modificar/{id}")
     public String modificado(MultipartFile archivo, String nombre, String dni, String email,
-            String password, String password2, ModelMap modelo, String id){
+            String password, String password2, ModelMap modelo, String id, Rol rol){
         try {
             
-            servicioCliente.actualizar(archivo, id, nombre, email, password, password2, dni);
+            servicioCliente.actualizar(archivo, id, nombre, email, password, password2, dni,rol);
             
             return "index.html";
         } catch (MiException e) {
