@@ -5,8 +5,6 @@ import com.mrhouse.mrhouse.Entidades.Publicacion;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.servicios.ServicioPublicacion;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
