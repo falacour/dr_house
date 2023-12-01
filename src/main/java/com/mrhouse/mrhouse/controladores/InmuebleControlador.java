@@ -60,8 +60,9 @@ public class InmuebleControlador {
    }
    
    @GetMapping("/lista")
-    public String listar(ModelMap modelo) {
-        List <Inmueble> inmuebles = servicioInmueble.listarInmuebles();
+    public String listar(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List <Inmueble> inmuebles = repositorioInmueble.inmueblesPorEnte(cliente.getId());
         modelo.addAttribute("inmuebles", inmuebles);
         return "inmueble_lista.html";
     }
