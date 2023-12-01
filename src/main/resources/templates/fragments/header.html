@@ -11,7 +11,7 @@
     </div>
 
     <!--forms relacionados a las querys de busqueda-->
-    <form class="searcher" action="buscar.php" method="get" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE', 'USER')">
+    <form class="searcher" action="buscar.php" method="get" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE')">
        <!-- <input
             class="searcher-form"
             type="text"
@@ -61,7 +61,6 @@
             <option value="3">Santa Fe</option>
             <option value="3">Neuquén</option>
         </select>
-      
        <button class="buscar" type="submit" value="Buscar">Buscar</button>
       
 
@@ -77,16 +76,16 @@
         </a>
     </div>
     <!--Sesion iniciada-->
-    <div sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE', 'USER')">
+    <div sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE')">
         <a  th:href="@{/perfil}">
             <button class="log-in"  type="button">Perfil</button>
         </a>
 
-        <a sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/}">
+      <!--  <a sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/}">
             <button class="log-in" type="button">Pasarse Propietario</button>
 
 
-            <!--  ESTO ES PARA PASARSE DE ROL PERO POR AHORA LO DEJEMOS COMENTADO
+              ESTO ES PARA PASARSE DE ROL PERO POR AHORA LO DEJEMOS COMENTADO
             <div th:if="${cliente.permiso}">
                 <div th:if="${cliente.rol == CLIENTE}">
                     <a  th:href="@{/}">
