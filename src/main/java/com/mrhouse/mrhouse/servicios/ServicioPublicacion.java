@@ -31,6 +31,7 @@ public class ServicioPublicacion {
         publicacion.setMensaje(mensaje);
         publicacion.setEmisor(emisor);
         publicacion.setReceptor(receptor);
+        publicacion.setLeido(false);
         publicacion.setEstado(true);
 
         repositorioPublicacion.save(publicacion);
@@ -73,6 +74,16 @@ public class ServicioPublicacion {
     
     public Publicacion getReferenceById(String id){
         return repositorioPublicacion.getReferenceById(id);
+    }
+    @Transactional
+    public void marcarComoLeido(String id){   
+        Optional<Publicacion> respuesta = repositorioPublicacion.findById(id);
+        if (respuesta.isPresent()) {
+            Publicacion publicacion = respuesta.get();
+            publicacion.setLeido(true);
+            
+            repositorioPublicacion.save(publicacion);
+        }   
     }
     
     //listar todas las publicaciones de un cliente en especifico

@@ -57,9 +57,18 @@ public class PublicacionControlador {
     }
     
     @GetMapping("/modificar/{id}")
-    public String modificar(@PathVariable String id,ModelMap modelo){
-        modelo.addAttribute("publicacion", servicioPublicacion.getReferenceById(id));
-       
+    public String modificar(@PathVariable String id,ModelMap modelo, HttpSession session){
+        
+            Cliente cliente = (Cliente) session.getAttribute("clientesession");
+            Publicacion publicacion = servicioPublicacion.getReferenceById(id);
+            
+            //esto es para que si el que abre el mensaje es al que va dirigido, se marca como leido
+            if(cliente.getId().equals(publicacion.getId())){
+                servicioPublicacion.marcarComoLeido(publicacion.getId());
+            } 
+        
+        
+        modelo.addAttribute("publicacion", publicacion);
         
         return "publicacion_modificar.html";
     }
@@ -68,7 +77,8 @@ public class PublicacionControlador {
     public String modificar(@PathVariable String id,@RequestParam String asunto,
             @RequestParam String mensaje, @RequestParam String idEmisor,@RequestParam String idReceptor,ModelMap modelo){
         
-        try {
+        try {           
+            
             servicioPublicacion.modificarPublicacion(id, asunto, mensaje, idEmisor, idReceptor);
             modelo.put("exito", "Publicacion modificada con exito");
         
@@ -81,5 +91,13 @@ public class PublicacionControlador {
         }       
         
         return "redirect:/lista";
-    }    
+    }  
+    
+//    //cambia el estado a leido , y redirecciona a la vista donde se esta visualizando
+//    @PostMapping("/marcarLeido/{id}")
+//    public String marcarComoLeido(@PathVariable String id){
+//        servicioPublicacion.marcarComoLeido(id);
+//        
+//        return "redirect:/modificar/"+id;
+//    }
 }
