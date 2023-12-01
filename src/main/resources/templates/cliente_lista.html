@@ -16,32 +16,43 @@
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Contraseña</th>
+                        
                         <th scope="col">Rol</th>
                          <th scope="col">Imagen</th>
-                        <th scope="col" >Accion</th> <!-- sec:authorize = "hasRole('ADMIN')" -->
+                        <th  sec:authorize = "hasRole('ADMIN')" scope="col" >Accion</th> <!-- -->
                     </tr>
                 </thead>
-                <tbody th:each="ente : ${entes}">
+                <tbody th:each="cliente : ${clientes}">
                     <tr>
                         
-                        <th scope="row" th:text="${ente.nombre}"></th>
-                        <td th:text="${ente.email}"></td>
-                        <td th:text="${ente.password}"></td>
-                        <td th:text="${ente.rol}"></td>
+                        <th scope="row" th:text="${cliente.nombre}"></th>
+                        <td th:text="${cliente.email}"></td>
+                
+                        <td th:text="${cliente.rol}"></td>
                         <td>Imagen</td>
-                        <td> <!-- sec:authorize = "hasRole('ADMIN')"-->
-                            <a th:href="@{/ente/modificar/__${ente.id}__}">
+                        <td sec:authorize = "hasRole('ADMIN')">
+                            <a th:href="@{/admin/modificar/__${cliente.id}__}">
                                 <i class="bi bi-feather"></i>Modificar
                             </a>
                         </td>
-                        <!-- cambio de estado
-                            <td sec:authorize = "hasRole('ADMIN')">
-                            <a th:href="@{/ente/modificar/__${libro.isbn}__}">
+                         cambio de estado
+                            <td >sec:authorize = "hasRole('ADMIN')"
+                            <a th:href="@{/admin/modificar/__${cliente.id}__}">
                                 <i class="bi bi-feather"></i>Eliminar
                             </a>
                         </td>                        
-                        -->
+                       
+                        <td th:text="${cliente.rol}"></td>
+
+                        <td>
+                            <a th:href= "@{/admin/modificarRol/__${cliente.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a>
+                        </td>
+
+                        <td>
+                            <a th:href= "@{/admin/modificar/__${cliente.id}__}"><i class="fas fa-feather-alt"></i> Modificar</a>
+                        </td>
+
+                    </tr>
                         
                     </tr>                                    
                 </tbody>

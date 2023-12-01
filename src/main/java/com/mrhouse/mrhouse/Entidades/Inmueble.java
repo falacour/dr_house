@@ -1,21 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mrhouse.mrhouse.Entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import lombok.*;
 
-/**
- *
- * @author thell
- */
 @Entity
+@Data
+@NoArgsConstructor
 public class Inmueble {
 
     @Id
@@ -28,106 +18,13 @@ public class Inmueble {
     private String provincia;
     private String departamento;
     private Double precio;
-    @ManyToOne
-    private Ente ente;
-    @ManyToOne
+    private String descripcion;
+  @OneToOne
+    private Cliente ente;
+    @OneToOne
     private Cliente cliente;
     @OneToOne
     private Imagen imagen;
     private Boolean alta;
 
-    public Inmueble() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public Integer getAntiguedad() {
-        return antiguedad;
-    }
-
-    public void setAntiguedad(Integer Antiguedad) {
-        this.antiguedad = Antiguedad;
-    }
-
-    public Long getMts2() {
-        return mts2;
-    }
-
-    public void setMts2(Long mts2) {
-        this.mts2 = mts2;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
- 
-    public Ente getEnte() {
-        return ente;
-    }
-
-    public void setEnte(Ente ente) {
-        this.ente = ente;
-    }
-
-    public Imagen getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(Imagen imagen) {
-        this.imagen = imagen;
-    }
-
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    public String getProvincia() {
-        return provincia;
-    }
-
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
-    }
-
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
-
-    public Boolean getAlta() {
-        return alta;
-    }
-
-    public void setAlta(Boolean alta) {
-        this.alta = alta;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
 }

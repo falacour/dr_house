@@ -1,0 +1,119 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+    <head th:replace = "/fragments/head :: head"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/inmueble_lista.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>lista de inmueble</title>
+</head>
+<body>
+    <header th:replace = "/fragments/header :: header"/>
+    <nav th:replace = "/fragments/nav :: nav"/>
+    <div class="container-fluid m-5 contenedor">
+        <!--Lista de clientes-->
+        <div class="container m-5" >
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col"> imagen</th>
+                        <th scope="col"> DNI</th>
+                        <th scope="col"> nombre</th>
+                        <th scope="col"> email</th>
+                    </tr>
+                </thead>
+                <tbody th:each="ente : ${cliente}">
+                    <tr>
+                        <th scope="row" th:text="${cliente.imagen}"></th>
+                        <td><figure>
+                                <img th:src="@{/imagen/ente/__${cliente.imagen.id}__}" alt="imagen cliente"/>
+                            </figure></td>
+                        <th scope="row" th:text="${cliente.nombre}"></th>
+                        <th scope="row" th:text="${cliente.provincia}"></th>
+                        <th scope="row" th:text="${cliente.email}"></th>
+                        <td>
+                            <a class="boton-modificar" th:href="@{/cliente/modificar/__${cliente.id}__}">Modificar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <!--Lista de entes-->
+        <div class="container m-5" >
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col"> imagen</th>
+                        <th scope="col"> nombre</th>
+                        <th scope="col"> email</th>
+                    </tr>
+                </thead>
+                <tbody th:each="ente : ${ente}">
+                    <tr>
+                        <th scope="row" th:text="${ente.imagen}"></th>
+                        <td><figure>
+                                <img th:src="@{/imagen/ente/__${ente.imagen.id}__}" alt="imagen ente"/>
+                            </figure></td>
+                        <th scope="row" th:text="${ente.nombre}"></th>
+                        <th scope="row" th:text="${ente.email}"></th>
+                        <td>
+                            <a class="boton-modificar" th:href="@{/ente/modificar/__${ente.id}__}">Modificar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <!--Carga de Inmuebles-->
+        <div class="container m-5" >
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col"> tipo de inmueble</th>
+                        <th scope="col"> Vista previa del inmueble</th>
+                        <th scope="col"> Provincia</th>
+                        <th scope="col"> Departamento</th>
+                        <th scope="col"> Direccion</th>
+                        <th scope="col"> Mts2</th>
+                        <th scope="col"> Precio</th>
+                        <th scope="col"> Estado</th>
+                        <th scope="col"> Acciones</th>
+                    </tr>
+                </thead>
+                <tbody th:each="inmueble : ${inmuebles}">
+                    <tr>
+                        <th scope="row" th:text="${inmueble.tipo}"></th>
+                        <td><figure>
+                                <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
+                            </figure></td>
+                        <th scope="row" th:text="${inmueble.direccion}"></th>
+                        <th scope="row" th:text="${inmueble.provincia}"></th>
+                        <th scope="row" th:text="${inmueble.departamento}"></th>
+                        <th scope="row" th:text="${inmueble.mts2}"></th>
+                        <th scope="row" th:text="${inmueble.precio}"></th>
+                        <th scope="row" th:text="${inmueble.alta}"></th>
+                        <td>
+                            <a class="boton-modificar" th:href="@{/inmueble/modificar/__${inmueble.id}__}">Modificar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <section class="py-5 text-center container">
+                <div class="row py-lg-5">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <a th:href="@{/}" class="btn btn-primary my-2">Volver</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+
+        <!--Seccion del Footer-->
+        <footer th:replace = "/fragments/footer :: footer"/>
+        <script src="index.js"></script>
+</body>
+</html>

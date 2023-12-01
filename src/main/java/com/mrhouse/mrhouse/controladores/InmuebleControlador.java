@@ -7,9 +7,11 @@ package com.mrhouse.mrhouse.controladores;
 import com.mrhouse.mrhouse.Entidades.*;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
+import com.mrhouse.mrhouse.servicios.ServicioCliente;
 import com.mrhouse.mrhouse.servicios.ServicioImagen;
 import com.mrhouse.mrhouse.servicios.ServicioInmueble;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +32,8 @@ public class InmuebleControlador {
     private RepositorioInmueble repositorioInmueble;
     @Autowired
     private ServicioImagen servicioImagen;
+    @Autowired
+    private ServicioCliente servicioCliente;
     
    @GetMapping("/registrar")
    public String registrar(ModelMap modelo){
@@ -40,10 +44,13 @@ public class InmuebleControlador {
    public String registro(@RequestParam(required = false) Long id, @RequestParam String tipo,
            @RequestParam(required = false)Integer antiguedad, @RequestParam(required = false ) Long mts2,
            @RequestParam String direccion, ModelMap modelo, MultipartFile archivo, Double precio,
-           String provincia, String departamento){
+           String provincia, String departamento, String descripcion, HttpSession session){
+       
+       Cliente cliente = (Cliente) session.getAttribute("clientesession");
+       
        try {
            servicioInmueble.crearInmueble(archivo, id, tipo, antiguedad, mts2, direccion,
-                   precio, provincia, departamento);
+                   precio, provincia, departamento, descripcion, cliente.getId());
            modelo.put("exelente", "se cargo tu inmueble");
        } catch (MiException e) {
            modelo.put("error", e.getMessage());
@@ -84,5 +91,13 @@ public class InmuebleControlador {
         }
         
         return "redirect:/inmueble/lista";
+     }
+     
+     @GetMapping("/comprar/{id}")
+     public String comprar(Long idInmueble, String id){
+         
+         servicioCliente.compra(idInmueble, id);
+         
+         return "redirect:/..";
      }
 }
