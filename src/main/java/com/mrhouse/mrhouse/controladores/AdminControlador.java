@@ -5,6 +5,7 @@
 package com.mrhouse.mrhouse.controladores;
 
 import com.mrhouse.mrhouse.Entidades.Cliente;
+import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
 import com.mrhouse.mrhouse.servicios.ServicioCliente;
 import com.mrhouse.mrhouse.servicios.ServicioInmueble;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -26,6 +28,8 @@ public class AdminControlador {
     private ServicioCliente servicioCliente;
     @Autowired
     private ServicioInmueble servicioInmueble;
+    @Autowired
+    private RepositorioCliente repositorioCliente;
     @GetMapping("/dashboard")
     public String panelAdministrativo(){
         return "panel.html";
@@ -34,7 +38,7 @@ public class AdminControlador {
     public String listar(ModelMap modelo){
         List<Cliente>clientes= servicioCliente.listarClientes();
         modelo.addAttribute("clientes",clientes);
-        return "lista_cliente_admin.html";
+        return "cliente_lista.html";
     }
     @GetMapping("/cliente")
     public String crearCliente(){
@@ -42,11 +46,14 @@ public class AdminControlador {
         return "redirect:./registro";
     }
     
-    @GetMapping("/modificarRol")
-    public String cambiarRol(@PathVariable String id){
-        servicioCliente.cambiarRol(id);
-        
-       return "redirect:/admin/usuarios";
-    }
-   
+  @GetMapping("/admin/cambiarRol/{id}")
+public String cambiarRol(@PathVariable String id){
+    servicioCliente.cambiarRol(id);
+    return "redirect:/admin/usuarios";
+}
+  @GetMapping("/admin/eliminar/{id}")
+public String eliminarPorId(@PathVariable String id){
+    servicioCliente.eliminarPorId(id);
+    return "redirect:/admin/usuarios";
+}
 }

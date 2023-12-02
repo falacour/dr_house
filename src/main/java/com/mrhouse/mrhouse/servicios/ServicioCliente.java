@@ -93,6 +93,14 @@ public class ServicioCliente implements UserDetailsService {
     public void compra(Long idInmueble, String id){
         servicioInmueble.compra(id, idInmueble);
     }
+    @Transactional
+public  void eliminarPorId(String id) {
+    Optional <Cliente> respuesta = repositorioCliente.findById(id);
+    if (respuesta.isPresent()) {
+    Cliente cliente = respuesta.get();
+    repositorioCliente.delete(cliente);
+    }
+}
  public void cambiarRol(String id){
         Optional<Cliente> respuesta = repositorioCliente.findById(id);
     	
