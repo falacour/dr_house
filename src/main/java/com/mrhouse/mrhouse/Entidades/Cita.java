@@ -1,7 +1,6 @@
-package com.mrhouse.Entidades;
+package com.mrhouse.mrhouse.Entidades;
 
 import com.mrhouse.mrhouse.Entidades.Cliente;
-import com.mrhouse.mrhouse.Entidades.RangoHorario;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -21,7 +20,6 @@ public class Cita implements Serializable {
     @ManyToOne
     private Cliente ente;
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     @ManyToOne

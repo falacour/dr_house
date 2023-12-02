@@ -7,6 +7,7 @@ package com.mrhouse.mrhouse.servicios;
 import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.Entidades.Imagen;
 import com.mrhouse.mrhouse.Entidades.Inmueble;
+import com.mrhouse.mrhouse.Entidades.RangoHorario;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -62,6 +64,10 @@ public class ServicioInmueble {
         return Inmuebles;
 
     }
+    
+    public Inmueble obtenerInmueblePorId(Long id) {
+    return repositorioInmueble.getOne(id);
+}
 
     //se deberia obtener el usuario de la session para poder llamar a este evento
     //en la navegacion previa a la visualizacion de la lista de los inmuebles del ente
@@ -149,4 +155,26 @@ public class ServicioInmueble {
             throw new MiException("el departamento no puede estar vacio");
         }
     }
+    
+      
+
+   
+    public List<RangoHorario> obtenerRangosHorariosPorId(Long id) {
+        // Encuentra el inmueble por su cuenta tributaria
+        Inmueble inmueble = getOne(id);
+
+        // Si no se encuentra el inmueble, devolver una lista vacía o lanzar una excepción
+        if (inmueble == null) {
+            // Opción 1: Devolver una lista vacía
+            // return new ArrayList<>();
+
+            // Opción 2: Lanzar una excepción
+            throw new EntityNotFoundException("Inmueble no encontrado con cuenta tributaria: " + id);
+        }
+
+        // Devuelve los rangos horarios asociados al inmueble encontrado
+        return inmueble.getRangosHorarios();
+    }
+
+  
 }
