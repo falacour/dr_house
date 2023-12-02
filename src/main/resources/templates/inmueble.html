@@ -44,7 +44,8 @@
                 <form th:action="@{/inmueble/comprar/__${inmueble.id}__}" method="get">
                     <input type="hidden" th:value="${cliente.id}" name="id"/>
                     <input type="hidden" th:value="${inmueble.id}" name="idInmueble"/>
-                    <button type="submit" th:if="${cliente.rol == rol}">Comprar</button>
+                    <button type="submit" th:if="${cliente.rol == rol && cliente.id != inmueble.ente.id}">Comprar</button>
+                    <button type="submit" disabled th:if="${cliente.rol == rol && cliente.id == inmueble.ente.id}">Ya es de su propiedad</button>
                 </form>
             </div>
             <!--Formulario para cliente no autenticado -->
