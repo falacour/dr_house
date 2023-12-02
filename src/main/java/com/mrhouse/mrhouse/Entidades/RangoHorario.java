@@ -29,7 +29,6 @@ public class RangoHorario implements Serializable {
     private LocalTime horaFin; // Hora de fin del rango horario
 
     @ManyToOne
-    @JoinColumn(name = "cuenta_tributaria", referencedColumnName = "cuentaTributaria")
     private Inmueble inmueble;
 
     // Otras propiedades y getters/setters

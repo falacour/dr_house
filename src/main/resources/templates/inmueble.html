@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace = "/fragments/head :: head"/>
     <body>
-    <body>
         <header th:replace="/fragments/header :: header" />
         <nav th:replace="/fragments/nav :: nav"/>
 
@@ -13,67 +12,41 @@
 
             <input hidden th:value="${inmueble.id}" name="idInmueble">
             <br><br>
-             <strong>Tipo: </strong> <span th:text="${inmueble.tipo}"></span><br><br>
-              <strong>Provincia: </strong> <span th:text="${inmueble.provincia}"></span><br><br>
-               <strong>Departamento: </strong> <span th:text="${inmueble.departamento}"></span><br><br>
-                <strong>Precio: </strong> <span th:text="${inmueble.precio}"></span><br><br>
-                 <strong>Descripcion: </strong> <span th:text="${inmueble.descripcion}"></span><br><br>
+            <strong>Tipo: </strong> <span th:text="${inmueble.tipo}"></span><br><br>
+            <strong>Provincia: </strong> <span th:text="${inmueble.provincia}"></span><br><br>
+            <strong>Departamento: </strong> <span th:text="${inmueble.departamento}"></span><br><br>
+            <strong>Precio: </strong> <span th:text="${inmueble.precio}"></span><br><br>
+            <strong>Descripcion: </strong> <span th:text="${inmueble.descripcion}"></span><br><br>
 
             <!-- Formulario para cliente autenticado -->
             <div th:if="${cliente != null}">
-                <form th:action="@{/inmueble/comprar/__${inmueble.id}__}" method="post">
-                    <input type="hidden" th:value="${cliente.id}" name="idCliente"/>
-                    <input type="hidden" th:value="${inmueble.id}" name="idInmueble"/>
-                    <button class="oferta-especial-btn" type="submit" th:if="${cliente.rol == rol && inmueble.cliente.id == null}">Comprar</button>
-                    <button class="oferta-especial-btn" th:if="${inmueble.cliente.id != null}" type="submit" disabled>vendido</button>
-                </form>
+                <form th:action="@{/inmueble/comprar/__${inmueble.id}__}" method="get">
+                    <input hidden th:value="${cliente.id}" name="idCliente"/>
+                    <input hidden th:value="${inmueble.id}" name="idInmueble"/>
+                    <button type="submit" th:if="${cliente.rol == rol && cliente.id != inmueble.ente.id}">Comprar</button>
+                    <button type="submit" disabled th:if="${cliente.rol == rol && cliente.id == inmueble.ente.id}">Ya es de su propiedad</button>
             </div>
             <!-- Formulario para cliente no autenticado -->
             <div th:if="${cliente == null}">
                 <!-- Formulario para cliente no autenticado -->
                 <form th:action="@{/login}" method="get">
-                    <button type="submit" th:if="${inmueble.cliente == null}">Comprar</button>
-                    <button th:if="${inmueble.cliente != null}" type="submit" disabled>vendido</button>
+                    <button type="submit">Comprar</button>
                 </form>
             </div>
             <form th:action="@{/inmueble/calendario}" method="get">
                 <button type="submit">Pedir una reunión</button>
             </form>
+
         </div>
+
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <a th:href="@{/}" class="btn btn-primary my-2">Volver</a>
             </div>
         </div>
 
-            <div th:if="${cliente != null}">
-                <form th:action="@{/inmueble/comprar/__${inmueble.id}__}" method="get">
-                    <input type="hidden" th:value="${cliente.id}" name="id"/>
-                    <input type="hidden" th:value="${inmueble.id}" name="idInmueble"/>
-                    <button type="submit" th:if="${cliente.rol == rol && cliente.id != inmueble.ente.id}">Comprar</button>
-                    <button type="submit" disabled th:if="${cliente.rol == rol && cliente.id == inmueble.ente.id}">Ya es de su propiedad</button>
-                </form>
-            </div>
-            <!--Formulario para cliente no autenticado -->
-            <div th:if="${cliente == null}">
-                <!-- Formulario para cliente no autenticado--> 
-                <form th:action="@{/login}" method="get">
-                    <button type="submit" th:if="${inmueble.ente != '' }">Comprar</button>
-                </form>
-            </div>
-        </div>
-        <form th:action="@{/}" method="get">
-            <button type="submit">Pedir una reunión</button>
-        </form>
-    </div>
-    <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <a th:href="@{/}" class="btn btn-primary my-2">Volver</a>
-        </div>
-    </div>
-
-    <footer th:replace="/fragments/footer :: footer" />
-</body>
+        <footer th:replace="/fragments/footer :: footer" />
+    </body>
 
 
 </html>

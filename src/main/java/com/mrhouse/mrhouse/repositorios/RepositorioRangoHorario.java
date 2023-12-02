@@ -12,10 +12,11 @@ import java.util.List;
 @Repository
 public interface RepositorioRangoHorario extends JpaRepository<RangoHorario, Long> {
 
-    List<RangoHorario> findById(String idHorario);
+    @Query("SELECT r FROM RangoHorario r WHERE r.id = :id")
+    List<RangoHorario> findById(@Param("id") String id);
 
-    @Query("SELECT r FROM RangoHorario r WHERE r.inmueble.cuentaTributaria = :cuentaTributaria")
-    List<RangoHorario> findByCuentaTributaria(@Param("cuentaTributaria") String cuentaTributaria);
+    @Query("SELECT r FROM RangoHorario r WHERE r.inmueble.id = :id")
+    List<RangoHorario> findByCuentaTributaria(@Param("id") String id);
 
     List<RangoHorario> findByFecha(@Param("fecha")LocalDate fecha);
 }
