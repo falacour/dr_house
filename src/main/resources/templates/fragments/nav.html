@@ -36,11 +36,12 @@
             </a>
             <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
                 <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ENTE')" th:href="@{/inmueble/registrar}">Nuevo Inmueble</a></li>
-                <li><a class="linkAAlgo"sec:authorize="hasAnyRole('ENTE','CLIENTE')" th:href="@{/inmueble/lista}">Mis Inmuebles</a></li>
-                <li><a class="linkAAlgo"sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/inmueble/lista}">Todos los Inmuebles disponibles</a></li>
-                <li><a class="linkAAlgo" sec:authorize="hasAnyRole('ENTE')" th:href="@{/inmueble/vendidos}">Vendidos</a></li>
-                <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ADMIN')" th:href="@{/}">Todos los Inmuebles</a></li>
-                <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ADMIN')" th:href="@{/}">Todos los Inmuebles Vendidos </a></li>
+                <li><a class="linkAAlgo"sec:authorize="hasAnyRole('ENTE')" th:href="@{/inmueble/listaInmueblesPorEnteAVender}">Mis Inmuebles</a></li>
+                <li><a class="linkAAlgo"sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/inmueble//listaComprados}">Mis Inmuebles</a></li>
+                <li><a class="linkAAlgo"sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/inmueble/listaInmueblesNoComprados}">Todos los Inmuebles disponibles</a></li>
+                <li><a class="linkAAlgo" sec:authorize="hasAnyRole('ENTE')" th:href="@{/inmueble/listaVendidos}">Vendidos</a></li>
+                <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ADMIN')" th:href="@{/inmueble/listarTodosLosInmueblesAVender}">Todos los Inmuebles</a></li>
+                <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ADMIN')" th:href="@{/inmueble/listarTodosLosInmueblesVendidos}">Todos los Inmuebles Vendidos </a></li>
             </ul>
         </div>
         <div class=" dropdown" sec:authorize="hasAnyRole('ENTE','ADMIN')">

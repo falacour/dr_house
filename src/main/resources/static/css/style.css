@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #4083fa;
-    background: linear-gradient(to bottom, #4083fa, #101f3f);
+    background: linear-gradient(to bottom, #3498DB, #001f3f);
 }
 /*Header*/
 header {
@@ -17,7 +17,7 @@ header {
     justify-content: space-between; 
     align-items: center; 
     background-color: #101f3f;
-    background: linear-gradient(to bottom, #101f3f, #28505b);
+    background: linear-gradient(to bottom, #001f3f, #3498DB);
     padding-left: 1rem; 
     padding-right: 1rem; 
 }
@@ -45,13 +45,12 @@ header {
 
 .searcher{
     padding-top: 10px ;
-    width: 600px; /* Establecer el ancho */
+    width: fit-content; /* Establecer el ancho */
     justify-content: space-between; 
     align-items: center; 
     padding-left: 5rem; 
 }
 .searcher-form{
-
     background-color: white;
     color: black;
     border-radius: 10px;
@@ -303,6 +302,7 @@ max-width: 1200px;
 
 }
 .contenedorTarjetas .tarjeta {
+    background-color: #f3f0ec;
     width: 330px;
     height: 430px;
     border-radius: 8px;
@@ -331,12 +331,8 @@ max-width: 1200px;
 .contenedorTarjetas .tarjeta p{
     padding: 0 1rem;
     font-size: 16px;
-    font-weight: 500;
-    color: black;
-    font-weight: bold;
+    font-weight: 300;
     text-decoration: none;
-    
-
 }
 .contenedorTarjetas .tarjeta button{
     color: #3498db;

@@ -3,6 +3,7 @@ package com.mrhouse.mrhouse.controladores;
 import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.Entidades.Publicacion;
 import com.mrhouse.mrhouse.excepciones.MiException;
+import com.mrhouse.mrhouse.servicios.ServicioCliente;
 import com.mrhouse.mrhouse.servicios.ServicioPublicacion;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -21,17 +22,24 @@ public class PublicacionControlador {
     
     @Autowired
     ServicioPublicacion servicioPublicacion;
+    @Autowired
+    ServicioCliente servicioCliente;
     
-    @GetMapping("/registrar")
-    public String registrar(){
+    @PostMapping("/registrar")
+    public String registrar(@RequestParam String id, ModelMap modelo){       
+        modelo.put("idEnte", id);
+        
         return "publicacion_form.html";   
     }
     
     @PostMapping("/registro")
     public String registro(@RequestParam String asunto,@RequestParam String mensaje,
-            @RequestParam String idEmisor,@RequestParam String idReceptor, ModelMap modelo){
+            @RequestParam String idReceptor, ModelMap modelo, HttpSession session){
         try {
-            servicioPublicacion.crearPublicacion(asunto, mensaje, idEmisor, idReceptor);
+            
+            Cliente emisor = (Cliente) session.getAttribute("clientesession");            
+            
+            servicioPublicacion.crearPublicacion(asunto, mensaje, emisor.getId(), idReceptor);
             
             modelo.put("exito", "La publicacion se registro correctamente!!");
              return "redirect:/";
@@ -47,7 +55,7 @@ public class PublicacionControlador {
     //Se listaran todas las publicaciones dirigidas al id del cliente registrado
     //no se necesitan parametros ya que se toman del session
     @GetMapping("/recibidos")
-    public String listarPublicacionesMias(ModelMap modelo, HttpSession session) {
+    public String listarPublicacionesRecibidas(ModelMap modelo, HttpSession session) {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
         
         List <Publicacion> publicaciones = servicioPublicacion.listarPorIdReceptor(cliente.getId());
@@ -56,10 +64,13 @@ public class PublicacionControlador {
     }
     
     @GetMapping("/enviadas")
-    public String listarPublicacionesRecibidas(ModelMap modelo, HttpSession session) {
+    public String listarPublicacionesEnviadas(ModelMap modelo, HttpSession session) {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        System.out.println("cliente id"+cliente.getId());
         
         List <Publicacion> publicaciones = servicioPublicacion.listarPorIdEmisor(cliente.getId());
+        System.out.println("Cantidad de publicaciones"+publicaciones.size());
+        
         modelo.addAttribute("publicaciones", publicaciones);
         return "publicaciones_lista_recibidos.html";
     }

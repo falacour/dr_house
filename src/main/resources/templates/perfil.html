@@ -8,7 +8,7 @@
         <h1 th:text="'Hola ' + ${cliente.nombre}+'!' "  ></h1>
 
         <div class="contenedor-perfil"> 
-            <div >
+            <div>
                 <img th:src="@{/imagen/inmueble/__${cliente.imagen.id}__}" alt="imagen de perfil"
                      th:if='${cliente.imagen != null}'/>
             </div>

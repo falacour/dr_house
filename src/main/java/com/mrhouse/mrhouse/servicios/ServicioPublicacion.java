@@ -29,10 +29,10 @@ public class ServicioPublicacion {
 
         publicacion.setAsunto(asunto);
         publicacion.setMensaje(mensaje);
-        //publicacion.setEmisor(emisor);
-        //publicacion.setReceptor(receptor);
-        //publicacion.setLeido(false);
-        //publicacion.setEstado(true);
+        publicacion.setEmisor(emisor);
+        publicacion.setReceptor(receptor);
+        publicacion.setLeido(false);
+        publicacion.setEstado(true);
 
         repositorioPublicacion.save(publicacion);
 
