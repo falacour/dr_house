@@ -69,8 +69,7 @@
                         <!-- Otros elementos de la tarjeta -->
                         <p th:text="'Tipo:  ' + ${inmueble.tipo}"></p>
                         <p th:text="'Provincia:  ' + ${inmueble.provincia}"></p>
-                        <p th:text="'Departamento:  ' + ${inmueble.departamento}"></p>
-                        <p th:text="'Precio:  ' + ${inmueble.precio} + '$'"></p>
+                        <br>
 
                         <!-- Formulario para cliente autenticado -->
                          <!--
@@ -88,6 +87,7 @@
                                 <button type="submit" th:if="${inmueble.ente != '' }">Comprar</button>
                             </form>
                         </div>-->
+                        <p><a th:href="@{/vistaInmueble/__${inmueble.id}__}"class="oferta-especial-btn">Conoce más</a></p>
                     </div>
 
 
