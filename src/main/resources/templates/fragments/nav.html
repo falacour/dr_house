@@ -4,17 +4,17 @@
         <li><a th:href="@{/}" class="linkAAlgo">Inicio</a></li>
         <li><a th:href="@{/}" class="linkAAlgo">Reuniones</a></li>
         <!--<li><a th:href="@{/}" class="linkAAlgo">Reclamos</a></li>-->
-       <!--  <div class=" dropdown" >
-            <a class="linkAAlgo botonInmueble" 
-               href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Boletas
-            </a>
-            <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
-                <li><a class="linkAAlgo"  th:href="@{/}">A Pagar!!</a></li>
-                <li><a class="linkAAlgo" th:href="@{/}">Pagadas</a></li>
-
-            </ul>
-        </div>-->
+        <!--  <div class=" dropdown" >
+             <a class="linkAAlgo botonInmueble" 
+                href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                 Boletas
+             </a>
+             <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
+                 <li><a class="linkAAlgo"  th:href="@{/}">A Pagar!!</a></li>
+                 <li><a class="linkAAlgo" th:href="@{/}">Pagadas</a></li>
+ 
+             </ul>
+         </div>-->
 
         <div class=" dropdown">
             <a class="linkAAlgo botonInmueble" 
@@ -22,9 +22,8 @@
                 Mensajes
             </a>
             <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
-               
-                <li><a class="linkAAlgo" th:href="@{/publicacion/lista}">Recibidos</a></li>
-                <li><a class="linkAAlgo" th:href="@{/publicacion/lista}">Enviados</a></li>
+                <li><a class="linkAAlgo" th:href="@{/publicacion/recibidos}">Mensajes Recibidos</a></li>
+                <li><a class="linkAAlgo" th:href="@{/publicacion/enviadas}">Mensajes Enviados</a></li>
 
             </ul>
         </div>
@@ -38,8 +37,8 @@
             <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
                 <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ENTE')" th:href="@{/inmueble/registrar}">Nuevo Inmueble</a></li>
                 <li><a class="linkAAlgo"sec:authorize="hasAnyRole('ENTE','CLIENTE')" th:href="@{/inmueble/lista}">Mis Inmuebles</a></li>
-                <li><a class="linkAAlgo"sec:authorize="hasAnyRole('ENTE','CLIENTE')" th:href="@{/inmueble/lista}">Todos los Inmuebles disponibles</a></li>
-                <li><a class="linkAAlgo" sec:authorize="hasAnyRole('ENTE')" th:href="@{/}">Vendidos</a></li>
+                <li><a class="linkAAlgo"sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/inmueble/lista}">Todos los Inmuebles disponibles</a></li>
+                <li><a class="linkAAlgo" sec:authorize="hasAnyRole('ENTE')" th:href="@{/inmueble/vendidos}">Vendidos</a></li>
                 <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ADMIN')" th:href="@{/}">Todos los Inmuebles</a></li>
                 <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ADMIN')" th:href="@{/}">Todos los Inmuebles Vendidos </a></li>
             </ul>
@@ -52,7 +51,7 @@
             <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
                 <li><a class="linkAAlgo"  th:href="@{/registro}">Nuevo Cliente</a></li>
                 <li><a class="linkAAlgo"sec:authorize="hasAnyRole('ENTE')" th:href="@{/cliente/lista}">Mis Clientes</a></li>
-                 <li><a class="linkAAlgo"sec:authorize="hasAnyRole('ADMIN')" th:href="@{/cliente/lista}">Todos los Clientes</a></li>
+                <li><a class="linkAAlgo"sec:authorize="hasAnyRole('ADMIN')" th:href="@{/cliente/lista}">Todos los Clientes</a></li>
 
             </ul>
         </div>
