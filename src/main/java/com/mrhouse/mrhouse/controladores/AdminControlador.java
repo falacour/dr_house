@@ -34,7 +34,12 @@ public class AdminControlador {
     public String listar(ModelMap modelo){
         List<Cliente>clientes= servicioCliente.listarClientes();
         modelo.addAttribute("clientes",clientes);
-        return "cliente_lista.html";
+        return "lista_cliente_admin.html";
+    }
+    @GetMapping("/cliente")
+    public String crearCliente(){
+     
+        return "redirect:./registro";
     }
     
     @GetMapping("/modificarRol/{id}")
