@@ -26,7 +26,7 @@
                 <form class="formulario_inmueble" th:action="@{/inmueble/registro}" method="POST" enctype="multipart/form-data">
                     <h3 class="titulo">Cargar Inmueble</h3>
                     <p></p>
-                    <select name="Tipo de propiedad" class="searcher-form">
+                    <select name="Tipo de propiedad" class="searcher-form" th:value="${tipo}">
                         <option value="" disabled selected>Tipo de vivienda</option>
                         <option value="1">Departamento</option>
                         <option value="2">PH</option>
@@ -106,12 +106,12 @@
                             provincia(); // Llamada inicial para cargar las provincias al cargar la página
                         });
                     </script>
-                    <select id="provincias" class="searcher-form" name='provincia'>
-                        <option value="" disabled selected>Elige una provincia</option>
+                    <select id="provincias" class="searcher-form" name='provincia' th:value="${provincia}">
+                        <option value="" disabled selected >Elige una provincia</option>
                     </select>
 
                     <select id="municipios" class="searcher-form" name='departamento'>
-                        <option value="" disabled selected>Elige un municipio</option>
+                        <option value="" disabled selected th:value="${departamento}">Elige un municipio</option>
                     </select>
 
                     <div class="form-group my-3">
