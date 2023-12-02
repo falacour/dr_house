@@ -67,7 +67,7 @@ public class InmuebleControlador {
         return "inmueble_lista.html";
     }
     
-    @GetMapping("/Vendidos")
+    @GetMapping("/vendidos")
     public String listarVendidos(ModelMap modelo, HttpSession session) {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
         List <Inmueble> inmuebles = repositorioInmueble.inmueblesPorEnteComprados(cliente.getId());

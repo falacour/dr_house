@@ -38,7 +38,7 @@
             <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
                 <li><a class="linkAAlgo"  th:href="@{/inmueble/registrar}">Nuevo Inmueble</a></li>
                 <li><a class="linkAAlgo"sec:authorize="hasAnyRole('ENTE','CLIENTE')" th:href="@{/inmueble/lista}">Mis Inmuebles</a></li>
-                <li><a class="linkAAlgo" th:href="@{/}">Vendidos</a></li>
+                <li><a class="linkAAlgo" th:href="@{/inmueble/vendidos}">Vendidos</a></li>
                 <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ADMIN')" th:href="@{/}">Todos los Inmuebles</a></li>
                 <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ADMIN')" th:href="@{/}">Todos los Inmuebles Vendidos </a></li>
             </ul>
