@@ -1,60 +1,39 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace = "/fragments/head :: head"/>
-    
     <body>        
         <header th:replace = "/fragments/header :: header"/>
         <nav th:replace = "/fragments/nav :: nav"/>
-        
-        
         <div class="container m-5">
             <table class="table table-dark">
                 <thead>
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Email</th>
-                        
                         <th scope="col">Rol</th>
-                         <th scope="col">Imagen</th>
-                        <th  sec:authorize = "hasRole('ADMIN')" scope="col" >Accion</th> <!-- -->
+                        <th scope="col">Imagen</th>
+                        <th sec:authorize = "hasRole('ADMIN')" scope="col">Accion</th>
                     </tr>
                 </thead>
                 <tbody th:each="cliente : ${clientes}">
                     <tr>
-                        
                         <th scope="row" th:text="${cliente.nombre}"></th>
                         <td th:text="${cliente.email}"></td>
-                
                         <td th:text="${cliente.rol}"></td>
                         <td>Imagen</td>
                         <td sec:authorize = "hasRole('ADMIN')">
-                            <a th:href="@{/admin/modificar/__${cliente.id}__}">
+                            <a th:href="@{modificarRol/__${cliente.id}__}">
                                 <i class="bi bi-feather"></i>Modificar
                             </a>
                         </td>
-                         cambio de estado
-                            <td sec:authorize = "hasRole('ADMIN')">
-                            <a th:href="@{/admin/modificar/__${cliente.id}__}">
+                        <td sec:authorize = "hasRole('ADMIN')">
+                            <a th:href="@{/admin/modificarRol/__${cliente.id}__}">
                                 <i class="bi bi-feather"></i>Eliminar
                             </a>
-                        </td>                        
-                       
-                        <td th:text="${cliente.rol}"></td>
-
-                        <td>
-                            <a th:href= "@{/admin/modificarRol/__${cliente.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a>
                         </td>
-
-                        <td>
-                            <a th:href= "@{/admin/modificar/__${cliente.id}__}"><i class="fas fa-feather-alt"></i> Modificar</a>
-                        </td>
-
                     </tr>
-                        
-                    </tr>                                    
                 </tbody>
             </table>
         </div>

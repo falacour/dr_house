@@ -117,4 +117,11 @@ public class PortalControlador {
         modelo.put("inmueble", servicioInmueble.getOne(id));
         return "inmueble.html";
     }
+     @GetMapping("/usuarios")
+    public String listar(ModelMap modelo) {
+        List<Cliente>clientes = servicioCliente.listarClientes();
+        modelo.addAttribute("clientes", clientes);
+
+        return "cliente_lista.html";
+    }
 }
