@@ -4,6 +4,7 @@ import com.mrhouse.mrhouse.Entidades.FechaHoraContainer;
 import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.Entidades.RangoHorario;
 import com.mrhouse.mrhouse.Entidades.Cliente;
+import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioCita;
 import com.mrhouse.mrhouse.servicios.ServicioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioRangoHorario;
@@ -38,6 +39,9 @@ public class CitaControlador {
     @Autowired
     private ServicioInmueble servicioInmueble;
 
+    @Autowired
+    private RepositorioInmueble repositorioInmueble;
+    
     @GetMapping("/registrar/{cuentaTributaria}")
     public String registrarCita(@PathVariable("cuentaTributaria") String id,
                                 ModelMap model, HttpSession session) throws Exception {

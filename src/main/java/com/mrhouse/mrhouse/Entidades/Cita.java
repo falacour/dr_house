@@ -1,4 +1,4 @@
-package com.mrhouse.Entidades;
+package com.mrhouse.mrhouse.Entidades;
 
 import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.Entidades.RangoHorario;

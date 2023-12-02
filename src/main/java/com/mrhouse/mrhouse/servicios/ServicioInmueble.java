@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mrhouse.mrhouse.servicios;
 
 import com.mrhouse.mrhouse.Entidades.Cliente;
@@ -11,9 +7,7 @@ import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

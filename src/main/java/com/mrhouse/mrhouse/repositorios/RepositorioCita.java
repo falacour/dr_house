@@ -5,7 +5,7 @@
  */
 package com.mrhouse.mrhouse.repositorios;
 
-import com.mrhouse.Entidades.Cita;
+import com.mrhouse.mrhouse.Entidades.Cita;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import lombok.*;
-import com.mrhouse.Entidades.Cita;
+import com.mrhouse.mrhouse.Entidades.Cita;
 
 @Entity
 @Data
