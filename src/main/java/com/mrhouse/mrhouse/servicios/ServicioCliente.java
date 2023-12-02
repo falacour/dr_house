@@ -60,13 +60,14 @@ public class ServicioCliente implements UserDetailsService {
     }
 
     public void actualizar(MultipartFile archivo, String idCliente, String nombre, String mail,
-            String password, String password2, String dni) throws MiException {
+            String password, String password2, String dni,Rol rol) throws MiException {
         validar(nombre, mail, password, password2,dni);
         Optional<Cliente> respuesta = repositorioCliente.findById(idCliente);
         if (respuesta.isPresent()) {
             Cliente cliente = respuesta.get();
             cliente.setEmail(mail);
             cliente.setPassword(new BCryptPasswordEncoder().encode(password));
+            cliente.setRol(rol);
             String idImagen = null;
             if (cliente.getImagen() != null) {
                 idImagen = cliente.getImagen().getId();
@@ -92,6 +93,33 @@ public class ServicioCliente implements UserDetailsService {
     public void compra(Long idInmueble, String id){
         servicioInmueble.compra(id, idInmueble);
     }
+    @Transactional
+public  void eliminarPorId(String id) {
+    Optional <Cliente> respuesta = repositorioCliente.findById(id);
+    if (respuesta.isPresent()) {
+    Cliente cliente = respuesta.get();
+    repositorioCliente.delete(cliente);
+    }
+}
+ public void cambiarRol(String id){
+        Optional<Cliente> respuesta = repositorioCliente.findById(id);
+    	
+    	if(respuesta.isPresent()) {
+    		
+    		Cliente cliente = respuesta.get();
+    		
+    		if(cliente.getRol().equals(Rol.CLIENTE)) {
+    			
+    		cliente.setRol(Rol.ENTE);
+    		
+    		}else if(cliente.getRol().equals(Rol.ENTE)) {
+    			cliente.setRol(Rol.CLIENTE);
+    		
+    		
+    	}
+        }
+ }
+
 
     public void validar(String nombre, String email, String password, String password2, String dni) throws MiException {
         if (nombre == null || nombre.isEmpty()) {

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mensajería</title>
+    <head th:replace = "/fragments/head :: head"/>
+</head>
+<body>
+    <header th:replace="/fragments/header :: header" />
+    <nav th:replace="/fragments/nav :: nav"/>
+
+    <div class="container">
+        <h2>Nueva publicación</h2>
+
+        <form th:action="@{/registro}" method="post">
+
+            <div class="form-group">
+                <label for="asunto">Asunto</label>
+                <input type="text" id="nombre" name="asunto" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <input type="text" id="nombre" name="mensaje" required>
+            </div>
+          <!--  <div class="form-group">
+                <label for="email">Emisor</label>
+                <input type="email" id="nombre" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Receptor</label>
+                <input type="email" id="nombre" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="">Estado</label>
+                <select name="" id="estado">
+                    <option value="true">leido</option>
+                    <option value="false">no leido</option>
+                </select>
+            </div>-->
+            <div class="form-group">
+                <input type="submit" value="Enviar">
+            </div>
+        </form>
+    </div>
+
+    <footer th:replace="/fragments/footer :: footer" />
+</body>
+</html>

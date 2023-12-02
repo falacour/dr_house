@@ -27,6 +27,7 @@ header {
     display: flex;
     align-items: center;
     padding-right: 1rem;
+    
 }
 .nombre_Empresa{
     font-family: 'Noto Serif Old Uyghur', serif;
@@ -39,6 +40,7 @@ header {
 .logo{
     width: 20px;
     padding-top: 10px ;
+     border-radius: 5%;
 }
 
 .searcher{
@@ -343,7 +345,7 @@ input[type="tipo"], input[type="antiguedad"], input[type="mtrs2"], input[type="d
     text-decoration: none;
 }
 
-
+/*conenedor perfil*/
 
 .contenedor-perfil {
     max-width: 300px;
@@ -368,4 +370,22 @@ input[type="tipo"], input[type="antiguedad"], input[type="mtrs2"], input[type="d
             display: flex;
             align-items: center;
             justify-content: center;
+}
+
+.container img{
+    width: 400px; /* ajusta el tamaño deseado */
+    height: 400px; /* ajusta el tamaño deseado */
+    object-fit: cover; /* maneja el tamaño de la imagen manteniendo su relación de aspecto */
+    border-radius: 5%;
+}
+/* Estilos para el botón de Volver */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  margin: auto;
+ 
+}
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
 }
