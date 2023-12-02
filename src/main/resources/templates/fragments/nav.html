@@ -22,7 +22,7 @@
                 Mensajes
             </a>
             <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
-                <li><a class="linkAAlgo"  th:href="@{/publicacion/registrar}">Nuevo Mensaje</a></li>
+               
                 <li><a class="linkAAlgo" th:href="@{/publicacion/lista}">Recibidos</a></li>
                 <li><a class="linkAAlgo" th:href="@{/publicacion/lista}">Enviados</a></li>
 
@@ -38,6 +38,7 @@
             <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
                 <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ENTE')" th:href="@{/inmueble/registrar}">Nuevo Inmueble</a></li>
                 <li><a class="linkAAlgo"sec:authorize="hasAnyRole('ENTE','CLIENTE')" th:href="@{/inmueble/lista}">Mis Inmuebles</a></li>
+                <li><a class="linkAAlgo"sec:authorize="hasAnyRole('ENTE','CLIENTE')" th:href="@{/inmueble/lista}">Todos los Inmuebles disponibles</a></li>
                 <li><a class="linkAAlgo" sec:authorize="hasAnyRole('ENTE')" th:href="@{/}">Vendidos</a></li>
                 <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ADMIN')" th:href="@{/}">Todos los Inmuebles</a></li>
                 <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ADMIN')" th:href="@{/}">Todos los Inmuebles Vendidos </a></li>

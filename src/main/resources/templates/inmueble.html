@@ -13,11 +13,11 @@
 
             <input hidden th:value="${inmueble.id}" name="idInmueble">
             <br><br>
-             <strong>Tipo: </strong> <span th:text="${inmueble.tipo}"></span><br><br>
-              <strong>Provincia: </strong> <span th:text="${inmueble.provincia}"></span><br><br>
-               <strong>Departamento: </strong> <span th:text="${inmueble.departamento}"></span><br><br>
-                <strong>Precio: </strong> <span th:text="${inmueble.precio}"></span><br><br>
-                 <strong>Descripcion: </strong> <span th:text="${inmueble.descripcion}"></span><br><br>
+            <strong>Tipo: </strong> <span th:text="${inmueble.tipo}"></span><br><br>
+            <strong>Provincia: </strong> <span th:text="${inmueble.provincia}"></span><br><br>
+            <strong>Departamento: </strong> <span th:text="${inmueble.departamento}"></span><br><br>
+            <strong>Precio: </strong> <span th:text="${inmueble.precio}"></span><br><br>
+            <strong>Descripcion: </strong> <span th:text="${inmueble.descripcion}"></span><br><br>
 
             <!-- Formulario para cliente autenticado -->
             <div th:if="${cliente != null}">
@@ -32,12 +32,15 @@
             <div th:if="${cliente == null}">
                 <!-- Formulario para cliente no autenticado -->
                 <form th:action="@{/login}" method="get">
-                    <button type="submit" th:if="${inmueble.cliente == null}">Comprar</button>
+                    <button class="" type="submit" th:if="${inmueble.cliente == null}">Comprar</button>
                     <button th:if="${inmueble.cliente != null}" type="submit" disabled>vendido</button>
                 </form>
             </div>
             <form th:action="@{/inmueble/calendario}" method="get">
-                <button type="submit">Pedir una reunión</button>
+                <button class="" type="submit">Pedir una reunión</button>
+            </form>
+            </form>
+            <<button ><a class=""  th:href="@{/publicacion/registrar}">Nuevo Mensaje</a></button>
             </form>
         </div>
         <div class="row py-lg-5">
