@@ -122,4 +122,11 @@ public class PortalControlador {
         modelo.addAttribute("rol", rol);
         return "inmueble.html";
     }
+     @GetMapping("/usuarios")
+    public String listar(ModelMap modelo) {
+        List<Cliente>clientes = servicioCliente.listarClientes();
+        modelo.addAttribute("clientes", clientes);
+
+        return "cliente_lista.html";
+    }
 }

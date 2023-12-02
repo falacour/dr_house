@@ -42,7 +42,7 @@ public class AdminControlador {
         return "redirect:./registro";
     }
     
-    @GetMapping("/modificarRol/{id}")
+    @GetMapping("/modificarRol")
     public String cambiarRol(@PathVariable String id){
         servicioCliente.cambiarRol(id);
         
