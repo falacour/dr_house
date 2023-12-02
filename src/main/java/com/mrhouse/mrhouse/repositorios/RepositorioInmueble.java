@@ -18,9 +18,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RepositorioInmueble extends JpaRepository<Inmueble, Long> {
 
-    @Query("SELECT i FROM Inmueble i WHERE i.id = :id ")
+   @Query("SELECT i FROM Inmueble i WHERE i.id = :id ")
     public Inmueble buscarPorid(@Param("id") Long id);
-    
+
     @Query("SELECT i FROM Inmueble i WHERE i.ente.id = :id")
     public List inmueblesPorEnte(@Param("id") String id);
     
@@ -32,7 +32,7 @@ public interface RepositorioInmueble extends JpaRepository<Inmueble, Long> {
     
     @Query("SELECT i FROM Inmueble i WHERE i.cliente.id = :id")
     public List inmueblesPorCliente(@Param("id") String id);
-    
+
     @Query("SELECT i FROM Inmueble i WHERE i.cliente.id = null")
     public List inmueblesNoComprados();
     
@@ -51,4 +51,16 @@ public interface RepositorioInmueble extends JpaRepository<Inmueble, Long> {
 //            @Param("param3") String param3
     );
 
+    @Query("SELECT i.cliente FROM Inmueble i WHERE i.ente.id = :id AND i.cliente.id != null")
+    public List clientesDeEnte(@Param("id") String id);
+
+    //query para filtrar publicaciones
+    @Query("SELECT i FROM Inmueble i "
+            + "WHERE (:tipo IS NULL OR i.tipo = :tipo) "
+            + "AND (:tipo IS NULL OR i.tipo = :tipo) "
+            + "AND (:tipo IS NULL OR i.tipo = :tipo)")
+    public List<Inmueble> buscarPorParametros(@Param("tipo") String tipo
+    //            ,@Param("param2") String param2,
+    //            @Param("param3") String param3
+    );
 }
