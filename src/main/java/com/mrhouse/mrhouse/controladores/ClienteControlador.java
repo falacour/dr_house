@@ -4,10 +4,13 @@
  */
 package com.mrhouse.mrhouse.controladores;
 
+import java.util.List;
 import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.enumeraciones.Rol;
 import com.mrhouse.mrhouse.excepciones.MiException;
+import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioCliente;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +31,9 @@ public class ClienteControlador {
 
     @Autowired
     private ServicioCliente servicioCliente;
+    
+    @Autowired
+    private RepositorioInmueble repositorioInmueble;
 
       @GetMapping("/registrar")
     public String registrar() {
@@ -68,5 +74,12 @@ public class ClienteControlador {
         } catch (MiException e) {
             return "perfil_modificar.html";
         }
+    }
+    
+       @GetMapping("/lista")
+    public String listar(ModelMap modelo) {
+        List <Cliente> clientes = servicioCliente.listarClientes();
+        modelo.addAttribute("clientes", clientes);
+        return "cliente_lista.html";
     }
 }

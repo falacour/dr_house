@@ -1,5 +1,6 @@
 package com.mrhouse.mrhouse.Entidades;
 
+import java.util.List;
 import javax.persistence.*;
 import lombok.*;
 
@@ -26,5 +27,9 @@ public class Inmueble {
     @OneToOne
     private Imagen imagen;
     private Boolean alta;
+    
+   @OneToMany(mappedBy = "inmueble")
+    private List<RangoHorario> rangosHorarios;
+
 
 }
