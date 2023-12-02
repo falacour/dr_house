@@ -3,6 +3,7 @@ package com.mrhouse.mrhouse.controladores;
 import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.Entidades.Publicacion;
 import com.mrhouse.mrhouse.excepciones.MiException;
+import com.mrhouse.mrhouse.servicios.ServicioCliente;
 import com.mrhouse.mrhouse.servicios.ServicioPublicacion;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -21,17 +22,24 @@ public class PublicacionControlador {
     
     @Autowired
     ServicioPublicacion servicioPublicacion;
+    @Autowired
+    ServicioCliente servicioCliente;
     
-    @GetMapping("/registrar")
-    public String registrar(){
+    @PostMapping("/registrar")
+    public String registrar(@RequestParam String id, ModelMap modelo){       
+        modelo.put("idEnte", id);
+        
         return "publicacion_form.html";   
     }
     
     @PostMapping("/registro")
     public String registro(@RequestParam String asunto,@RequestParam String mensaje,
-            @RequestParam String idEmisor,@RequestParam String idReceptor, ModelMap modelo){
+            @RequestParam String idReceptor, ModelMap modelo, HttpSession session){
         try {
-            servicioPublicacion.crearPublicacion(asunto, mensaje, idEmisor, idReceptor);
+            
+            Cliente emisor = (Cliente) session.getAttribute("clientesession");            
+            
+            servicioPublicacion.crearPublicacion(asunto, mensaje, emisor.getId(), idReceptor);
             
             modelo.put("exito", "La publicacion se registro correctamente!!");
              return "redirect:/";

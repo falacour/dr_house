@@ -40,8 +40,9 @@
             <form sec:authorize="hasAnyRole('CLIENTE')" th:action="@{/inmueble/calendario}" method="get">
                 <button class="" type="submit">Pedir una reunión</button>
             </form>
-            <form>            
-                <button ><a class="" sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/publicacion/registrar}">Nuevo Mensaje</a></button>
+            <form th:action="@{/publicacion/registrar}" method="POST" >
+                <input hidden th:value="${inmueble.ente.id}" name="id">
+                <button type="submit" ><a class="" sec:authorize="hasAnyRole('CLIENTE')">Nuevo Mensaje</a></button>
             </form>
 
         </div>
