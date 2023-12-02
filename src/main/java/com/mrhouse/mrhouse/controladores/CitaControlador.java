@@ -39,11 +39,8 @@ public class CitaControlador {
     @Autowired
     private ServicioInmueble servicioInmueble;
 
-    @Autowired
-    private RepositorioInmueble repositorioInmueble;
-    
-    @GetMapping("/registrar/{cuentaTributaria}")
-    public String registrarCita(@PathVariable("cuentaTributaria") String id,
+    @GetMapping("/registrar/{id}")
+    public String registrarCita(@PathVariable("id") Long id,
                                 ModelMap model, HttpSession session) throws Exception {
         Inmueble inmueble = servicioInmueble.obtenerInmueblePorId(id);
         List<RangoHorario> rangoHorario = servicioRangoHorario.obtenerRangoHorarioPorId(id);
@@ -85,9 +82,9 @@ public class CitaControlador {
         return "redirect:/";
     }
 
-    @GetMapping("/horarios-disponibles/{cuentaTributaria}")
+    @GetMapping("/horarios-disponibles/{id}")
     @ResponseBody
-    public ResponseEntity<Map<String, List<LocalTime>>> obtenerHorariosDisponibles(@PathVariable String cuentaTributaria) {
+    public ResponseEntity<Map<String, List<LocalTime>>> obtenerHorariosDisponibles(@PathVariable Long id) {
         try {
             List<RangoHorario> rangoHorarioList = servicioInmueble.obtenerRangoHorariosPorId(id);
 

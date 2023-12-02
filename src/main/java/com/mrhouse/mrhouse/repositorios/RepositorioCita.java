@@ -1,15 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.mrhouse.mrhouse.repositorios;
+package com.mrhouse.repositorios;
 
 import com.mrhouse.mrhouse.Entidades.Cita;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.mrhouse.mrhouse.Entidades.RangoHorario;
+import java.util.List;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
-@Repository
-public interface RepositorioCita extends JpaRepository<Cita, String> {
-    // Puedes agregar consultas personalizadas aquí si es necesario
+public interface RepositorioCita extends CrudRepository<Cita, String> {
+
+    @Query("SELECT r FROM RangoHorario r WHERE r.inmueble.cuentaTributaria = :cuentaTributaria")
+    List<RangoHorario> findByCuentaTributaria(@Param("cuentaTributaria") String cuentaTributaria);
+
+    @Query("SELECT c FROM Cita c WHERE c.horario = :rangoHorario")
+    List<Cita> findByHorario(@Param("rangoHorario") RangoHorario rangoHorario);
 }
