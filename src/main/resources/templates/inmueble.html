@@ -25,6 +25,7 @@
                     <input hidden th:value="${inmueble.id}" name="idInmueble"/>
                     <button type="submit" th:if="${cliente.rol == rol && cliente.id != inmueble.ente.id}">Comprar</button>
                     <button type="submit" disabled th:if="${cliente.rol == rol && cliente.id == inmueble.ente.id}">Ya es de su propiedad</button>
+                </form>
             </div>
             <!-- Formulario para cliente no autenticado -->
             <div th:if="${cliente == null}">
