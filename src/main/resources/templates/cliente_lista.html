@@ -36,7 +36,7 @@
                             </a>
                         </td>
                          cambio de estado
-                            <td >sec:authorize = "hasRole('ADMIN')"
+                            <td sec:authorize = "hasRole('ADMIN')">
                             <a th:href="@{/admin/modificar/__${cliente.id}__}">
                                 <i class="bi bi-feather"></i>Eliminar
                             </a>
