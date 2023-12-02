@@ -52,7 +52,7 @@ public class PublicacionControlador {
         
         List <Publicacion> publicaciones = servicioPublicacion.listarPublicacionesPorId(cliente.getId());
         modelo.addAttribute("publicaciones", publicaciones);
-        return "publicacion_lista.html";
+        return "publicaciones_lista_recibidos.html";
     }
     
     @GetMapping("/modificar/{id}")

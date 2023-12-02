@@ -55,7 +55,7 @@
                     <button th:if="${inmueble.cliente != null}" type="submit" disabled>vendido</button>
                 </form>
             </div>
-            <form th:action="@{/}" method="get">
+            <form th:action="@{/inmueble/calendario}" method="get">
                 <button type="submit">Pedir una reunión</button>
             </form>
         </div>

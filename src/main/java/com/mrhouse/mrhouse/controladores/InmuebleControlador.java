@@ -100,4 +100,10 @@ public class InmuebleControlador {
          
          return "redirect:/..";
      }
+     
+        @GetMapping("/calendario")
+    public String definirReunion(ModelMap modelo) {
+        
+        return "calendario.html";
+    }
 }
