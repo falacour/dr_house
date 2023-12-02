@@ -34,13 +34,14 @@ public class PublicacionControlador {
             servicioPublicacion.crearPublicacion(asunto, mensaje, idEmisor, idReceptor);
             
             modelo.put("exito", "La publicacion se registro correctamente!!");
+             return "redirect:/";
         } catch (MiException ex) {
              modelo.put("error", ex.getMessage());
              modelo.put("asunto", asunto);
              modelo.put("mensaje", mensaje);              
         }
-    
-        return "redirect:/";
+    return "registrar.html";
+       
     }
     
     //Se listaran todas las publicaciones dirigidas al id del cliente registrado

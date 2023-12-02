@@ -1,0 +1,44 @@
+
+
+    
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-box {
+            margin-bottom: 20px;
+        }
+
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .sender {
+            background-color: #3498db;
+            color: #fff;
+            text-align: right;
+        }
+
+        .receiver {
+            background-color: #e0e0e0;
+            text-align: left;
+        }
+
+        .message-input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
