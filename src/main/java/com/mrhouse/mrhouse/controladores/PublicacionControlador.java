@@ -55,7 +55,7 @@ public class PublicacionControlador {
     //Se listaran todas las publicaciones dirigidas al id del cliente registrado
     //no se necesitan parametros ya que se toman del session
     @GetMapping("/recibidos")
-    public String listarPublicacionesMias(ModelMap modelo, HttpSession session) {
+    public String listarPublicacionesRecibidas(ModelMap modelo, HttpSession session) {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
         
         List <Publicacion> publicaciones = servicioPublicacion.listarPorIdReceptor(cliente.getId());
@@ -64,10 +64,13 @@ public class PublicacionControlador {
     }
     
     @GetMapping("/enviadas")
-    public String listarPublicacionesRecibidas(ModelMap modelo, HttpSession session) {
+    public String listarPublicacionesEnviadas(ModelMap modelo, HttpSession session) {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        System.out.println("cliente id"+cliente.getId());
         
         List <Publicacion> publicaciones = servicioPublicacion.listarPorIdEmisor(cliente.getId());
+        System.out.println("Cantidad de publicaciones"+publicaciones.size());
+        
         modelo.addAttribute("publicaciones", publicaciones);
         return "publicaciones_lista_recibidos.html";
     }
