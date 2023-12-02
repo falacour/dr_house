@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calendario</title>
+  <link rel="stylesheet" href="/css/calendario.css">
+</head>
+<body>
+
+<div class="calendar">
+  <div class="month">
+    <div class="prev" onclick="prevMonth()">&#10094;</div>
+    <div class="next" onclick="nextMonth()">&#10095;</div>
+    <div class="month-name"></div>
+  </div>
+  <div class="weekdays"></div>
+  <div class="days"></div>
+</div>
+
+<select id="horarios">
+  <option value="9:00">9:00 AM</option>
+  <option value="10:00">10:00 AM</option>
+  <option value="11:00">11:00 AM</option>
+  <option value="12:00">12:00 PM</option>
+  <option value="13:00">1:00 PM</option>
+  <option value="14:00">2:00 PM</option>
+  <option value="15:00">3:00 PM</option>
+  <option value="16:00">4:00 PM</option>
+  <option value="17:00">5:00 PM</option>
+</select>
+
+<!-- Botón de reserva -->
+            <form th:action="@{/}" method="get">
+                <button type="submit">Reservar</button>
+            </form>
+<script>
+  // Obtener referencias a los elementos del calendario
+const monthName = document.querySelector('.month-name');
+const weekdays = document.querySelector('.weekdays');
+const days = document.querySelector('.days');
+
+// Array de nombres de los días de la semana
+const daysOfWeek = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+
+// Función para obtener el nombre del mes
+function getMonthName(month) {
+  const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+  return months[month];
+}
+
+// Función para actualizar el calendario
+function updateCalendar(year, month) {
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  
+  monthName.textContent = getMonthName(month) + ' ' + year;
+
+  // Mostrar los nombres de los días de la semana
+  let weekdaysHTML = '';
+  for (let day of daysOfWeek) {
+    weekdaysHTML += <div>${day}</div>;
+  }
+  weekdays.innerHTML = weekdaysHTML;
+
+  // Mostrar los días del mes
+  let daysHTML = '';
+  for (let i = 1; i <= lastDay.getDate(); i++) {
+    daysHTML += <div>${i}</div>;
+  }
+  days.innerHTML = daysHTML;
+}
+
+// Variables para el año y mes actuales
+let currentYear = new Date().getFullYear();
+let currentMonth = new Date().getMonth();
+
+// Función para mostrar el mes anterior
+function prevMonth() {
+  currentMonth--;
+  if (currentMonth < 0) {
+    currentMonth = 11;
+    currentYear--;
+  }
+  updateCalendar(currentYear, currentMonth);
+}
+
+// Función para mostrar el mes siguiente
+function nextMonth() {
+  currentMonth++;
+  if (currentMonth > 11) {
+    currentMonth = 0;
+    currentYear++;
+  }
+  updateCalendar(currentYear, currentMonth);
+}
+
+// Actualizar el calendario al cargar la página
+updateCalendar(currentYear, currentMonth);
+
+// Función para manejar el clic en los días
+function changeColor(event) {
+  const selectedDay = event.target;
+  selectedDay.classList.toggle('selected');
+}
+
+// Agregar evento clic a los días del calendario
+days.addEventListener('click', changeColor);
+
+// Función para redirigir a la página de reservas al hacer clic en el botón
+document.getElementById('reservarButton').addEventListener('click', function() {
+  // Aquí puedes colocar el enlace a la página de reservas
+  window.location.href = 'enlace_de_la_pagina_de_reservas'; // Reemplaza con tu enlace
+});
+
+</script>
+</body>
+</html>

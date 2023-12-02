@@ -10,6 +10,7 @@ import com.mrhouse.mrhouse.enumeraciones.Rol;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioCliente;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,11 +76,10 @@ public class ClienteControlador {
         }
     }
     
-    @GetMapping("/listaClientes")
-    public String lista(HttpSession session, ModelMap modelo){
-        Cliente cliente = (Cliente) session.getAttribute("clientesession");
-        List<Cliente> clientes = repositorioInmueble.clientesDeEnte(cliente.getId());
-        modelo.put("clientes", clientes);
-        return"cliente_lista.html";
+       @GetMapping("/lista")
+    public String listar(ModelMap modelo) {
+        List <Cliente> clientes = servicioCliente.listarClientes();
+        modelo.addAttribute("clientes", clientes);
+        return "cliente_lista.html";
     }
 }

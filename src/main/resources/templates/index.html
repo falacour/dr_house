@@ -53,9 +53,51 @@
                 });
             });
         </script>
-        <!--ES PARA LA LISTA-->
+        
+        
+        <!-- Seccion de ofertas -->
+        <div class="titulo-seccion">
+            <h2>¡Ofertas Especiales!</h2>
+        </div>
+
+        <section class="ofertas">
+            <div class="contenedorTarjetas" th:each="inmueble : ${inmuebles}">
+                <a  th:href="@{/vistaInmueble/__${inmueble.id}__}">
+
+                    <div class="tarjeta" th:if="@{/imagen/inmueble/__${inmueble.imagen.id}__} != null">
+                        <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
+                        <!-- Otros elementos de la tarjeta -->
+                        <p th:text="'Tipo:  ' + ${inmueble.tipo}"></p>
+                        <p th:text="'Provincia:  ' + ${inmueble.provincia}"></p>
+                        <br>
+
+                        <!-- Formulario para cliente autenticado -->
+                         <!--
+                        <div th:if="${cliente != null}">
+                            <form th:action="@{/inmueble/comprar/__${inmueble.id}__}" method="get">
+                                <input type="hidden" th:value="${cliente.id}" name="id"/>
+                                <input type="hidden" th:value="${inmueble.id}" name="idInmueble"/>
+                                <button type="submit" th:if="${cliente.rol == rol}">Comprar</button>
+                            </form>
+                        </div>
+                        <!-- Formulario para cliente no autenticado --
+                        <div th:if="${cliente == null}">
+                            !-- Formulario para cliente no autenticado --
+                            <form th:action="@{/login}" method="get">
+                                <button type="submit" th:if="${inmueble.ente != '' }">Comprar</button>
+                            </form>
+                        </div>-->
+                        <p><a th:href="@{/vistaInmueble/__${inmueble.id}__}"class="oferta-especial-btn">Conoce más</a></p>
+                    </div>
 
 
+                    <div th:if="@{/imagen/inmueble/__${inmueble.id}__} == null" >
+                        <p>error</p>
+                    </div></a>
+            </div>
+        </section> 
+        
+        <!--ES PARA LA LISTA DE TODOS LOS INMUEBLES-->
         <div class="titulo-seccion">
             <h2>Inmuebles</h2>
         </div>
@@ -80,37 +122,7 @@
             </div>
         </section>
 
-        <!-- Seccion de ofertas -->
-        <div class="titulo-seccion">
-            <h2>¡Ofertas Especiales!</h2>
-        </div>
-
-        <section class="ofertas">
-            <div>
-                <p><a href="#" class="oferta-especial-btn">Conoce más</a></p>
-                <img
-                    class="oferta"
-                    src="/img/download.jpg"
-                    alt="Oferta 1"
-                    />
-            </div>
-            <div>
-                <p><a href="#" class="oferta-especial-btn">Conoce más</a></p>
-                <img
-                    class="oferta"
-                    src="/img/oferta_inmobiliaria_paquete_diseno_pagina_web_publica_casas_locales_departamentos_terrenos_en_linea_dimension_digital_com_website_sistema.jpg"
-                    alt="Oferta 2"
-                    />
-            </div>
-            <div>
-                <p><a href="#" class="oferta-especial-btn">Conoce más</a></p>
-                <img
-                    class="oferta"
-                    src="/img/images.jpg"
-                    alt="Oferta 3"
-                    />
-            </div>
-        </section> 
+        
 
         <!-- Seccion del Footer -->
         <footer th:replace="/fragments/footer :: footer" />

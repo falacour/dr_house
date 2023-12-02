@@ -368,3 +368,11 @@ input[type="tipo"], input[type="antiguedad"], input[type="mtrs2"], input[type="d
             align-items: center;
             justify-content: center;
 }
+
+
+.container img{
+    width: 400px; /* ajusta el tamaño deseado */
+    height: 400px; /* ajusta el tamaño deseado */
+    object-fit: cover; /* maneja el tamaño de la imagen manteniendo su relación de aspecto */
+    border-radius: 5%;
+}
