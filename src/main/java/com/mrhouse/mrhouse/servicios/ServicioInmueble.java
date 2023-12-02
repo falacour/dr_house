@@ -44,9 +44,9 @@ public class ServicioInmueble {
         inmueble.setProvincia(provincia);
         inmueble.setDepartamento(departamento);
         inmueble.setEnte(repositorioCliente.getOne(idEnte));
-        if (descripcion != null){
+        if (descripcion != null) {
             inmueble.setDescripcion(descripcion);
-        }else{
+        } else {
             inmueble.setDescripcion("");
         }
         inmueble.setAlta(Boolean.FALSE);
@@ -64,10 +64,10 @@ public class ServicioInmueble {
         return Inmuebles;
 
     }
-    
+
     public Inmueble obtenerInmueblePorId(Long id) {
-    return repositorioInmueble.getOne(id);
-}
+        return repositorioInmueble.getOne(id);
+    }
 
     //se deberia obtener el usuario de la session para poder llamar a este evento
     //en la navegacion previa a la visualizacion de la lista de los inmuebles del ente
@@ -82,8 +82,7 @@ public class ServicioInmueble {
 
     public void modificar(MultipartFile archivo, Long id, String tipo, Integer antiguedad,
             Long mts2, String direccion, Double precio, String provincia, String departamento,
-            String alta, Imagen imagen)throws MiException {
-        
+            String alta, Imagen imagen) throws MiException {
 
         validar(id, tipo, antiguedad, mts2, direccion, precio, provincia, departamento);
 
@@ -98,14 +97,14 @@ public class ServicioInmueble {
             inmueble.setPrecio(precio);
             inmueble.setProvincia(provincia);
             inmueble.setDepartamento(departamento);
-            
+
             if (alta.equals("dar de alta")) {
                 inmueble.setAlta(Boolean.TRUE);
             } else {
                 inmueble.setAlta(Boolean.FALSE);
             }
-            repositorioInmueble.save(inmueble); 
-            
+            repositorioInmueble.save(inmueble);
+
             System.out.println("NO HUBO ERROR EN LA MODIFICACION DEL iNMUEBLE");
         }
     }
@@ -114,7 +113,7 @@ public class ServicioInmueble {
         return repositorioInmueble.getOne(id);
 
     }
-    
+
     public void compra(String id, Long idInmueble) {
         Optional<Inmueble> respuesta = repositorioInmueble.findById(idInmueble);
 
@@ -126,6 +125,7 @@ public class ServicioInmueble {
             repositorioInmueble.save(inmueble);
         }
     }
+
 
     public void validar(Long id, String tipo, Integer antiguedad, Long mts2, String direccion,
             Double precio, String provincia, String departamento) throws MiException {
@@ -155,10 +155,7 @@ public class ServicioInmueble {
             throw new MiException("el departamento no puede estar vacio");
         }
     }
-    
-      
 
-   
     public List<RangoHorario> obtenerRangosHorariosPorId(Long id) {
         // Encuentra el inmueble por su cuenta tributaria
         Inmueble inmueble = getOne(id);
@@ -176,5 +173,4 @@ public class ServicioInmueble {
         return inmueble.getRangosHorarios();
     }
 
-  
 }

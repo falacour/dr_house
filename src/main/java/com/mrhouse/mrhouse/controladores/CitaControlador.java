@@ -42,7 +42,8 @@ public class CitaControlador {
     public String registrarCita(@PathVariable("id") Long id,
                                 ModelMap model, HttpSession session) throws Exception {
         Inmueble inmueble = servicioInmueble.obtenerInmueblePorId(id);
-        List<RangoHorario> rangoHorario = servicioRangoHorario.obtenerRangoHorarioPorId(id);
+        List<RangoHorario> rangoHorario = new ArrayList();
+        rangoHorario.add(servicioRangoHorario.obtenerRangoHorarioPorId(id));
         Cliente cliente = (Cliente) session.getAttribute("usuariosession");
         model.put("inmueble", inmueble);
 
@@ -85,7 +86,7 @@ public class CitaControlador {
     @ResponseBody
     public ResponseEntity<Map<String, List<LocalTime>>> obtenerHorariosDisponibles(@PathVariable Long id) {
         try {
-            List<RangoHorario> rangoHorarioList = servicioInmueble.obtenerRangoHorariosPorId(id);
+            List<RangoHorario> rangoHorarioList = servicioInmueble.obtenerRangosHorariosPorId(id);
 
             if (rangoHorarioList.isEmpty()) {
                 return ResponseEntity.notFound().build();
@@ -93,24 +94,29 @@ public class CitaControlador {
 
             // Formatea las fechas como cadenas en el formato "yyyy-MM-dd"
            Map<String, List<LocalTime>> horariosPorFecha = rangoHorarioList.stream()
-                    .collect(Collectors.groupingBy(
-                            rango -> rango.getFecha().toString(),
-                            Collectors.flatMapping(
-                                    rango -> {
-                                        List<LocalTime> horas = new ArrayList<>();
-                                        LocalTime horaInicio = rango.getHoraInicio();
-                                        LocalTime horaFin = rango.getHoraFin();
+        .collect(Collectors.groupingBy(
+                rango -> rango.getFecha().toString(),
+                Collectors.mapping(
+                        rango -> {
+                            List<LocalTime> horas = new ArrayList<>();
+                            LocalTime horaInicio = rango.getHoraInicio();
+                            LocalTime horaFin = rango.getHoraFin();
 
-                                        while (horaInicio.isBefore(horaFin) || horaInicio.equals(horaFin)) {
-                                            horas.add(horaInicio);
-                                            horaInicio = horaInicio.plusMinutes(30);
-                                        }
+                            while (horaInicio.isBefore(horaFin) || horaInicio.equals(horaFin)) {
+                                horas.add(horaInicio);
+                                horaInicio = horaInicio.plusMinutes(30);
+                            }
 
-                                        return horas.stream();
-                                    },
-                                    Collectors.toList()
-                            )
-                    ));
+                            return horas;
+                        },
+                        Collectors.toList()
+                )
+        ))
+        .entrySet().stream()
+        .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                entry -> entry.getValue().stream().flatMap(List::stream).collect(Collectors.toList())
+        ));
 
             return ResponseEntity.ok(horariosPorFecha);
         } catch (Exception e) {
