@@ -113,8 +113,13 @@ public class PortalControlador {
     }
 
     @GetMapping("/vistaInmueble/{id}")
-    public String vistaInmueble(@PathVariable Long id, ModelMap modelo) {
-        modelo.put("inmueble", servicioInmueble.getOne(id));
+    public String vistaInmueble(@PathVariable Long id, ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        Rol rol = Rol.CLIENTE;
+        Inmueble inmueble = servicioInmueble.getOne(id);
+        modelo.addAttribute("cliente", cliente);
+        modelo.put("inmueble", inmueble );
+        modelo.addAttribute("rol", rol);
         return "inmueble.html";
     }
 }

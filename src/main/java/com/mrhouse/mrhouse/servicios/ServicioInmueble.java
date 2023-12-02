@@ -115,8 +115,6 @@ public class ServicioInmueble {
         if (respuesta.isPresent()) {
             Inmueble inmueble = respuesta.get();
             inmueble.setCliente(repositorioCliente.getOne(id));
-            Cliente ente = null;
-            inmueble.setEnte(ente);
             repositorioInmueble.save(inmueble);
         }
     }
