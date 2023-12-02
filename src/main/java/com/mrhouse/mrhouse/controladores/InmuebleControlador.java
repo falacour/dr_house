@@ -34,7 +34,8 @@ public class InmuebleControlador {
     private ServicioImagen servicioImagen;
     @Autowired
     private ServicioCliente servicioCliente;
-
+    
+    //////////////////////////////////////REGISTRO///////////////////////////////////////
     @GetMapping("/registrar")
     public String registrar(ModelMap modelo) {
         return "inmueble_form.html";
@@ -59,23 +60,63 @@ public class InmuebleControlador {
         }
         return "redirect:/";
     }
-
-    @GetMapping("/lista")
-    public String listar(ModelMap modelo, HttpSession session) {
+    
+    //////////////////////////////////////LISTAS//////////////////////////////////////////
+    @GetMapping("/listarTodosLosInmueblesAVender")
+    public String listaTodosLosInmueblesAVender(ModelMap modelo, HttpSession session) {
+        List<Inmueble> inmuebles = repositorioInmueble.todosLosInmueblesAVender();
+        modelo.addAttribute("inmuebles", inmuebles);
+        return "inmueble_lista.html";
+    }
+    
+    @GetMapping("/listarTodosLosInmueblesVendidos")
+    public String listaTodosLosInmueblesVendidos(ModelMap modelo, HttpSession session) {
+        List<Inmueble> inmuebles = repositorioInmueble.todosLosInmueblesVendidos();
+        modelo.addAttribute("inmuebles", inmuebles);
+        return "inmueble_lista.html";
+    }
+    
+    @GetMapping("/listaInmueblesNoComprados")
+    public String listaEnteInmuebleNoComprados(ModelMap modelo, HttpSession session) {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
-        List<Inmueble> inmuebles = repositorioInmueble.inmueblesPorEnteVender(cliente.getId());
+        List<Inmueble> inmuebles = repositorioInmueble.inmueblesNoComprados();
+        modelo.addAttribute("inmuebles", inmuebles);
+        return "inmueble_lista.html";
+    }
+    
+    @GetMapping("/listaEnteInmuebleAVender")
+    public String listaEnteInmuebleAVender(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List<Inmueble> inmuebles = repositorioInmueble.inmueblesPorEnteAVender(cliente.getId());
         modelo.addAttribute("inmuebles", inmuebles);
         return "inmueble_lista.html";
     }
 
-    @GetMapping("/vendidos")
-    public String listarVendidos(ModelMap modelo, HttpSession session) {
+    @GetMapping("/listaVendidos")
+    public String listarEnteInmueblesVendidos(ModelMap modelo, HttpSession session) {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
         List<Inmueble> inmuebles = repositorioInmueble.inmueblesPorEnteComprados(cliente.getId());
         modelo.addAttribute("inmuebles", inmuebles);
         return "inmueble_lista.html";
     }
-
+    
+    @GetMapping("/listaComprados")
+    public String listarClienteInmueblesComprados(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List<Inmueble> inmuebles = repositorioInmueble.inmueblesPorCliente(cliente.getId());
+        modelo.addAttribute("inmuebles", inmuebles);
+        return "inmueble_lista.html";
+    }
+    
+    @GetMapping("/listaInmueblesPorEnteAVender")
+    public String listarinmueblesPorEnteAVenders(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List<Inmueble> inmuebles = repositorioInmueble.inmueblesPorCliente(cliente.getId());
+        modelo.addAttribute("inmuebles", inmuebles);
+        return "inmueble_lista.html";
+    }
+    
+    /////////////////////////////////MODIFICAR/////////////////////////////////////
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable Long id, ModelMap modelo) {
 
@@ -102,7 +143,8 @@ public class InmuebleControlador {
 
         return "redirect:/inmueble/lista";
     }
-
+    
+    //////////////////////////////////////COMPRAR///////////////////////////////////////
     @GetMapping("/comprar/{id}")
     public String comprar(Long idInmueble, String idCliente) {
 
@@ -110,7 +152,8 @@ public class InmuebleControlador {
 
         return "index.html";
     }
-
+    
+    //////////////////////////////////////Calendario///////////////////////////////////////
     @GetMapping("/calendario")
     public String definirReunion(ModelMap modelo) {
 
