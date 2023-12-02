@@ -1,4 +1,4 @@
-package com.mrhouse.repositorios;
+package com.mrhouse.mrhouse.repositorios;
 
 import com.mrhouse.mrhouse.Entidades.Cita;
 import com.mrhouse.mrhouse.Entidades.RangoHorario;
