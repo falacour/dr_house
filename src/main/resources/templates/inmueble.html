@@ -28,6 +28,8 @@
                     <button type="submit" disabled th:if="${cliente.rol == rol && cliente.id == inmueble.ente.id}">Ya es de su propiedad</button>
                 </form>
             </div>
+            
+            
             <!-- Formulario para cliente no autenticado -->
             <div th:if="${cliente == null}">
                 <!-- Formulario para cliente no autenticado -->
@@ -35,11 +37,11 @@
                     <button type="submit">Comprar</button>
                 </form>
             </div>
-            <form th:action="@{/inmueble/calendario}" method="get">
+            <form sec:authorize="hasAnyRole('CLIENTE')" th:action="@{/inmueble/calendario}" method="get">
                 <button class="" type="submit">Pedir una reunión</button>
             </form>
             <form>            
-                <button ><a class=""  th:href="@{/publicacion/registrar}">Nuevo Mensaje</a></button>
+                <button ><a class="" sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/publicacion/registrar}">Nuevo Mensaje</a></button>
             </form>
 
         </div>
