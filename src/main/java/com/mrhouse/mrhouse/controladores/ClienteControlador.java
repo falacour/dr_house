@@ -50,7 +50,7 @@ public class ClienteControlador {
     }
 
 
-    @GetMapping("/modificar")
+    @GetMapping("/modificar/{id}")
     public String modificar(ModelMap modelo, HttpSession session){
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
         modelo.put("cliente",cliente);
