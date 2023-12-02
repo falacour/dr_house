@@ -87,8 +87,13 @@ public class ServicioPublicacion {
     }
     
     //listar todas las publicaciones de un cliente en especifico
-    public List listarPublicacionesPorId(String id){
-       return  repositorioPublicacion.buscarTodasPorId(id);   
+    public List listarPorIdReceptor(String id){
+       return  repositorioPublicacion.buscarTodasPorIdReceptor(id);   
+    }
+    
+    //listar todas las publicaciones de un cliente en especifico
+    public List listarPorIdEmisor(String id){
+       return  repositorioPublicacion.buscarTodasPorIdEmisor(id);   
     }
 
     private void validar(String asunto, String mensaje, String idEmisor, String idReceptor) throws MiException {
