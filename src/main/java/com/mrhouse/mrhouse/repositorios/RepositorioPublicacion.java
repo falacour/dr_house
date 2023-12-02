@@ -13,7 +13,10 @@ public interface RepositorioPublicacion extends JpaRepository<Publicacion, Strin
     //query para obtener todas las publicaciones de una persona, en este caso el receptor
     //ejemplo: soy el ADMIN y quiero ver todas las publicaciones/mensajes dirigidas a mi, usaria con mi id tomada del sesion
     @Query("SELECT p FROM Publicacion p WHERE p.receptor.id = :idReceptor")
-    public List buscarTodasPorId(@Param("idReceptor") String idReceptor);
+    public List buscarTodasPorIdReceptor(@Param("idReceptor") String idReceptor);
+    
+    @Query("SELECT p FROM Publicacion p WHERE p.emisor.id = :idEmisor")
+    public List buscarTodasPorIdEmisor(@Param("idEmisor") String idEmisor);
 
 //    
 //    //query para filtrar publicaciones

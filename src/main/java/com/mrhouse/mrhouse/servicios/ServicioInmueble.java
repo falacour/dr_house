@@ -1,19 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mrhouse.mrhouse.servicios;
 
 import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.Entidades.Imagen;
 import com.mrhouse.mrhouse.Entidades.Inmueble;
+import com.mrhouse.mrhouse.Entidades.RangoHorario;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
+import com.mrhouse.mrhouse.repositorios.RepositorioRangoHorario;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +26,8 @@ public class ServicioInmueble {
     private RepositorioCliente repositorioCliente;
     @Autowired
     private ServicioImagen servicioImagen;
+    @Autowired
+    private RepositorioRangoHorario repositorioRangoHorario;
 
     @Transactional
     public void crearInmueble(MultipartFile archivo, Long id, String tipo, Integer antiguedad, Long mts2,
@@ -62,6 +63,10 @@ public class ServicioInmueble {
         return Inmuebles;
 
     }
+    
+    public Inmueble obtenerInmueblePorId(Long id) {
+    return repositorioInmueble.getOne(id);
+}
 
     //se deberia obtener el usuario de la session para poder llamar a este evento
     //en la navegacion previa a la visualizacion de la lista de los inmuebles del ente
@@ -115,10 +120,16 @@ public class ServicioInmueble {
         if (respuesta.isPresent()) {
             Inmueble inmueble = respuesta.get();
             inmueble.setCliente(repositorioCliente.getOne(id));
-            Cliente ente = null;
-            inmueble.setEnte(ente);
             repositorioInmueble.save(inmueble);
         }
+    }
+    
+    public RangoHorario obtenerRangoHorarioPorId(Long id) throws Exception {
+        Optional<RangoHorario> rangoHorarioOptional = repositorioRangoHorario.findById(id);
+        if (rangoHorarioOptional.isPresent()) {
+            return rangoHorarioOptional.get();
+        }
+        throw new Exception("No se encontró el rango horario con ID: " + id);
     }
 
     public void validar(Long id, String tipo, Integer antiguedad, Long mts2, String direccion,
@@ -149,4 +160,25 @@ public class ServicioInmueble {
             throw new MiException("el departamento no puede estar vacio");
         }
     }
+    
+      
+
+   
+    public List<RangoHorario> obtenerRangosHorariosPorId(Long id) {
+        Inmueble inmueble = getOne(id);
+
+        // Si no se encuentra el inmueble, devolver una lista vacía o lanzar una excepción
+        if (inmueble == null) {
+            // Opción 1: Devolver una lista vacía
+            // return new ArrayList<>();
+
+            // Opción 2: Lanzar una excepción
+            throw new EntityNotFoundException("Inmueble no encontrado con id: " + id);
+        }
+
+        // Devuelve los rangos horarios asociados al inmueble encontrado
+        return inmueble.getRangosHorarios();
+    }
+
+  
 }
