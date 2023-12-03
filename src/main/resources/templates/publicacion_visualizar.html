@@ -10,8 +10,9 @@
     <nav th:replace="/fragments/nav :: nav"/>
 
     <div class="container">
-        <h2>Visualizacion Publicación</h2>            
-            <div class="form-group">
+        <h2 th:if="${session.clientesession.id} != ${emisor.id}" th:text="'Publicacion de ' + ${emisor.nombre}"></h2>            
+        <h2 th:if="${session.clientesession.id} == ${emisor.id}" th:text="'Publicacion enviada a ' + ${publicacion.receptor.nombre}"></h2>     
+        <div class="form-group">
                 <label for="asunto">Asunto</label>
                 <input type="text" id="nombre" name="asunto" th:value="${publicacion.asunto}" disabled />
             </div>
@@ -23,7 +24,7 @@
         <form th:action="@{/publicacion/registrar}" method="POST">
             <input type="text" name="id" th:value="${publicacion.emisor.id}" hidden/>
             <div class="form-group">
-                <input type="submit" value="Responder"/>
+                <input type="submit" value="Responder" th:if="${session.clientesession.id} != ${emisor.id}"/>
             </div>
         </form>
     </div>
