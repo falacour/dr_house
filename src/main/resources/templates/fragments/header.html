@@ -12,14 +12,13 @@
 
     <!--forms relacionados a las querys de busqueda-->
     <form class="searcher" action="buscar.php" method="get" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE')">
-       <!-- <input
-            class="searcher-form"
-            type="text"
-            id="busqueda"
-            name="q"
-            placeholder="Escribe tu búsqueda..."
-            />-->
-        
+        <!-- <input
+             class="searcher-form"
+             type="text"
+             id="busqueda"
+             name="q"
+             placeholder="Escribe tu búsqueda..."
+             />-->
         <select name="Operaciones" class="searcher-form">
             <option value="" disabled selected>
                 Tipo de transaccion
@@ -48,12 +47,65 @@
             <option value="16">Edificio</option>
             <option value="17">Otros</option>
         </select>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const $selectProvincias = document.getElementById("provincias");
+                const $selectMunicipios = document.getElementById("municipios");
 
+                function provincia() {
+                    fetch("https://apis.datos.gob.ar/georef/api/provincias")
+                            .then((res) => (res.ok ? res.json() : Promise.reject(res)))
+                            .then((json) => {
+                                let $options = `<option value="Elige una provincia">Elige una provincia</option>`;
+
+                                json.provincias.forEach(
+                                        (el) => ($options += `<option value="${el.nombre}">${el.nombre}</option>`)
+                                );
+
+                                $selectProvincias.innerHTML = $options;
+                            })
+                            .catch((error) => {
+                                let message = error.statusText || "Ocurrió un error";
+                                $selectProvincias.nextElementSibling.innerHTML = `Error: ${error.status}: ${message}`;
+                            });
+                }
+
+                function municipio(provincia) {
+                    fetch(
+                            `https://apis.datos.gob.ar/georef/api/municipios?provincia=${provincia}&max=100`
+                            )
+                            .then((res) => (res.ok ? res.json() : Promise.reject(res)))
+                            .then((json) => {
+                                let $options = `<option value="Elige un municipio">Elige un municipio</option>`;
+
+                                json.municipios.forEach(
+                                        (el) => ($options += `<option value="${el.id}">${el.nombre}</option>`)
+                                );
+
+                                $selectMunicipios.innerHTML = $options;
+                            })
+                            .catch((error) => {
+                                let message = error.statusText || "Ocurrió un error";
+                                $selectMunicipios.nextElementSibling.innerHTML = `Error: ${error.status}: ${message}`;
+                            });
+                }
+
+                $selectProvincias.addEventListener("change", (e) => {
+                    municipio(e.target.value);
+                    console.log(e.target.value);
+                });
+
+                provincia(); // Llamada inicial para cargar las provincias al cargar la página
+            });
+        </script>
         <select id="provincias" class="searcher-form">
             <option value="" disabled selected>Elige una provincia</option>
         </select>
-       <button class="buscar" type="submit" value="Buscar">Buscar</button>
-      
+        <select id="municipios" class="searcher-form">
+            <option value="" disabled selected>Elige un municipio</option>
+        </select>
+        <button class="buscar" type="submit" value="Buscar">Buscar</button>
+
 
     </form>
     <!--Botones relacionados a ingreso y registro de Usuario-->
@@ -71,23 +123,6 @@
         <a  th:href="@{/perfil}">
             <button class="log-in"  type="button">Perfil</button>
         </a>
-
-      <!--  <a sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/}">
-            <button class="log-in" type="button">Pasarse Propietario</button>
-
-
-              ESTO ES PARA PASARSE DE ROL PERO POR AHORA LO DEJEMOS COMENTADO
-            <div th:if="${cliente.permiso}">
-                <div th:if="${cliente.rol == CLIENTE}">
-                    <a  th:href="@{/}">
-                        <button class="log-in" th:if="${session.usuariosession != null}" type="button">Pasarse Propitario</button>
-                </div>
-                <div th:if="${cliente.rol == ENTE}">
-                    <a  th:href="@{/}">
-                        <button class="log-in" th:if="${session.usuariosession != null}" type="button">Pasarse Cliente</button>
-                </div>
-            </div>
-            -->
         </a>
         <a  th:href="@{/logout}">
             <button class="log-in" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE')" type="button" >Cerrar sesion</button>
