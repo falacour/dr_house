@@ -52,7 +52,7 @@
             <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
                 <li><a class="linkAAlgo"  th:href="@{/registro}">Nuevo Cliente</a></li>
                 <li><a class="linkAAlgo"sec:authorize="hasAnyRole('ENTE')" th:href="@{/cliente/lista}">Mis Clientes</a></li>
-                <li><a class="linkAAlgo"sec:authorize="hasAnyRole('ADMIN')" th:href="@{/cliente/lista}">Todos los Clientes</a></li>
+                <li><a class="linkAAlgo"sec:authorize="hasAnyRole('ADMIN')" th:href="@{/cliente/listaAllClient}">Todos los Clientes</a></li>
 
             </ul>
         </div>
@@ -65,7 +65,7 @@
             </a>
             <ul class=" dropdown-content " aria-labelledby="navbarDropdown" sec:authorize="hasRole('ADMIN')">
                 <li><a class="linkAAlgo"  th:href="@{/registro}">Nuevo propietario</a></li>
-                <li><a class="linkAAlgo" th:href="@{/cliente/lista}">Todos los propietarios</a></li>
+                <li><a class="linkAAlgo" th:href="@{/cliente/listaAllEnte}">Todos los propietarios</a></li>
             </ul>
         </div>
 </nav>
