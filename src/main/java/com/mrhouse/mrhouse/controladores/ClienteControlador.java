@@ -21,10 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- *
- * @author thell
- */
 @Controller
 @RequestMapping("/cliente")
 public class ClienteControlador {
@@ -77,8 +73,9 @@ public class ClienteControlador {
     }
     
        @GetMapping("/lista")
-    public String listar(ModelMap modelo) {
-        List <Cliente> clientes = servicioCliente.listarClientes();
+    public String listar(ModelMap modelo,HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List <Cliente> clientes = repositorioInmueble.clientesDeEnte(cliente.getId());
         modelo.addAttribute("clientes", clientes);
         return "cliente_lista.html";
     }
