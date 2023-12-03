@@ -22,8 +22,9 @@
                 Mensajes
             </a>
             <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
-                <li><a class="linkAAlgo" th:href="@{/publicacion/recibidos}">Mensajes Recibidos</a></li>
-                <li><a class="linkAAlgo" th:href="@{/publicacion/enviadas}">Mensajes Enviados</a></li>
+                <li><a class="linkAAlgo" sec:authorize="hasAnyRole('CLIENTE','ENTE')" th:href="@{/publicacion/recibidos}">Mensajes Recibidos</a></li>
+                <li><a class="linkAAlgo" sec:authorize="hasAnyRole('CLIENTE','ENTE')" th:href="@{/publicacion/enviadas}">Mensajes Enviados</a></li>
+                <li><a class="linkAAlgo" sec:authorize="hasAnyRole('ADMIN')" th:href="@{/publicacion/enviadas}">Todos los mensajes</a></li>
 
             </ul>
         </div>
@@ -35,10 +36,10 @@
                 Inmuebles
             </a>
             <ul class=" dropdown-content " aria-labelledby="navbarDropdown">
-                <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ENTE')" th:href="@{/inmueble/registrar}">Nuevo Inmueble</a></li>
-                <li><a class="linkAAlgo"sec:authorize="hasAnyRole('ENTE')" th:href="@{/inmueble/listaEnteInmuebleAVender}">Mis Inmuebles</a></li>
-                <li><a class="linkAAlgo"sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/inmueble/listaComprados}">Mis Inmuebles</a></li>
-                <li><a class="linkAAlgo"sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/inmueble/listaInmueblesNoComprados}">Todos los Inmuebles disponibles</a></li>
+                <li><a class="linkAAlgo" sec:authorize="hasAnyRole('ENTE')" th:href="@{/inmueble/registrar}">Nuevo Inmueble</a></li>
+                <li><a class="linkAAlgo" sec:authorize="hasAnyRole('ENTE')" th:href="@{/inmueble/listaEnteInmuebleAVender}">Mis Inmuebles</a></li>
+                <li><a class="linkAAlgo" sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/inmueble/listaComprados}">Mis Inmuebles</a></li>
+                <li><a class="linkAAlgo" sec:authorize="hasAnyRole('CLIENTE')" th:href="@{/inmueble/listaInmueblesNoComprados}">Todos los Inmuebles disponibles</a></li>
                 <li><a class="linkAAlgo" sec:authorize="hasAnyRole('ENTE')" th:href="@{/inmueble/listaVendidos}">Vendidos</a></li>
                 <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ADMIN')" th:href="@{/inmueble/listarTodosLosInmueblesAVender}">Todos los Inmuebles</a></li>
                 <li><a class="linkAAlgo"  sec:authorize="hasAnyRole('ADMIN')" th:href="@{/inmueble/listarTodosLosInmueblesVendidos}">Todos los Inmuebles Vendidos </a></li>
