@@ -24,7 +24,7 @@ public interface RepositorioInmueble extends JpaRepository<Inmueble, Long> {
     @Query("SELECT i FROM Inmueble i WHERE i.ente.id = :id")
     public List inmueblesPorEnte(@Param("id") String id);
     //Trae una lista de inmuebles que pertenecen al ente seleccionado y no estan vendidos
-    @Query("SELECT i FROM Inmueble i WHERE i.ente.id = :id AND i.cliente.id = null")
+    @Query("SELECT i FROM Inmueble i WHERE i.ente.id = :id AND i.cliente.id IS NULL")
     public List inmueblesPorEnteAVender(@Param("id") String id);
     //Trae una lista de inmuebles que pertenecen al ente seleccionado y si estan vendidos
     @Query("SELECT i FROM Inmueble i WHERE i.ente.id = :id AND i.cliente.id != null")

@@ -64,15 +64,19 @@ public class InmuebleControlador {
     //////////////////////////////////////LISTAS//////////////////////////////////////////
     @GetMapping("/listarTodosLosInmueblesAVender")
     public String listaTodosLosInmueblesAVender(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
         List<Inmueble> inmuebles = repositorioInmueble.todosLosInmueblesAVender();
         modelo.addAttribute("inmuebles", inmuebles);
+        modelo.addAttribute("cliente", cliente);
         return "inmueble_lista.html";
     }
     
     @GetMapping("/listarTodosLosInmueblesVendidos")
     public String listaTodosLosInmueblesVendidos(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
         List<Inmueble> inmuebles = repositorioInmueble.todosLosInmueblesVendidos();
         modelo.addAttribute("inmuebles", inmuebles);
+        modelo.addAttribute("cliente", cliente);
         return "inmueble_lista.html";
     }
     
@@ -81,6 +85,7 @@ public class InmuebleControlador {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
         List<Inmueble> inmuebles = repositorioInmueble.inmueblesNoComprados();
         modelo.addAttribute("inmuebles", inmuebles);
+        modelo.addAttribute("cliente", cliente);
         return "inmueble_lista.html";
     }
     
