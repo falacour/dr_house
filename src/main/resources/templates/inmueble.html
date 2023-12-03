@@ -42,9 +42,9 @@
                 </form>
             </div>
             <div class="botones" >
-                <form th:action="@{/publicacion/registrar}" method="POST" >
+                <form sec:authorize="hasAnyRole('CLIENTE')" th:action="@{/publicacion/registrar}" method="POST" >
                     <input hidden th:value="${inmueble.ente.id}" name="id">
-                    <button type="submit" ><a sec:authorize="hasAnyRole('CLIENTE')">Nuevo Mensaje</a></button>
+                    <button type="submit" ><a>Nuevo Mensaje</a></button>
                 </form>
             </div>
 
