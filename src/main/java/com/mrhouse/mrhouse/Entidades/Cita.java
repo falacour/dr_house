@@ -1,11 +1,10 @@
 package com.mrhouse.mrhouse.Entidades;
 
-import com.mrhouse.mrhouse.Entidades.Cliente;
+import com.mrhouse.mrhouse.Entidades.*;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
