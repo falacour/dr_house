@@ -390,7 +390,30 @@ input[type="tipo"], input[type="antiguedad"], input[type="mtrs2"], input[type="d
     object-fit: cover; /* maneja el tamaño de la imagen manteniendo su relación de aspecto */
     border-radius: 5%;
 }
+/* Estilos para el botónes del inmueble*/
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+.btn:hover {
+  color: #fff;
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
 /* Estilos para el botón de Volver */
+
 .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
