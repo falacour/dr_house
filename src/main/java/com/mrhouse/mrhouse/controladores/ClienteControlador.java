@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,6 +62,7 @@ public class ClienteControlador {
         modelo.put("cliente",cliente);
         return "perfil_modificar.html";
     }
+ 
     
     @PostMapping("/modificar/{id}")
     public String modificado(MultipartFile archivo, String nombre, String dni, String email,
@@ -98,4 +100,9 @@ public class ClienteControlador {
         modelo.addAttribute("clientes", clientes);
         return "cliente_lista.html";
     }
+     @GetMapping("/baja/{id}")
+public String baja(@PathVariable String id, @PathVariable Boolean baja ){
+    servicioCliente.baja(id);
+    return "cliente_lista.html";
+}
 }
