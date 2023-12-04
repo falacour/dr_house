@@ -28,7 +28,7 @@
                         <th scope="col"> Precio</th>
                         <th scope="col"> Transaccion</th>
                         <th scope="col"> Estado</th>
-                        <th scope="col"> Acciones</th>
+                        <th sec:authorize="hasAnyRole('ADMIN','ENTE')" scope="col"> Acciones</th>
                     </tr>
                 </thead>
                 <tbody th:each="inmueble : ${inmuebles}">
@@ -45,8 +45,8 @@
                         <th scope="row" th:text="${inmueble.precio}"></th>
                         <th scope="row" th:text="${inmueble.transaccion}"></th>
                         <th scope="row" th:text="${inmueble.alta}"></th>
-                        <td>
-                            <a class="boton-modificar" th:href="@{/inmueble/modificar/__${inmueble.id}__}">Modificar</a>
+                        <td >
+                            <a class="boton-modificar" sec:authorize="hasAnyRole('ADMIN','ENTE')" th:href="@{/inmueble/modificar/__${inmueble.id}__}">Modificar</a>
                         </td>
                     </tr>
                 </tbody>
