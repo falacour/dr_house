@@ -6,6 +6,7 @@ package com.mrhouse.mrhouse.controladores;
 
 import com.mrhouse.mrhouse.Entidades.*;
 import com.mrhouse.mrhouse.excepciones.MiException;
+import com.mrhouse.mrhouse.repositorios.RepositorioImagen;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioCliente;
 import com.mrhouse.mrhouse.servicios.ServicioImagen;
@@ -30,6 +31,8 @@ public class InmuebleControlador {
     private ServicioInmueble servicioInmueble;
     @Autowired
     private RepositorioInmueble repositorioInmueble;
+    @Autowired
+    private RepositorioImagen repositorioImagen;
     @Autowired
     private ServicioImagen servicioImagen;
     @Autowired
@@ -128,7 +131,7 @@ public class InmuebleControlador {
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable Long id, ModelMap modelo) {
 
-        modelo.put("inmueble", servicioInmueble.getOne(id));
+        modelo.put("inmueble", repositorioInmueble.getOne(id));
 
         return "inmueble_modificar.html";
     }
