@@ -89,7 +89,8 @@ public class ServicioInmueble {
 
     public void modificar(MultipartFile archivo, Long id, String tipo, Integer antiguedad,
             Long mts2, String direccion, Double precio, String provincia, String departamento,
-            String alta, Imagen imagen, String transaccion, Integer hambientes) throws MiException {
+            String alta, Imagen imagen, String transaccion, Integer hambientes,
+            Double oferta) throws MiException {
 
         validar(id, tipo, antiguedad, mts2, direccion, precio, provincia, departamento,
                 transaccion, hambientes);
@@ -107,6 +108,7 @@ public class ServicioInmueble {
             inmueble.setDepartamento(departamento);
             inmueble.setHambientes(hambientes);
             inmueble.setTransaccion(transaccion);
+            inmueble.setOferta(oferta);
 
             if (alta.equals("dar de alta")) {
                 inmueble.setAlta(Boolean.TRUE);
