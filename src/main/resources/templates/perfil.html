@@ -40,7 +40,6 @@
         </div> 
         <div class="contenedorTarjetas">
 
-
             <div class= "tarjeta" th:each="inmueble : ${inmuebles}">
                 <img  th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
                 <p th:text="'Tipo:  ' + ${inmueble.tipo}"></p>
