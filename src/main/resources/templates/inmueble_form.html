@@ -118,7 +118,13 @@
                         <input type="text" class="form-control" name="direccion" placeholder="Direccion del inmueble" th:value="${direccion}">
                     </div>
                     <div class="form-group my-3">
+                        <input type="number" class="form-control" name="hambientes" placeholder="Cantidad de hambientes" th:value="${hambientes}">
+                    </div>
+                    <div class="form-group my-3">
                         <input type="number" class="form-control" name="precio" placeholder="Valor del Inmueble" th:value="${precio}">
+                    </div>
+                    <div class="form-group my-3">
+                        <input type="text" class="form-control" name="transaccion" placeholder="Tipo de transaccion" th:value="${tansaccion}">
                     </div>
                     <div class="form-group my-3">
                         <input type="file" class="form-control" name="archivo" th:value="${archivo}" >
@@ -127,11 +133,11 @@
                         <input type="text" class="form-control" name="descripcion" placeholder="Descripcion del inmueble" th:value="${descripcion}">
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
+                    <button th:action="" type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
                 </form>
                 <div>
                     <div>
-                        <a th:href="@{/}" class="volver">Volver</a>
+                        <a th:href="@{/inmueble/listaInmueblesNoComprados}" class="volver">Volver</a>
                     </div>
                 </div>
             </div>

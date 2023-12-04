@@ -32,8 +32,9 @@ public class ServicioInmueble {
     @Transactional
     public void crearInmueble(MultipartFile archivo, Long id, String tipo, Integer antiguedad, Long mts2,
             String direccion, Double precio, String provincia, String departamento, String descripcion,
-            String idEnte) throws MiException {
-        validar(mts2, tipo, antiguedad, mts2, direccion, precio, provincia, departamento);
+            String idEnte, String transaccion, Integer hambientes) throws MiException {
+        validar(id, tipo, antiguedad, mts2, direccion, precio, provincia, departamento,
+                transaccion, hambientes);
         Inmueble inmueble = new Inmueble();
         inmueble.setTipo(tipo);
         inmueble.setAntiguedad(antiguedad);
@@ -49,6 +50,8 @@ public class ServicioInmueble {
             inmueble.setDescripcion("");
         }
         inmueble.setAlta(Boolean.FALSE);
+        inmueble.setHambientes(hambientes);
+        inmueble.setTransaccion(transaccion);
 
         Imagen imagen = servicioImagen.guardar(archivo);
 
@@ -81,9 +84,10 @@ public class ServicioInmueble {
 
     public void modificar(MultipartFile archivo, Long id, String tipo, Integer antiguedad,
             Long mts2, String direccion, Double precio, String provincia, String departamento,
-            String alta, Imagen imagen) throws MiException {
+            String alta, Imagen imagen, String transaccion, Integer hambientes) throws MiException {
 
-        validar(id, tipo, antiguedad, mts2, direccion, precio, provincia, departamento);
+        validar(id, tipo, antiguedad, mts2, direccion, precio, provincia, departamento,
+                transaccion, hambientes);
 
         Optional<Inmueble> respuesta = repositorioInmueble.findById(id);
 
@@ -96,6 +100,8 @@ public class ServicioInmueble {
             inmueble.setPrecio(precio);
             inmueble.setProvincia(provincia);
             inmueble.setDepartamento(departamento);
+            inmueble.setHambientes(hambientes);
+            inmueble.setTransaccion(transaccion);
 
             if (alta.equals("dar de alta")) {
                 inmueble.setAlta(Boolean.TRUE);
@@ -122,7 +128,7 @@ public class ServicioInmueble {
             repositorioInmueble.save(inmueble);
         }
     }
-    
+
     public RangoHorario obtenerRangoHorarioPorId(Long id) throws Exception {
         Optional<RangoHorario> rangoHorarioOptional = repositorioRangoHorario.findById(id);
         if (rangoHorarioOptional.isPresent()) {
@@ -133,7 +139,8 @@ public class ServicioInmueble {
 
 
     public void validar(Long id, String tipo, Integer antiguedad, Long mts2, String direccion,
-            Double precio, String provincia, String departamento) throws MiException {
+            Double precio, String provincia, String departamento, String transaccion,
+            Integer hambientes) throws MiException {
 
         if (id == null) {
             throw new MiException("falta el id");
@@ -158,6 +165,12 @@ public class ServicioInmueble {
         }
         if (departamento == null) {
             throw new MiException("el departamento no puede estar vacio");
+        }
+        if (transaccion == null || transaccion == "") {
+            throw new MiException("la transaccion no puede estar vacia");
+        }
+        if (hambientes == null) {
+            throw new MiException("los hambientes no puede estar vacio");
         }
     }
 
