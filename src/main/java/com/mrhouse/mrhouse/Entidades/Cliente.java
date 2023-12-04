@@ -32,5 +32,5 @@ public class Cliente {
        
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     private List<Inmueble> inmueble;
-    private Boolean permiso;
+    private Boolean baja;
 }
