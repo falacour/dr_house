@@ -27,7 +27,7 @@
                         <th scope="col"> Hambientes</th>
                         <th scope="col"> Precio</th>
                         <th scope="col"> Transaccion</th>
-                        <th scope="col"> Estado</th>
+                       
                         <th sec:authorize="hasAnyRole('ADMIN','ENTE')" scope="col"> Acciones</th>
                     </tr>
                 </thead>
@@ -44,10 +44,18 @@
                         <th scope="row" th:text="${inmueble.hambientes}"></th>
                         <th scope="row" th:text="${inmueble.precio}"></th>
                         <th scope="row" th:text="${inmueble.transaccion}"></th>
-                        <th scope="row" th:text="${inmueble.alta}"></th>
-                        <td >
+                
+                     
+                        <td>
+                            <div th:if="${inmueble.cliente == null}" >
                             <a class="boton-modificar" sec:authorize="hasAnyRole('ADMIN','ENTE')" th:href="@{/inmueble/modificar/__${inmueble.id}__}">Modificar</a>
+                            <br>
+                            <br>
+                            
+                                <a class="boton-modificar" sec:authorize="hasAnyRole('ADMIN','ENTE')" th:href="@{/inmueble/eliminar/__${inmueble.id}__}">Eliminar</a>
+                                </div>
                         </td>
+                     
                     </tr>
                 </tbody>
             </table>

@@ -171,5 +171,10 @@ public class InmuebleControlador {
     public String definirReunion(ModelMap modelo) {
 
         return "calendario.html";
-    }    
+    } 
+     @GetMapping("/eliminar/{id}")
+public String eliminar(@PathVariable Long id){
+    servicioInmueble.eliminarPorId(id);
+    return "redirect:/inmueble/listaEnteInmuebleAVender";
+}
 }

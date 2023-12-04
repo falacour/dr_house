@@ -6,6 +6,7 @@ import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.Entidades.RangoHorario;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
+import com.mrhouse.mrhouse.repositorios.RepositorioImagen;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import com.mrhouse.mrhouse.repositorios.RepositorioRangoHorario;
@@ -26,6 +27,8 @@ public class ServicioInmueble {
     private RepositorioCliente repositorioCliente;
     @Autowired
     private ServicioImagen servicioImagen;
+    @Autowired
+    private RepositorioImagen repositorioImagen;
     @Autowired
     private RepositorioRangoHorario repositorioRangoHorario;
 
@@ -197,4 +200,15 @@ public class ServicioInmueble {
         return repositorioInmueble.buscarPorParametros(tipo, provincia, transaccion, departamento);
         
     } 
+     @Transactional
+    public void eliminarPorId(Long id) {
+        Optional<Inmueble> respuesta = repositorioInmueble.findById(id);
+        if (respuesta.isPresent()) {
+            Inmueble inmueble = respuesta.get();
+            Imagen imagen=repositorioImagen.getOne(inmueble.getImagen().getId());
+            repositorioImagen.delete(imagen);
+            repositorioInmueble.delete(inmueble);
+           
+        }
+    }
 }
