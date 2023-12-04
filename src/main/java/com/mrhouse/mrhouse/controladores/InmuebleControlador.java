@@ -140,14 +140,14 @@ public class InmuebleControlador {
     public String modificar(@PathVariable MultipartFile archivo, @PathVariable Long id, ModelMap modelo,
             String idImagen, String tipo, Integer antiguedad, Long mts2, String direccion,
             Double precio, String provincia, String departamento, String alta, String transaccion,
-            Integer hambientes) {
+            Integer hambientes, Double oferta) {
 
         try {
             servicioImagen.actualizar(archivo, idImagen);
             Imagen imagen = servicioImagen.getOne(idImagen);
             servicioInmueble.modificar(archivo, id, tipo, antiguedad, mts2,
                     direccion, precio, provincia, departamento, alta, imagen, transaccion,
-                    hambientes);
+                    hambientes, oferta);
 
         } catch (MiException ex) {
             modelo.put("error", ex);
@@ -171,5 +171,10 @@ public class InmuebleControlador {
     public String definirReunion(ModelMap modelo) {
 
         return "calendario.html";
-    }    
+    } 
+     @GetMapping("/eliminar/{id}")
+public String eliminar(@PathVariable Long id){
+    servicioInmueble.eliminarPorId(id);
+    return "redirect:/inmueble/listaEnteInmuebleAVender";
+}
 }

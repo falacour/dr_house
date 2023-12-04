@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -46,13 +45,13 @@ public class AdminControlador {
         return "redirect:./registro";
     }
     
-  @GetMapping("/admin/cambiarRol/{id}")
+  @GetMapping("/cambiarRol/{id}")
 public String cambiarRol(@PathVariable String id){
     servicioCliente.cambiarRol(id);
     return "redirect:/admin/usuarios";
 }
-  @GetMapping("/admin/eliminar/{id}")
-public String eliminarPorId(@PathVariable String id){
+  @GetMapping("/eliminar/{id}")
+public String eliminar(@PathVariable String id){
     servicioCliente.eliminarPorId(id);
     return "redirect:/admin/usuarios";
 }

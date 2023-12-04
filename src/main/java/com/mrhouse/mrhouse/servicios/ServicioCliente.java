@@ -34,17 +34,17 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class ServicioCliente implements UserDetailsService {
 
-    @Autowired
-    private RepositorioCliente repositorioCliente;
+         @Autowired
+          private RepositorioCliente repositorioCliente;
 
-    @Autowired
-    private ServicioImagen servicioImagen;
-    
-    @Autowired
-    private ServicioInmueble servicioInmueble;
+          @Autowired
+         private ServicioImagen servicioImagen;
 
-    @Transactional
-    public void registrar(MultipartFile archivo, String nombre, String dni, String mail,
+           @Autowired
+          private ServicioInmueble servicioInmueble;
+
+     @Transactional
+     public void registrar(MultipartFile archivo, String nombre, String dni, String mail,
             String password, String password2, Rol rol) throws MiException {
         validar(nombre, mail, password, password2, dni);
         Cliente cliente = new Cliente();
@@ -60,8 +60,8 @@ public class ServicioCliente implements UserDetailsService {
     }
 
     public void actualizar(MultipartFile archivo, String idCliente, String nombre, String mail,
-            String password, String password2, String dni,Rol rol) throws MiException {
-        validar(nombre, mail, password, password2,dni);
+            String password, String password2, String dni, Rol rol) throws MiException {
+        validar(nombre, mail, password, password2, dni);
         Optional<Cliente> respuesta = repositorioCliente.findById(idCliente);
         if (respuesta.isPresent()) {
             Cliente cliente = respuesta.get();
@@ -88,38 +88,41 @@ public class ServicioCliente implements UserDetailsService {
         clientes = repositorioCliente.findAll();
         return clientes;
     }
-    
+
     @Transactional
-    public void compra(Long idInmueble, String id){
+    public void compra(Long idInmueble, String id) {
         servicioInmueble.compra(id, idInmueble);
     }
-    @Transactional
-public  void eliminarPorId(String id) {
-    Optional <Cliente> respuesta = repositorioCliente.findById(id);
-    if (respuesta.isPresent()) {
-    Cliente cliente = respuesta.get();
-    repositorioCliente.delete(cliente);
-    }
-}
- public void cambiarRol(String id){
-        Optional<Cliente> respuesta = repositorioCliente.findById(id);
-    	
-    	if(respuesta.isPresent()) {
-    		
-    		Cliente cliente = respuesta.get();
-    		
-    		if(cliente.getRol().equals(Rol.CLIENTE)) {
-    			
-    		cliente.setRol(Rol.ENTE);
-    		
-    		}else if(cliente.getRol().equals(Rol.ENTE)) {
-    			cliente.setRol(Rol.CLIENTE);
-    		
-    		
-    	}
-        }
- }
 
+    @Transactional
+    public void eliminarPorId(String id) {
+        Optional<Cliente> respuesta = repositorioCliente.findById(id);
+        if (respuesta.isPresent()) {
+            Cliente cliente = respuesta.get();
+            repositorioCliente.delete(cliente);
+           
+        }
+    }
+
+    public void cambiarRol(String id) {
+        Optional<Cliente> respuesta = repositorioCliente.findById(id);
+
+        if (respuesta.isPresent()) {
+
+            Cliente cliente = respuesta.get();
+
+            if (cliente.getRol().equals(Rol.CLIENTE)) {
+
+                cliente.setRol(Rol.ENTE);
+
+            } else if (cliente.getRol().equals(Rol.ENTE)) {
+                cliente.setRol(Rol.CLIENTE);
+
+            }
+            repositorioCliente.save(cliente);
+        }
+
+    }
 
     public void validar(String nombre, String email, String password, String password2, String dni) throws MiException {
         if (nombre == null || nombre.isEmpty()) {
@@ -137,8 +140,9 @@ public  void eliminarPorId(String id) {
         if (!password.equals(password2)) {
             throw new MiException("Las contraseñas deben ser iguales");
         }
-        if(dni== null ){
-            throw new MiException("el dni no puede estar vacio");}
+        if (dni == null) {
+            throw new MiException("el dni no puede estar vacio");
+        }
     }
 
     @Override

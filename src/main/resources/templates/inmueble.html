@@ -20,7 +20,12 @@
                 <strong>Provincia: </strong> <span th:text="${inmueble.provincia}"></span><br><br>
                 <strong>Departamento: </strong> <span th:text="${inmueble.departamento}"></span><br><br>
                 <strong>Hambientes: </strong> <span th:text="${inmueble.hambientes}"></span><br><br>
+                <div th:if="${inmueble.oferta == null}">
                 <strong>Precio: </strong> <span th:text="${inmueble.precio}"></span><br><br>
+                </div>
+                <div th:if="${inmueble.oferta != null}">
+                <strong>Precio de Oferta: </strong> <span th:text="${inmueble.oferta}"></span><br><br>
+                </div>
                 <strong>Tipo de transacción: </strong> <span th:text="${inmueble.transaccion}"></span><br><br>
                 <strong>Descripcion: </strong> <span th:text="${inmueble.descripcion}"></span><br><br>
 
