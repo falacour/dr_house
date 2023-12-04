@@ -139,6 +139,7 @@ public class ServicioInmueble {
         throw new Exception("No se encontró el rango horario con ID: " + id);
     }
 
+
     public void validar(Long id, String tipo, Integer antiguedad, Long mts2, String direccion,
             Double precio, String provincia, String departamento, String transaccion,
             Integer hambientes) throws MiException {
