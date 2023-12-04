@@ -103,6 +103,15 @@ public class ServicioCliente implements UserDetailsService {
            
         }
     }
+    @Transactional
+    public void baja(String id) {
+        Optional<Cliente> respuesta = repositorioCliente.findById(id);
+        if (respuesta.isPresent()) {
+            Cliente cliente = respuesta.get();
+            cliente.setBaja(Boolean.TRUE);
+           
+        }
+    }
 
     public void cambiarRol(String id) {
         Optional<Cliente> respuesta = repositorioCliente.findById(id);
