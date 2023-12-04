@@ -67,7 +67,7 @@ body {
   font-size: 16px;
   border: 2px solid #007BFF;
   border-radius: 5px;
-  background-color: #007BFF;
+  background-color: orange;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
@@ -84,8 +84,8 @@ body {
   font-size: 16px;
   border: 2px solid #007BFF;
   border-radius: 5px;
-  background-color: blue;
-  color: #fff;
+  background-color: black;
+  color: white;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   margin-bottom: 10px;

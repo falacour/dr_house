@@ -1,13 +1,11 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head>
-        <head th:replace = "/fragments/head :: head"/>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/inmueble_lista.css"/>
-        <title>lista de inmueble</title>
-    </head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-    
+
+    <head th:replace = "/fragments/head :: head"/>
+    <link rel="stylesheet" href="/css/inmueble_lista.css"/>
+
     <body>
         <header th:replace = "/fragments/header :: header"/>
         <nav th:replace = "/fragments/nav :: nav"/>
@@ -18,6 +16,7 @@
                 <table class="table table-dark">
                     <thead>
                         <tr>
+                            <th scope="col"> Fecha</th>
                             <th scope="col"> Asunto</th>
                             <th scope="col"> Mensaje</th>
 
@@ -25,11 +24,12 @@
                     </thead>
                     <tbody th:each="publicacion : ${publicaciones}">
                         <tr>
-                             <th scope="row" th:text="${publicacion.asunto}"></th>
-                             <th scope="row" th:text="${publicacion.mensaje}"></th>
-                                          
-      <td>
-                                <a class="boton-modificar" th:href="@{/publicacion/modificar/__${publicacion.id}__}">Modificar</a>
+                            <th scope="row" th:text="${publicacion.fechaEnvio}"></th>
+                            <th scope="row" th:text="${publicacion.asunto}"></th>
+                            <th scope="row" th:text="${publicacion.mensaje}"></th>
+
+                            <td>
+                                <a class="boton-modificar" th:href="@{/publicacion/visualizar/__${publicacion.id}__}">Ver</a>
                             </td>
                         </tr>
                     </tbody>
@@ -39,7 +39,6 @@
                     <div class="row py-lg-5">
                         <div class="col-lg-6 col-md-8 mx-auto">
                             <a th:href="@{/}" class="btn btn-primary my-2">Volver</a>
-                            </p>
                         </div>
                     </div>
                 </section>

@@ -6,6 +6,7 @@ import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.Entidades.RangoHorario;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
+import com.mrhouse.mrhouse.repositorios.RepositorioImagen;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import com.mrhouse.mrhouse.repositorios.RepositorioRangoHorario;
@@ -27,13 +28,18 @@ public class ServicioInmueble {
     @Autowired
     private ServicioImagen servicioImagen;
     @Autowired
+    private RepositorioImagen repositorioImagen;
+    @Autowired
     private RepositorioRangoHorario repositorioRangoHorario;
 
     @Transactional
     public void crearInmueble(MultipartFile archivo, Long id, String tipo, Integer antiguedad, Long mts2,
             String direccion, Double precio, String provincia, String departamento, String descripcion,
-            String idEnte) throws MiException {
-        validar(mts2, tipo, antiguedad, mts2, direccion, precio, provincia, departamento);
+            String idEnte, String transaccion, Integer hambientes) throws MiException {
+        
+        id = 1L;
+        validar(id, tipo, antiguedad, mts2, direccion, precio, provincia, departamento,
+                transaccion, hambientes);
         Inmueble inmueble = new Inmueble();
         inmueble.setTipo(tipo);
         inmueble.setAntiguedad(antiguedad);
@@ -43,12 +49,14 @@ public class ServicioInmueble {
         inmueble.setProvincia(provincia);
         inmueble.setDepartamento(departamento);
         inmueble.setEnte(repositorioCliente.getOne(idEnte));
-        if (descripcion != null){
+        if (descripcion != null) {
             inmueble.setDescripcion(descripcion);
-        }else{
+        } else {
             inmueble.setDescripcion("");
         }
         inmueble.setAlta(Boolean.FALSE);
+        inmueble.setHambientes(hambientes);
+        inmueble.setTransaccion(transaccion);
 
         Imagen imagen = servicioImagen.guardar(archivo);
 
@@ -63,10 +71,10 @@ public class ServicioInmueble {
         return Inmuebles;
 
     }
-    
+
     public Inmueble obtenerInmueblePorId(Long id) {
-    return repositorioInmueble.getOne(id);
-}
+        return repositorioInmueble.getOne(id);
+    }
 
     //se deberia obtener el usuario de la session para poder llamar a este evento
     //en la navegacion previa a la visualizacion de la lista de los inmuebles del ente
@@ -81,10 +89,11 @@ public class ServicioInmueble {
 
     public void modificar(MultipartFile archivo, Long id, String tipo, Integer antiguedad,
             Long mts2, String direccion, Double precio, String provincia, String departamento,
-            String alta, Imagen imagen)throws MiException {
-        
+            String alta, Imagen imagen, String transaccion, Integer hambientes,
+            Double oferta) throws MiException {
 
-        validar(id, tipo, antiguedad, mts2, direccion, precio, provincia, departamento);
+        validar(id, tipo, antiguedad, mts2, direccion, precio, provincia, departamento,
+                transaccion, hambientes);
 
         Optional<Inmueble> respuesta = repositorioInmueble.findById(id);
 
@@ -97,14 +106,17 @@ public class ServicioInmueble {
             inmueble.setPrecio(precio);
             inmueble.setProvincia(provincia);
             inmueble.setDepartamento(departamento);
-            
+            inmueble.setHambientes(hambientes);
+            inmueble.setTransaccion(transaccion);
+            inmueble.setOferta(oferta);
+
             if (alta.equals("dar de alta")) {
                 inmueble.setAlta(Boolean.TRUE);
             } else {
                 inmueble.setAlta(Boolean.FALSE);
             }
-            repositorioInmueble.save(inmueble); 
-            
+            repositorioInmueble.save(inmueble);
+
             System.out.println("NO HUBO ERROR EN LA MODIFICACION DEL iNMUEBLE");
         }
     }
@@ -113,7 +125,7 @@ public class ServicioInmueble {
         return repositorioInmueble.getOne(id);
 
     }
-    
+
     public void compra(String id, Long idInmueble) {
         Optional<Inmueble> respuesta = repositorioInmueble.findById(idInmueble);
 
@@ -123,7 +135,7 @@ public class ServicioInmueble {
             repositorioInmueble.save(inmueble);
         }
     }
-    
+
     public RangoHorario obtenerRangoHorarioPorId(Long id) throws Exception {
         Optional<RangoHorario> rangoHorarioOptional = repositorioRangoHorario.findById(id);
         if (rangoHorarioOptional.isPresent()) {
@@ -132,8 +144,10 @@ public class ServicioInmueble {
         throw new Exception("No se encontró el rango horario con ID: " + id);
     }
 
+
     public void validar(Long id, String tipo, Integer antiguedad, Long mts2, String direccion,
-            Double precio, String provincia, String departamento) throws MiException {
+            Double precio, String provincia, String departamento, String transaccion,
+            Integer hambientes) throws MiException {
 
         if (id == null) {
             throw new MiException("falta el id");
@@ -159,11 +173,14 @@ public class ServicioInmueble {
         if (departamento == null) {
             throw new MiException("el departamento no puede estar vacio");
         }
+        if (transaccion == null ) {
+            throw new MiException("la transaccion no puede estar vacia");
+        }
+        if (hambientes == null) {
+            throw new MiException("los hambientes no puede estar vacio");
+        }
     }
-    
-      
 
-   
     public List<RangoHorario> obtenerRangosHorariosPorId(Long id) {
         Inmueble inmueble = getOne(id);
 
@@ -179,6 +196,21 @@ public class ServicioInmueble {
         // Devuelve los rangos horarios asociados al inmueble encontrado
         return inmueble.getRangosHorarios();
     }
-
-  
+    
+    public List<Inmueble> filtroInmueble(String tipo, String provincia, String transaccion, String departamento){
+       
+        return repositorioInmueble.buscarPorParametros(tipo, provincia, transaccion, departamento);
+        
+    } 
+     @Transactional
+    public void eliminarPorId(Long id) {
+        Optional<Inmueble> respuesta = repositorioInmueble.findById(id);
+        if (respuesta.isPresent()) {
+            Inmueble inmueble = respuesta.get();
+            Imagen imagen=repositorioImagen.getOne(inmueble.getImagen().getId());
+            repositorioImagen.delete(imagen);
+            repositorioInmueble.delete(inmueble);
+           
+        }
+    }
 }

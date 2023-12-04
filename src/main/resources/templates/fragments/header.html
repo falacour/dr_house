@@ -11,7 +11,7 @@
     </div>
 
     <!--forms relacionados a las querys de busqueda-->
-    <form class="searcher" action="buscar.php" method="get" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE')">
+    <form class="searcher" action="buscar.php" method="GET" th:action="@{/filtro}"  sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE')">
         <!-- <input
              class="searcher-form"
              type="text"
@@ -19,33 +19,33 @@
              name="q"
              placeholder="Escribe tu búsqueda..."
              />-->
-        <select name="Operaciones" class="searcher-form">
+        <select name="transaccion" class="searcher-form">
             <option value="" disabled selected>
                 Tipo de transaccion
             </option>
-            <option value="1">Comprar</option>
-            <option value="2">Alquiler</option>
-            <option value="3">Temporario</option>
+            <option value="comprar">Comprar</option>
+            <option value="alquiler">Alquiler</option>
+            <option value="temporario">Temporario</option>
         </select>
-        <select name="Tipo de propiedad" class="searcher-form">
+        <select name="tipo" class="searcher-form" th:value="${tipo}">
             <option value="" disabled selected>Tipo de vivienda</option>
-            <option value="1">Departamento</option>
-            <option value="2">PH</option>
-            <option value="3">Casa</option>
-            <option value="4">Terreno y lotes</option>
-            <option value="5">Cochera</option>
-            <option value="6">Local</option>
-            <option value="7">Oficina</option>
-            <option value="8">Consultorio</option>
-            <option value="9">Quinta</option>
-            <option value="10">Chacra</option>
-            <option value="11">Galpon</option>
-            <option value="12">Deposito</option>
-            <option value="13">Campo</option>
-            <option value="14">Hotel</option>
-            <option value="15">Fondo de comercio</option>
-            <option value="16">Edificio</option>
-            <option value="17">Otros</option>
+            <option value="departamento">Departamento</option>
+            <option value="ph">PH</option>
+            <option value="casa">Casa</option>
+            <option value="terreno">Terreno y lotes</option>
+            <option value="cochera">Cochera</option>
+            <option value="local">Local</option>
+            <option value="oficina">Oficina</option>
+            <option value="consultorio">Consultorio</option>
+            <option value="quinta">Quinta</option>
+            <option value="chacra">Chacra</option>
+            <option value="galpon">Galpon</option>
+            <option value="deposito">Deposito</option>
+            <option value="campo">Campo</option>
+            <option value="hotel">Hotel</option>
+            <option value="fondo">Fondo de comercio</option>
+            <option value="edificio">Edificio</option>
+            <option value="otros">Otros</option>
         </select>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
@@ -56,7 +56,7 @@
                     fetch("https://apis.datos.gob.ar/georef/api/provincias")
                             .then((res) => (res.ok ? res.json() : Promise.reject(res)))
                             .then((json) => {
-                                let $options = `<option value="Elige una provincia">Elige una provincia</option>`;
+                                let $options = `<option value="">Elige una provincia</option>`;
 
                                 json.provincias.forEach(
                                         (el) => ($options += `<option value="${el.nombre}">${el.nombre}</option>`)
@@ -76,10 +76,10 @@
                             )
                             .then((res) => (res.ok ? res.json() : Promise.reject(res)))
                             .then((json) => {
-                                let $options = `<option value="Elige un municipio">Elige un municipio</option>`;
+                                let $options = `<option value="">Elige un municipio</option>`;
 
                                 json.municipios.forEach(
-                                        (el) => ($options += `<option value="${el.id}">${el.nombre}</option>`)
+                                        (el) => ($options += `<option value="${el.nombre}">${el.nombre}</option>`)
                                 );
 
                                 $selectMunicipios.innerHTML = $options;
@@ -98,10 +98,10 @@
                 provincia(); // Llamada inicial para cargar las provincias al cargar la página
             });
         </script>
-        <select id="provincias" class="searcher-form">
+        <select id="provincias" class="searcher-form" name="provincia">
             <option value="" disabled selected>Elige una provincia</option>
         </select>
-        <select id="municipios" class="searcher-form">
+        <select id="municipios" class="searcher-form" name="departamento">
             <option value="" disabled selected>Elige un municipio</option>
         </select>
         <button class="buscar" type="submit" value="Buscar">Buscar</button>
@@ -111,10 +111,10 @@
     <!--Botones relacionados a ingreso y registro de Usuario-->
     <!--Sin iniciar sesion-->
     <div sec:authorize="!hasAnyRole('ENTE', 'ADMIN', 'CLIENTE', 'USER')">
-        <a th:href="@{login}">
+        <a th:href="@{/login}">
             <button class="log-in"  type="button">Inicia Sesión</button>
         </a>
-        <a  th:href="@{registro}">
+        <a  th:href="@{/registro}">
             <button class="log-in" th:if="${session.usuariosession == null}" type="button">Registrarse</button>
         </a>
     </div>
@@ -122,7 +122,6 @@
     <div sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE')">
         <a  th:href="@{/perfil}">
             <button class="log-in"  type="button">Perfil</button>
-        </a>
         </a>
         <a  th:href="@{/logout}">
             <button class="log-in" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE')" type="button" >Cerrar sesion</button>

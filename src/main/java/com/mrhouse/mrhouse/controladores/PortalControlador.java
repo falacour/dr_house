@@ -129,4 +129,20 @@ public class PortalControlador {
 
         return "cliente_lista.html";
     }
+    
+    @GetMapping("/filtro")
+    public String filtro(@RequestParam(required = false) String tipo, @RequestParam(required = false) String provincia,@RequestParam(required = false) String transaccion,@RequestParam(required = false) String departamento,ModelMap modelo) {
+        System.out.println("tipo"+tipo);
+        if(provincia.isEmpty()){
+            provincia = null;
+        }
+        System.out.println("provincia"+provincia);
+        System.out.println("transaccion"+transaccion);
+        System.out.println("departamento"+departamento);        
+        
+        List<Inmueble> inmuebles = servicioInmueble.filtroInmueble(tipo, provincia, transaccion, departamento);        
+        modelo.addAttribute("inmuebles", inmuebles);
+
+        return "index.html";
+    }
 }

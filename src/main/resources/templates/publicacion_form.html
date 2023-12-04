@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Mensajería</title>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    
     <head th:replace = "/fragments/head :: head"/>
-</head>
 <body>
     <header th:replace="/fragments/header :: header" />
     <nav th:replace="/fragments/nav :: nav"/>
@@ -14,34 +12,19 @@
     <div class="container">
         <h2>Nueva publicación</h2>
 
-        <form th:action="@{/registro}" method="post">
-
+        <form th:action="@{/publicacion/registro}" method="POST">
+            <input type="text" th:value="${idEnte}" id="idEnte" name="idReceptor" hidden/>
             <div class="form-group">
                 <label for="asunto">Asunto</label>
-                <input type="text" id="nombre" name="asunto" required>
+                <input type="text" id="nombre" name="asunto"/>
             </div>
 
             <div class="form-group">
                 <label for="mensaje">Mensaje</label>
-                <input type="text" id="nombre" name="mensaje" required>
-            </div>
-          <!--  <div class="form-group">
-                <label for="email">Emisor</label>
-                <input type="email" id="nombre" name="email" required>
+                <textarea id="nombre" name="mensaje" rows="7" cols="65"></textarea>
             </div>
             <div class="form-group">
-                <label for="email">Receptor</label>
-                <input type="email" id="nombre" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="">Estado</label>
-                <select name="" id="estado">
-                    <option value="true">leido</option>
-                    <option value="false">no leido</option>
-                </select>
-            </div>-->
-            <div class="form-group">
-                <input type="submit" value="Enviar">
+                <input type="submit" value="Enviar"/>
             </div>
         </form>
     </div>

@@ -5,6 +5,7 @@ import com.mrhouse.mrhouse.Entidades.Publicacion;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
 import com.mrhouse.mrhouse.repositorios.RepositorioPublicacion;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -29,10 +30,11 @@ public class ServicioPublicacion {
 
         publicacion.setAsunto(asunto);
         publicacion.setMensaje(mensaje);
-        //publicacion.setEmisor(emisor);
-        //publicacion.setReceptor(receptor);
-        //publicacion.setLeido(false);
-        //publicacion.setEstado(true);
+        publicacion.setEmisor(emisor);
+        publicacion.setReceptor(receptor);
+        publicacion.setLeido(false);
+        publicacion.setEstado(true);
+        publicacion.setFechaEnvio(new Date());
 
         repositorioPublicacion.save(publicacion);
 

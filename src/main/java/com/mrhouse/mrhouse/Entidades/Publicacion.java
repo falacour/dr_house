@@ -1,9 +1,12 @@
 package com.mrhouse.mrhouse.Entidades;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -24,4 +27,6 @@ public class Publicacion {
     private Cliente receptor;  
     private boolean isLeido;
     private boolean estado;
+    @Temporal(TemporalType.DATE)
+    private Date fechaEnvio;
 }
