@@ -32,9 +32,8 @@
                     <label for="repetir-contrasena">Repetir Contraseña:</label>
                     <input type="password" id="repetir-contrasena" name="password2" required th:value="${password2}">
                 </div>
-                    <div class="form-group my-3">
-                    <input type="file" class="form-control" name="archivo" th:value="${archivo}" >
-                </div>
+
+                
                 <div class="form-group">
                     <label for="rol">Queres vender o comprar:</label>
                     <select name="rol" id="rol">
@@ -46,7 +45,7 @@
                     <input type="submit" value="Registrarse">
                 </div>
                 <div>
-                    <a th:href="@{/login}">ya tienes una cuenta?</a>
+                    <a th:href="@{/login}">YA TIENES CUENTA?</a>
                 </div>
             </form>
         </div>

@@ -1,0 +1,95 @@
+/*Para inmueble_form*/
+.contenedor_inmueble {
+    background-color: #f3f0ec;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+    padding: 60px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.contenedor_inmueble .formulario_inmueble{
+    margin: 10px 0;
+}
+
+.contenedor_inmueble .formulario_inmueble select,
+.contenedor_inmueble .formulario_inmueble input[type="text"],
+.contenedor_inmueble .formulario_inmueble input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+    box-sizing: border-box;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.contenedor_inmueble .formulario_inmueble select:hover,
+.contenedor_inmueble .formulario_inmueble input[type="text"]:hover,
+.contenedor_inmueble .formulario_inmueble input[type="number"]:hover {
+    background-color: #333;
+    color: #fff;
+    opacity: 0.8;
+}
+
+.contenedor_inmueble .formulario_inmueble button{
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+    margin-bottom: 10;
+}
+
+.contenedor_inmueble .formulario_inmueble button:hover{
+    background-color: #333;
+    color: #fff;
+    opacity: 0.8;
+}
+
+.contenedor_inmueble .formulario_inmueble input[type="file"] {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.contenedor_inmueble .formulario_inmueble input[type="file"]:hover {
+    background-color: #333;
+    color: #fff;
+    opacity: 0.8;
+}
+
+.contenedor_inmueble .formulario_inmueble h3.titulo {
+    font-size: 24px;
+    color: #333;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.volver{
+    border: none;
+    padding: 10px 200px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.volver:hover{
+    background-color: #333;
+    color: #fff;
+    opacity: 0.8;
+}

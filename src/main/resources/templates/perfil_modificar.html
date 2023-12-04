@@ -7,7 +7,7 @@
     </head>
     <body>
         <div class="container">
-            <h2>Modificar perfil</h2>
+            <h2>Editar perfil</h2>
 
             <form th:action="@{/cliente/modificar/__${cliente.id}__}" method="post" enctype="multipart/form-data">
                 <input type="text" th:value="${cliente.id}" id="id" name="id" hidden/>

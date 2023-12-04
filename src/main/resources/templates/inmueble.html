@@ -6,7 +6,7 @@
         <nav th:replace="/fragments/nav :: nav"/>
 
         <div class="container">
-            
+
             <h2>Inmueble</h2>
 
             <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
@@ -16,7 +16,9 @@
             <strong>Tipo: </strong> <span th:text="${inmueble.tipo}"></span><br><br>
             <strong>Provincia: </strong> <span th:text="${inmueble.provincia}"></span><br><br>
             <strong>Departamento: </strong> <span th:text="${inmueble.departamento}"></span><br><br>
+            <strong>Hambientes: </strong> <span th:text="${inmueble.hambientes}"></span><br><br>
             <strong>Precio: </strong> <span th:text="${inmueble.precio}"></span><br><br>
+            <strong>Tipo de transacción: </strong> <span th:text="${inmueble.transaccion}"></span><br><br>
             <strong>Descripcion: </strong> <span th:text="${inmueble.descripcion}"></span><br><br>
 
             <!-- Formulario para cliente autenticado -->
@@ -28,28 +30,31 @@
                     <button type="submit" disabled th:if="${cliente.rol == rol && cliente.id == inmueble.ente.id}">Ya es de su propiedad</button>
                 </form>
             </div>
-            
-            
+
+
             <!-- Formulario para cliente no autenticado -->
-            <div th:if="${cliente == null}">
-                <!-- Formulario para cliente no autenticado -->
+            <div class="botones" th:if="${cliente == null}">                
                 <form th:action="@{/login}" method="get">
                     <button type="submit">Comprar</button>
                 </form>
             </div>
-            <form sec:authorize="hasAnyRole('CLIENTE')" th:action="@{/inmueble/calendario}" method="get">
-                <button class="" type="submit">Pedir una reunión</button>
-            </form>
-            <form th:action="@{/publicacion/registrar}" method="POST" >
-                <input hidden th:value="${inmueble.ente.id}" name="id">
-                <button type="submit" ><a class="" sec:authorize="hasAnyRole('CLIENTE')">Nuevo Mensaje</a></button>
-            </form>
+            <div class="botones" >
+                <form sec:authorize="hasAnyRole('CLIENTE')" th:action="@{/inmueble/calendario}" method="get">
+                    <button type="submit">Pedir una reunión</button>
+                </form>
+            </div>
+            <div class="botones" >
+                <form sec:authorize="hasAnyRole('CLIENTE')" th:action="@{/publicacion/registrar}" method="POST" >
+                    <input hidden th:value="${inmueble.ente.id}" name="id">
+                    <button type="submit" ><a>Nuevo Mensaje</a></button>
+                </form>
+            </div>
 
         </div>
 
         <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <a th:href="@{/}" class="btn btn-primary my-2">Volver</a>
+            <div  class="col-lg-6 col-md-8 mx-auto">
+                <a class="btn btn-primary my-2" th:href="@{/}">Volver</a>
             </div>
         </div>
 

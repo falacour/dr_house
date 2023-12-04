@@ -1,16 +1,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <!--<head>
-        <head th:replace = "/fragments/head :: head"/>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="/css/inmueble_lista.css"/>
-        <title>lista de inmueble</title>
-    </head>-->
-        
-    <head th:replace = "/fragments/head :: head"/>
 
-    
+
+    <head th:replace = "/fragments/head :: head"/>
+    <link rel="stylesheet" href="/css/inmueble_lista.css"/>
+
     <body>
         <header th:replace = "/fragments/header :: header"/>
         <nav th:replace = "/fragments/nav :: nav"/>
@@ -21,6 +16,7 @@
                 <table class="table table-dark">
                     <thead>
                         <tr>
+                            <th scope="col"> Fecha</th>
                             <th scope="col"> Asunto</th>
                             <th scope="col"> Mensaje</th>
 
@@ -28,11 +24,12 @@
                     </thead>
                     <tbody th:each="publicacion : ${publicaciones}">
                         <tr>
-                             <th scope="row" th:text="${publicacion.asunto}"></th>
-                             <th scope="row" th:text="${publicacion.mensaje}"></th>
-                                          
-      <td>
-                                <a class="boton-modificar" th:href="@{/publicacion/modificar/__${publicacion.id}__}">Modificar</a>
+                            <th scope="row" th:text="${publicacion.fechaEnvio}"></th>
+                            <th scope="row" th:text="${publicacion.asunto}"></th>
+                            <th scope="row" th:text="${publicacion.mensaje}"></th>
+
+                            <td>
+                                <a class="boton-modificar" th:href="@{/publicacion/visualizar/__${publicacion.id}__}">Ver</a>
                             </td>
                         </tr>
                     </tbody>

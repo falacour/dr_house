@@ -46,16 +46,19 @@ public class InmuebleControlador {
     public String registro(@RequestParam(required = false) Long id, @RequestParam String tipo,
             @RequestParam(required = false) Integer antiguedad, @RequestParam(required = false) Long mts2,
             @RequestParam String direccion, ModelMap modelo, MultipartFile archivo, Double precio,
-            String provincia, String departamento, String descripcion, HttpSession session) {
+            String provincia, String departamento, String descripcion, HttpSession session,
+            String transaccion, Integer hambientes ) {
 
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
 
         try {
             servicioInmueble.crearInmueble(archivo, id, tipo, antiguedad, mts2, direccion,
-                    precio, provincia, departamento, descripcion, cliente.getId());
+                    precio, provincia, departamento, descripcion, cliente.getId(), transaccion,
+                    hambientes);
             modelo.put("exelente", "se cargo tu inmueble");
         } catch (MiException e) {
             modelo.put("error", e.getMessage());
+            System.out.println(e.getMessage());
             return "inmueble_form.html";
         }
         return "redirect:/";
@@ -64,15 +67,19 @@ public class InmuebleControlador {
     //////////////////////////////////////LISTAS//////////////////////////////////////////
     @GetMapping("/listarTodosLosInmueblesAVender")
     public String listaTodosLosInmueblesAVender(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
         List<Inmueble> inmuebles = repositorioInmueble.todosLosInmueblesAVender();
         modelo.addAttribute("inmuebles", inmuebles);
+        modelo.addAttribute("cliente", cliente);
         return "inmueble_lista.html";
     }
     
     @GetMapping("/listarTodosLosInmueblesVendidos")
     public String listaTodosLosInmueblesVendidos(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
         List<Inmueble> inmuebles = repositorioInmueble.todosLosInmueblesVendidos();
         modelo.addAttribute("inmuebles", inmuebles);
+        modelo.addAttribute("cliente", cliente);
         return "inmueble_lista.html";
     }
     
@@ -81,6 +88,7 @@ public class InmuebleControlador {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
         List<Inmueble> inmuebles = repositorioInmueble.inmueblesNoComprados();
         modelo.addAttribute("inmuebles", inmuebles);
+        modelo.addAttribute("cliente", cliente);
         return "inmueble_lista.html";
     }
     
@@ -128,20 +136,22 @@ public class InmuebleControlador {
     @PostMapping("/modificar/{id}")
     public String modificar(@PathVariable MultipartFile archivo, Long idInmueble, ModelMap modelo,
             String idImagen, String tipo, Integer antiguedad, Long mts2, String direccion,
-            Double precio, String provincia, String departamento, String alta) {
+            Double precio, String provincia, String departamento, String alta, String transaccion,
+            Integer hambientes) {
 
         try {
             servicioImagen.actualizar(archivo, idImagen);
             Imagen imagen = servicioImagen.getOne(idImagen);
             servicioInmueble.modificar(archivo, idInmueble, tipo, antiguedad, mts2,
-                    direccion, precio, provincia, departamento, alta, imagen);
+                    direccion, precio, provincia, departamento, alta, imagen, transaccion,
+                    hambientes);
 
         } catch (MiException ex) {
             modelo.put("error", ex);
             return "inmueble_modificar.html";
         }
 
-        return "redirect:/inmueble/lista";
+        return "redirect:/inmueble/listaEnteInmuebleAVender";
     }
     
     //////////////////////////////////////COMPRAR///////////////////////////////////////
@@ -158,5 +168,5 @@ public class InmuebleControlador {
     public String definirReunion(ModelMap modelo) {
 
         return "calendario.html";
-    }
+    }    
 }
