@@ -193,7 +193,7 @@ public class ServicioInmueble {
     }
     
     public List<Inmueble> filtroInmueble(String tipo, String provincia, String transaccion, String departamento){
-        
+       
         return repositorioInmueble.buscarPorParametros(tipo, provincia, transaccion, departamento);
         
     } 

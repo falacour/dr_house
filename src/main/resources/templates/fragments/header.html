@@ -28,25 +28,25 @@
             <option value="temporario">Temporario</option>
         </select>
         <select name="tipo" class="searcher-form" th:value="${tipo}">
-                        <option value="" disabled selected>Tipo de vivienda</option>
-                        <option value="departamento">Departamento</option>
-                        <option value="ph">PH</option>
-                        <option value="casa">Casa</option>
-                        <option value="terreno">Terreno y lotes</option>
-                        <option value="cochera">Cochera</option>
-                        <option value="local">Local</option>
-                        <option value="oficina">Oficina</option>
-                        <option value="consultorio">Consultorio</option>
-                        <option value="quinta">Quinta</option>
-                        <option value="chacra">Chacra</option>
-                        <option value="galpon">Galpon</option>
-                        <option value="deposito">Deposito</option>
-                        <option value="campo">Campo</option>
-                        <option value="hotel">Hotel</option>
-                        <option value="fondo">Fondo de comercio</option>
-                        <option value="edificio">Edificio</option>
-                        <option value="otros">Otros</option>
-                    </select>
+            <option value="" disabled selected>Tipo de vivienda</option>
+            <option value="departamento">Departamento</option>
+            <option value="ph">PH</option>
+            <option value="casa">Casa</option>
+            <option value="terreno">Terreno y lotes</option>
+            <option value="cochera">Cochera</option>
+            <option value="local">Local</option>
+            <option value="oficina">Oficina</option>
+            <option value="consultorio">Consultorio</option>
+            <option value="quinta">Quinta</option>
+            <option value="chacra">Chacra</option>
+            <option value="galpon">Galpon</option>
+            <option value="deposito">Deposito</option>
+            <option value="campo">Campo</option>
+            <option value="hotel">Hotel</option>
+            <option value="fondo">Fondo de comercio</option>
+            <option value="edificio">Edificio</option>
+            <option value="otros">Otros</option>
+        </select>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const $selectProvincias = document.getElementById("provincias");
@@ -56,7 +56,7 @@
                     fetch("https://apis.datos.gob.ar/georef/api/provincias")
                             .then((res) => (res.ok ? res.json() : Promise.reject(res)))
                             .then((json) => {
-                                let $options = `<option value="Elige una provincia">Elige una provincia</option>`;
+                                let $options = `<option value="">Elige una provincia</option>`;
 
                                 json.provincias.forEach(
                                         (el) => ($options += `<option value="${el.nombre}">${el.nombre}</option>`)
@@ -76,10 +76,10 @@
                             )
                             .then((res) => (res.ok ? res.json() : Promise.reject(res)))
                             .then((json) => {
-                                let $options = `<option value="Elige un municipio">Elige un municipio</option>`;
+                                let $options = `<option value="">Elige un municipio</option>`;
 
                                 json.municipios.forEach(
-                                        (el) => ($options += `<option value="${el.id}">${el.nombre}</option>`)
+                                        (el) => ($options += `<option value="${el.nombre}">${el.nombre}</option>`)
                                 );
 
                                 $selectMunicipios.innerHTML = $options;

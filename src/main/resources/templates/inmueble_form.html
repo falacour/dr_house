@@ -50,7 +50,7 @@
                                 let $options = `<option value="Elige un municipio">Elige un municipio</option>`;
 
                                 json.municipios.forEach(
-                                        (el) => ($options += `<option value="${el.id}">${el.nombre}</option>`)
+                                        (el) => ($options += `<option value="${el.nombre}">${el.nombre}</option>`)
                                 );
 
                                 $selectMunicipios.innerHTML = $options;
