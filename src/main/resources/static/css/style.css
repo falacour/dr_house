@@ -318,7 +318,7 @@ input[type="tipo"], input[type="antiguedad"], input[type="mtrs2"], input[type="d
     text-align: left;
     transition: all 0.25s;
     cursor: pointer;
-    background-color: bisque;
+    background-color: #FFE4DD;
     justify-content: center;
 }
 
@@ -382,6 +382,37 @@ input[type="tipo"], input[type="antiguedad"], input[type="mtrs2"], input[type="d
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Estilos para de inmueble */
+
+.container-text{
+    width: 400px;
+    color: white;
+    text-align: left;
+    padding-left: 190px;
+    padding-top: 15px;
+}
+.container-text button {
+    color: #e44d26;
+     width: 100%;
+    margin-top: 5px;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: white;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.2s; 
+    border: 2px solid #e44d26;
+}
+.container-text button:hover{
+  background-color: #e44d26;;
+   color: white;
+  
 }
 
 .container img{

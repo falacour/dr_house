@@ -17,6 +17,7 @@ body {
     padding: 60px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    color: black
 }
 .container {
     text-align: center;
@@ -54,7 +55,7 @@ input[type="file"] {
     border-radius: 5px;
     border-radius: 3px;
     cursor: pointer;
-    background-color: white;
+    background-color: #e44d26;;
     cursor: pointer;
     box-sizing: border-box;
     transition: background-color 0.2s;
@@ -63,10 +64,12 @@ input[type="file"] {
 input[type="text"]:hover,
 input[type="email"]:hover,
 input[type="password"]:hover,
-input[type="submit"]:hover,
+input[type="submit"]:hover{}
 input[type="file"]:hover,
 input[type="input"]:hover{
-    background-color: #333;
-    color: #fff;
+    background-color: white;
+    color: #e44d26;;
     opacity: 0.8;
+      border: 2px solid #e44d26;
+  border-radius: 5px;
 }
