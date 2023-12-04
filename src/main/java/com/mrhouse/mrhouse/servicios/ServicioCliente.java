@@ -46,8 +46,20 @@ public class ServicioCliente implements UserDetailsService {
     @Transactional
     public void registrar(MultipartFile archivo, String nombre, String dni, String mail,
             String password, String password2, Rol rol) throws MiException {
+
         validar(nombre, mail, password, password2, dni);
+
+        List<Cliente> clientes = repositorioCliente.todosLosUsuarios();
         Cliente cliente = new Cliente();
+
+        for (Cliente client : clientes) {
+            if (client.getDni().equals(dni)) {
+                throw new MiException("ya existe ese dni");
+            }
+            if (client.getEmail().equals(mail)) {
+                throw new MiException("ya existe ese mail");
+            }
+        }
         cliente.setNombre(nombre);
         cliente.setDni(dni);
         cliente.setEmail(mail);
