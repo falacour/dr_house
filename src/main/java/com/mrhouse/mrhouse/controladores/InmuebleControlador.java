@@ -137,7 +137,7 @@ public class InmuebleControlador {
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificar(@PathVariable MultipartFile archivo, Long idInmueble, ModelMap modelo,
+    public String modificar(@PathVariable MultipartFile archivo, @PathVariable Long id, ModelMap modelo,
             String idImagen, String tipo, Integer antiguedad, Long mts2, String direccion,
             Double precio, String provincia, String departamento, String alta, String transaccion,
             Integer hambientes) {
@@ -145,7 +145,7 @@ public class InmuebleControlador {
         try {
             servicioImagen.actualizar(archivo, idImagen);
             Imagen imagen = servicioImagen.getOne(idImagen);
-            servicioInmueble.modificar(archivo, idInmueble, tipo, antiguedad, mts2,
+            servicioInmueble.modificar(archivo, id, tipo, antiguedad, mts2,
                     direccion, precio, provincia, departamento, alta, imagen, transaccion,
                     hambientes);
 
