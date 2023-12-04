@@ -190,5 +190,10 @@ public class ServicioInmueble {
         // Devuelve los rangos horarios asociados al inmueble encontrado
         return inmueble.getRangosHorarios();
     }
-
+    
+    public List<Inmueble> filtroInmueble(String tipo, String provincia, String transaccion, String departamento){
+        
+        return repositorioInmueble.buscarPorParametros(tipo, provincia, transaccion, departamento);
+        
+    } 
 }
