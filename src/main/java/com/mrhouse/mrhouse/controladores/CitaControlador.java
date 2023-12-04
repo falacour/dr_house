@@ -4,6 +4,7 @@ import com.mrhouse.mrhouse.Entidades.FechaHoraContainer;
 import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.Entidades.RangoHorario;
 import com.mrhouse.mrhouse.Entidades.Cliente;
+import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioCita;
 import com.mrhouse.mrhouse.servicios.ServicioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioRangoHorario;
@@ -40,7 +41,7 @@ public class CitaControlador {
 
     @GetMapping("/registrar/{id}")
     public String registrarCita(@PathVariable("id") Long id,
-                                ModelMap model, HttpSession session) throws Exception {
+            ModelMap model, HttpSession session) throws Exception {
         Inmueble inmueble = servicioInmueble.obtenerInmueblePorId(id);
         List<RangoHorario> rangoHorario = new ArrayList();
         rangoHorario.add(servicioRangoHorario.obtenerRangoHorarioPorId(id));
@@ -61,10 +62,10 @@ public class CitaControlador {
         return "cita_form.html";
     }
 
-    @PostMapping("/registrar/{cuentaTributaria}")
+    @PostMapping("/registrar/{id}")
     public String registrarCita(@RequestParam String idEnte, @RequestParam String idCliente,
-                                @RequestParam Long idHorario, @RequestParam(required = false) String nota,
-                                ModelMap modelo) {
+            @RequestParam Long idHorario, @RequestParam(required = false) String nota,
+            ModelMap modelo) {
         System.out.println("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         try {
             System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
@@ -93,30 +94,30 @@ public class CitaControlador {
             }
 
             // Formatea las fechas como cadenas en el formato "yyyy-MM-dd"
-           Map<String, List<LocalTime>> horariosPorFecha = rangoHorarioList.stream()
-        .collect(Collectors.groupingBy(
-                rango -> rango.getFecha().toString(),
-                Collectors.mapping(
-                        rango -> {
-                            List<LocalTime> horas = new ArrayList<>();
-                            LocalTime horaInicio = rango.getHoraInicio();
-                            LocalTime horaFin = rango.getHoraFin();
+            Map<String, List<LocalTime>> horariosPorFecha = rangoHorarioList.stream()
+                    .collect(Collectors.groupingBy(
+                            rango -> rango.getFecha().toString(),
+                            Collectors.mapping(
+                                    rango -> {
+                                        List<LocalTime> horas = new ArrayList<>();
+                                        LocalTime horaInicio = rango.getHoraInicio();
+                                        LocalTime horaFin = rango.getHoraFin();
 
                             while (horaInicio.isBefore(horaFin) || horaInicio.equals(horaFin)) {
                                 horas.add(horaInicio);
                                 horaInicio = horaInicio.plusMinutes(30);
                             }
 
-                            return horas;
-                        },
-                        Collectors.toList()
-                )
-        ))
-        .entrySet().stream()
-        .collect(Collectors.toMap(
-                Map.Entry::getKey,
-                entry -> entry.getValue().stream().flatMap(List::stream).collect(Collectors.toList())
-        ));
+                                        return horas;
+                                    },
+                                    Collectors.toList()
+                            )
+                    ))
+                    .entrySet().stream()
+                    .collect(Collectors.toMap(
+                            Map.Entry::getKey,
+                            entry -> entry.getValue().stream().flatMap(List::stream).collect(Collectors.toList())   
+                    ));
 
             return ResponseEntity.ok(horariosPorFecha);
         } catch (Exception e) {

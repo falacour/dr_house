@@ -1,62 +1,144 @@
 <html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace = "/fragments/head :: head"/>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!--Fuente del titulo-->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Serif+Old+Uyghur&display=swap"
+            rel="stylesheet"
+            />
+        <!--Fuente del body-->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            />
+        <title>MrHouse</title>
+        <link href="/css/inmueble_form.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/css/style.css" />
+        <!--Script para las provincias/departamentos-->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const $selectProvincias = document.getElementById("provincias");
+                const $selectMunicipios = document.getElementById("municipios");
 
+                function provincia() {
+                    fetch("https://apis.datos.gob.ar/georef/api/provincias")
+                            .then((res) => (res.ok ? res.json() : Promise.reject(res)))
+                            .then((json) => {
+                                let $options = `<option value="Elige una provincia">Elige una provincia</option>`;
+
+                                json.provincias.forEach(
+                                        (el) => ($options += `<option value="${el.nombre}">${el.nombre}</option>`)
+                                );
+
+                                $selectProvincias.innerHTML = $options;
+                            })
+                            .catch((error) => {
+                                let message = error.statusText || "Ocurrió un error";
+                                $selectProvincias.nextElementSibling.innerHTML = `Error: ${error.status}: ${message}`;
+                            });
+                }
+
+                function municipio(provincia) {
+                    fetch(
+                            `https://apis.datos.gob.ar/georef/api/municipios?provincia=${provincia}&max=100`
+                            )
+                            .then((res) => (res.ok ? res.json() : Promise.reject(res)))
+                            .then((json) => {
+                                let $options = `<option value="Elige un municipio">Elige un municipio</option>`;
+
+                                json.municipios.forEach(
+                                        (el) => ($options += `<option value="${el.id}">${el.nombre}</option>`)
+                                );
+
+                                $selectMunicipios.innerHTML = $options;
+                            })
+                            .catch((error) => {
+                                let message = error.statusText || "Ocurrió un error";
+                                $selectMunicipios.nextElementSibling.innerHTML = `Error: ${error.status}: ${message}`;
+                            });
+                }
+
+                $selectProvincias.addEventListener("change", (e) => {
+                    municipio(e.target.value);
+                    console.log(e.target.value);
+                });
+
+                provincia(); // Llamada inicial para cargar las provincias al cargar la página
+            });
+        </script>
+    </head>
     <body>
-    <head th:replace = "/fragments/header :: header"/>
-    <head th:replace = "/fragments/nav :: nav"/>
-    <div class="container-fluid m-5 contenedor">
+        <header th:replace="/fragments/header :: header"></header>
+        <nav th:replace="/fragments/nav :: nav"></nav>
+        <div class="container-fluid m-5 contenedor">
+            <div class="contenedor_inmueble">
+                <form class="formulario_inmueble" th:action="@{/inmueble/registro}" method="POST" enctype="multipart/form-data">
+                    <h3 class="titulo">Cargar Inmueble</h3>
+                    <p></p>
+                    <select name="tipo" class="searcher-form" th:value="${tipo}">
+                        <option value="" disabled selected>Tipo de vivienda</option>
+                        <option value="1">Departamento</option>
+                        <option value="2">PH</option>
+                        <option value="3">Casa</option>
+                        <option value="4">Terreno y lotes</option>
+                        <option value="5">Cochera</option>
+                        <option value="6">Local</option>
+                        <option value="7">Oficina</option>
+                        <option value="8">Consultorio</option>
+                        <option value="9">Quinta</option>
+                        <option value="10">Chacra</option>
+                        <option value="11">Galpon</option>
+                        <option value="12">Deposito</option>
+                        <option value="13">Campo</option>
+                        <option value="14">Hotel</option>
+                        <option value="15">Fondo de comercio</option>
+                        <option value="16">Edificio</option>
+                        <option value="17">Otros</option>
+                    </select>
 
+                    <div class="form-group my-3">
+                        <input type="number" class="form-control" name="antiguedad" placeholder="Antiguedad del inmueble" th:value="${antiguedad}">
+                    </div>
 
-        <form class="formulario" th:action="@{/inmueble/registro}" method="POST" enctype="multipart/form-data">
+                    <div class="form-group my-3">
+                        <input type="number" class="form-control" name="mts2" placeholder="Metros cuadrados del inmueble" th:value="${mts2}">
+                    </div>
+                    <select id="provincias" class="searcher-form" th:value="${provincia}">
+                        <option value="" disabled selected>Elige una provincia</option>
+                    </select>
 
+                    <select id="municipios" class="searcher-form" th:value="${departamento}">
+                        <option value="" disabled selected>Elige un municipio</option>
+                    </select>
 
-            <label class="mb-2">Cargar Inmueble</label> 
-            <div class="form-group my-3">
+                    <div class="form-group my-3">
+                        <input type="text" class="form-control" name="direccion" placeholder="Direccion del inmueble" th:value="${direccion}">
+                    </div>
+                    <div class="form-group my-3">
+                        <input type="number" class="form-control" name="precio" placeholder="Valor del Inmueble" th:value="${precio}">
+                    </div>
+                    <div class="form-group my-3">
+                        <input type="file" class="form-control" name="archivo" th:value="${archivo}" >
+                    </div>
+                    <div class="form-group my-3">
+                        <input type="text" class="form-control" name="descripcion" placeholder="Descripcion del inmueble" th:value="${descripcion}">
+                    </div>
 
-                <input type="text" class="form-control" name="tipo" placeholder="Tipo de inmueble" th:value="${tipo}">
-            </div>
-
-            <div class="form-group my-3">
-                <input type="number" class="form-control" name="antiguedad" placeholder="Antiguedad del inmueble" th:value="${antiguedad}">
-            </div>
-
-            <div class="form-group my-3">
-                <input type="number" class="form-control" name="mts2" placeholder="Metros cuadrados del inmueble" th:value="${mts2}">
-            </div>
-            <div class="form-group my-3">
-                <input type="text" class="form-control" name="provincia" placeholder="Provincia" th:value="${provincia}">
-            </div>
-            <div class="form-group my-3">
-                <input type="text" class="form-control" name="departamento" placeholder="Departamento" th:value="${departamento}">
-            </div>
-            <div class="form-group my-3">
-                <input type="text" class="form-control" name="direccion" placeholder="Direccion del inmueble" th:value="${direccion}">
-            </div>
-            <div class="form-group my-3">
-                <input type="number" class="form-control" name="precio" placeholder="Valor del Inmueble" th:value="${precio}">
-            </div>
-            <div class="form-group my-3">
-                <input type="file" class="form-control" name="archivo" th:value="${archivo}" >
-            </div>
-            <div class="form-group my-3">
-                <input type="text" class="form-control" name="descripcion" placeholder="Descripcion del inmueble" th:value="${descripcion}">
-            </div>
-
-            <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
-        </form>
-
-
-        <section class=" text-center container">
-            <div class="row mt-3">
-                <div class="divVolver">
-                    <a th:href="@{/}" class="botonVolver">Volver</a>
+                    <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
+                </form>
+                <div>
+                    <div>
+                        <a th:href="@{/}" class="volver">Volver</a>
+                    </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+        <!-- Sección del Footer -->
+        <footer th:replace="/fragments/footer :: footer"></footer>
+        <script src="index.js"></script>
 
-    <!--Seccion del Footer-->
-    <head th:replace = "/fragments/footer :: footer"/>
-    <script src="index.js"></script>
-</body>
+    </body>
 </html>

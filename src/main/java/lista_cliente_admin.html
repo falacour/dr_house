@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace = "/fragments/head :: head"/>
-    
     <body>        
         <header th:replace = "/fragments/header :: header"/>
         <nav th:replace = "/fragments/nav :: nav"/>
-        
         
         <div class="container m-5">
             <table class="table table-dark">
@@ -16,34 +13,29 @@
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Contraseña</th>
                         <th scope="col">Rol</th>
-                         <th scope="col">Imagen</th>
-                        <th scope="col" >Accion</th> <!-- sec:authorize = "hasRole('ADMIN')" -->
+                        <th scope="col">Imagen</th>
+                        <th sec:authorize = "hasRole('ADMIN')" scope="col">Acción</th>
                     </tr>
                 </thead>
-                <tbody th:each="ente : ${entes}">
+                <tbody th:each="cliente : ${clientes}">
                     <tr>
-                        
-                        <th scope="row" th:text="${ente.nombre}"></th>
-                        <td th:text="${ente.email}"></td>
-                        <td th:text="${ente.password}"></td>
-                        <td th:text="${ente.rol}"></td>
+                        <td th:text="${cliente.nombre}"></td>
+                        <td th:text="${cliente.email}"></td>
+                        <td th:text="${cliente.rol}"></td>
                         <td>Imagen</td>
-                        <td> <!-- sec:authorize = "hasRole('ADMIN')"-->
-                            <a th:href="@{/ente/modificar/__${ente.id}__}">
+                        <td sec:authorize = "hasRole('ADMIN')">
+                            <a th:href="@{/admin/modificar/__${cliente.id}__}">
                                 <i class="bi bi-feather"></i>Modificar
                             </a>
-                        </td>
-                        <!-- cambio de estado
-                            <td sec:authorize = "hasRole('ADMIN')">
-                            <a th:href="@{/ente/modificar/__${libro.isbn}__}">
+                            <a th:href="@{/admin/modificar/__${cliente.id}__}">
                                 <i class="bi bi-feather"></i>Eliminar
                             </a>
-                        </td>                        
-                        -->
-                        
-                    </tr>                                    
+                            <a th:href= "@{/admin/modificarRol/__${cliente.id}__}">
+                                <i class="fas fa-feather-alt"></i>Cambiar Rol
+                            </a>
+                        </td>
+                    </tr>                                  
                 </tbody>
             </table>
         </div>

@@ -4,10 +4,14 @@
  */
 package com.mrhouse.mrhouse.controladores;
 
+import java.util.List;
 import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.enumeraciones.Rol;
 import com.mrhouse.mrhouse.excepciones.MiException;
+import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
+import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import com.mrhouse.mrhouse.servicios.ServicioCliente;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,49 +22,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- *
- * @author thell
- */
 @Controller
 @RequestMapping("/cliente")
 public class ClienteControlador {
 
     @Autowired
     private ServicioCliente servicioCliente;
-
-//    @GetMapping("/registrar")
-//    public String registrar() {
-//        return "cliente_form.html";
-//    }
-//
-//    @PostMapping("/registro")
-//    public String registro(MultipartFile archivo, @RequestParam String nombre, @RequestParam String dni, @RequestParam String email,
-//            @RequestParam String password, @RequestParam String password2, ModelMap modelo) {
-//        try {
-//            servicioCliente.registrar(archivo, nombre, dni, email, password, password2, Rol.USER);
-//            modelo.put("exito", "Tu usuario de cliente fue guardado con exito");
-//        } catch (MiException ex) {
-//            modelo.put("error", ex.getMessage());
-//            modelo.put("nombre", nombre);
-//            modelo.put("email", email);
-//            return "cliente_form.html";
-//        }
-//        return "index.html";
-//    }
-
-//    @GetMapping("/login")
-//    public String login(@RequestParam(required = false) String error, ModelMap modelo) {
-//
-//        if (error != null) {
-//            modelo.put("error", "usuario o contraseña invalidos");
-//
-//        }
-//        return "login.html";
-//    }
-//    
-   
     
+    @Autowired
+    private RepositorioInmueble repositorioInmueble;
+    @Autowired
+    private RepositorioCliente repositorioCliente;
+
+      @GetMapping("/registrar")
+    public String registrar() {
+        return "cliente_form.html";
+    }
+
+    @PostMapping("/registro")
+    public String registro(MultipartFile archivo, @RequestParam String nombre, @RequestParam String dni, @RequestParam String email,
+            @RequestParam String password, @RequestParam String password2, ModelMap modelo) {
+        try {
+            servicioCliente.registrar(archivo, nombre, dni, email, password, password2, Rol.CLIENTE);
+            modelo.put("exito", "Tu usuario de cliente fue guardado con exito");
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.put("nombre", nombre);
+            modelo.put("email", email);
+            return "cliente_form.html";
+        }
+        return "index.html";
+    }
+
+
     @GetMapping("/modificar/{id}")
     public String modificar(ModelMap modelo, HttpSession session){
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
@@ -70,14 +64,38 @@ public class ClienteControlador {
     
     @PostMapping("/modificar/{id}")
     public String modificado(MultipartFile archivo, String nombre, String dni, String email,
-            String password, String password2, ModelMap modelo, String id){
+            String password, String password2, ModelMap modelo, String id, Rol rol){
         try {
             
-            servicioCliente.actualizar(archivo, id, nombre, email, password, password2, dni);
+            servicioCliente.actualizar(archivo, id, nombre, email, password, password2, dni, rol);
             
             return "index.html";
         } catch (MiException e) {
             return "perfil_modificar.html";
         }
+    }
+    
+       @GetMapping("/lista")
+    public String listar(ModelMap modelo,HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List <Cliente> clientes = repositorioInmueble.clientesDeEnte(cliente.getId());
+        modelo.addAttribute("clientes", clientes);
+        return "cliente_lista.html";
+    }
+    
+    @GetMapping("/listaAllClient")
+    public String listarTodosLosClientes(ModelMap modelo,HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List <Cliente> clientes = repositorioCliente.todosLosClientes();
+        modelo.addAttribute("clientes", clientes);
+        return "cliente_lista.html";
+    }
+    
+    @GetMapping("/listaAllEnte")
+    public String listarTodosLosEntes(ModelMap modelo,HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List <Cliente> clientes = repositorioCliente.todosLosEnte();
+        modelo.addAttribute("clientes", clientes);
+        return "cliente_lista.html";
     }
 }

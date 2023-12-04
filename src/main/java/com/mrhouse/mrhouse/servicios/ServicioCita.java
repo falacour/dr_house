@@ -5,7 +5,7 @@ import com.mrhouse.mrhouse.Entidades.FechaHoraContainer;
 import com.mrhouse.mrhouse.Entidades.RangoHorario;
 import com.mrhouse.mrhouse.Entidades.Cliente;
 
-import com.mrhouse.repositorios.RepositorioCita;
+import com.mrhouse.mrhouse.repositorios.RepositorioCita;
 import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
 import com.mrhouse.mrhouse.repositorios.RepositorioRangoHorario;
 
