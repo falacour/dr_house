@@ -1,7 +1,7 @@
 package com.mrhouse.mrhouse.Entidades;
 
 import com.mrhouse.mrhouse.enumeraciones.Rol;
-import java.util.List;
+import java.util.*;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import lombok.*;
