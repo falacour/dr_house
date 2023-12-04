@@ -77,8 +77,12 @@
         <nav th:replace = "/fragments/nav :: nav"/>             
 
         <div class="contenedor_inmueble">
-                <form class="formulario_inmueble" th:action="@{/inmueble/registro}" method="POST" enctype="multipart/form-data">
+                <form class="formulario_inmueble" th:action="@{/inmueble/modificar/__${inmueble.id}__}" method="POST" enctype="multipart/form-data">
                     <h3 class="titulo">Editar Inmueble</h3>
+                    <div class="form-group my-3">
+                        <input type="text" hidden name="idImagen" th:value="${inmueble.imagen.id}">
+                        <input type="number" hidden name="idInmueble" th:value="${inmueble.id}">
+                    </div>
                     <p></p>
                     <select name="tipo" class="searcher-form" th:value="${inmueble.tipo}">
                         <option value="" disabled selected>Tipo de vivienda</option>
@@ -135,23 +139,20 @@
                                    </select>
                     </div>
                     <div class="form-group my-3">
-                        <input type="file" class="form-control" name="archivo" th:text="${inmueble.archivo}" >
+                        <input type="file" class="form-control" name="archivo" th:value="${inmueble.imagen.contenido}" >
                     </div>
                     <div class="form-group my-3">
-                        <input type="text" class="form-control" name="descripcion" placeholder="Descripcion del inmueble" th:text="${inmueble.descripcion}">
+                        <input type="text" class="form-control" name="descripcion" placeholder="Descripcion del inmueble" th:value="${inmueble.descripcion}">
                     </div>
-
-                    <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
-                </form>
-                <div class="form-group my-3">
+                    
+                    <div class="form-group my-3">
                     <select name="alta" class="searcher-form" th:value="${inmueble.alta}">
                         <option value="">No dar de Alta</option>
                         <option value="dar de alta">Dar de Alta</option>
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
-
+                    <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
             </form>
         </div>
     </body>
