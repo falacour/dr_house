@@ -1,0 +1,35 @@
+<header class="header-items">
+    <div class="logo-empresa">
+        <a class="button-logo" th:href="@{/}">
+            <img
+                src="/img/logo.png"
+                alt="logo_temporal"
+                class="logo-empresa"
+                />
+        </a>
+        <h1 class="nombre_Empresa">Mr. House</h1>
+    </div>
+
+    <!--forms relacionados a las querys de busqueda-->
+    <!--Botones relacionados a ingreso y registro de Usuario-->
+    <!--Sin iniciar sesion-->
+    <div sec:authorize="!hasAnyRole('ENTE', 'ADMIN', 'CLIENTE', 'USER')">
+        <a th:href="@{login}">
+            <button class="log-in"  type="button">Inicia Sesión</button>
+        </a>
+        <a  th:href="@{registro}">
+            <button class="log-in" th:if="${session.usuariosession == null}" type="button">Registrarse</button>
+        </a>
+    </div>
+    <!--Sesion iniciada-->
+    <div sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE')">
+        <a  th:href="@{/perfil}">
+            <button class="log-in"  type="button">Perfil</button>
+        </a>
+        </a>
+        <a  th:href="@{/logout}">
+            <button class="log-in" sec:authorize="hasAnyRole('ENTE', 'ADMIN', 'CLIENTE')" type="button" >Cerrar sesion</button>
+        </a>
+        <p  th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p>
+    </div>
+</header>
