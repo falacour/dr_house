@@ -58,6 +58,7 @@ public class InmuebleControlador {
             modelo.put("exelente", "se cargo tu inmueble");
         } catch (MiException e) {
             modelo.put("error", e.getMessage());
+            System.out.println(e.getMessage());
             return "inmueble_form.html";
         }
         return "redirect:/";
@@ -167,5 +168,5 @@ public class InmuebleControlador {
     public String definirReunion(ModelMap modelo) {
 
         return "calendario.html";
-    }
+    }    
 }

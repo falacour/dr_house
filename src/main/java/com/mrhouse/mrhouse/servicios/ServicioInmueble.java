@@ -33,6 +33,8 @@ public class ServicioInmueble {
     public void crearInmueble(MultipartFile archivo, Long id, String tipo, Integer antiguedad, Long mts2,
             String direccion, Double precio, String provincia, String departamento, String descripcion,
             String idEnte, String transaccion, Integer hambientes) throws MiException {
+        
+        id = 1L;
         validar(id, tipo, antiguedad, mts2, direccion, precio, provincia, departamento,
                 transaccion, hambientes);
         Inmueble inmueble = new Inmueble();
@@ -166,7 +168,7 @@ public class ServicioInmueble {
         if (departamento == null) {
             throw new MiException("el departamento no puede estar vacio");
         }
-        if (transaccion == null || transaccion == "") {
+        if (transaccion == null ) {
             throw new MiException("la transaccion no puede estar vacia");
         }
         if (hambientes == null) {
@@ -189,5 +191,10 @@ public class ServicioInmueble {
         // Devuelve los rangos horarios asociados al inmueble encontrado
         return inmueble.getRangosHorarios();
     }
-
+    
+    public List<Inmueble> filtroInmueble(String tipo, String provincia, String transaccion, String departamento){
+        
+        return repositorioInmueble.buscarPorParametros(tipo, provincia, transaccion, departamento);
+        
+    } 
 }

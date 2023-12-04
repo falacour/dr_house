@@ -53,14 +53,18 @@ public interface RepositorioInmueble extends JpaRepository<Inmueble, Long> {
     @Query("SELECT i FROM Inmueble i WHERE i.cliente != null")
     public List todosLosInmueblesVendidos();
 
-    //query para filtrar publicaciones
+    //query para filtrar inmuebles por parametros opcionales y que no tengan dueños asociados
     @Query("SELECT i FROM Inmueble i "
             + "WHERE (:tipo IS NULL OR i.tipo = :tipo) "
-            + "AND (:tipo IS NULL OR i.tipo = :tipo) "
-            + "AND (:tipo IS NULL OR i.tipo = :tipo)")
-    public List<Inmueble> buscarPorParametros(@Param("tipo") String tipo
-    //            ,@Param("param2") String param2,
-    //            @Param("param3") String param3
+            + "AND (:provincia IS NULL OR i.provincia = :provincia) "
+            + "AND (:transaccion IS NULL OR i.transaccion = :transaccion) "
+            + "AND (:departamento IS NULL OR i.departamento = :departamento)"
+            + "AND (i.cliente.id IS NULL)")
+    public List<Inmueble> buscarPorParametros(
+            @Param("tipo") String tipo,
+            @Param("provincia") String provincia,
+            @Param("transaccion") String transaccion,
+            @Param("departamento") String departamento
     );
-
+    
 }
