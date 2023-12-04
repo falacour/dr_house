@@ -2,91 +2,105 @@ body {
     font-family: Roboto, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-    width: 80%;
     margin: 0 auto;
     background-color: #4083fa;
     background: linear-gradient(to bottom, #4083fa, #101f3f);
+    
+}
+
+.conteiner-calendar {
+    justify-content: center;
+    display: flex;
+    display: grid;
+    margin-top: 20px;
+    justify-content: center;
+    
+}
+.conteiner-calendar conteiner-horarios{
+   text-align: center;
+   
+}
+.conteiner-calendar button{
+   text-align: center;
+  margin-top: 20px;
 }
 
 
 .calendar {
-  border: 1px solid #ccc;
-  padding: 20px;
-  box-sizing: border-box;
-  color: white;
-  margin-bottom: 20px; /* Espacio entre el calendario y el botón */
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+    margin-bottom: 20px; /* Espacio entre el calendario y el botón */
+    width:  500px;
 }
 
 .month {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .prev, .next {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .weekdays {
-  display: flex;
+    display: flex;
 }
 
 .weekdays div {
-  flex: 1;
-  text-align: center;
+    flex: 1;
+    text-align: center;
 }
 
 .days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
 }
 
 .days div {
-  text-align: center;
-  padding: 10px;
-  border: 1px solid #ccc;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
 }
 
 /* Estilos para los días seleccionados */
 .days div.selected {
-  background-color: lightblue;
-  color: white;
+    background-color: lightblue;
+    color: white;
 }
 
 /* Estilos del botón de reserva */
 #reservarButton {
-  display: block;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: 2px solid #007BFF;
-  border-radius: 5px;
-  background-color: orange;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #007BFF;
+    border-radius: 5px;
+    background-color: #e44d26;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 #reservarButton:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
+    background-color: white;
+    border-color: #e44d26;
+    color:#e44d26;
 }
 
 #horarios{
-  display: block;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: 2px solid #007BFF;
-  border-radius: 5px;
-  background-color: black;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  margin-bottom: 10px;
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #007BFF;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-bottom: 10px;
 }
