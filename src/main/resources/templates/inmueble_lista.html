@@ -40,6 +40,7 @@
                         <th scope="row" th:text="${inmueble.direccion}"></th>
                         <th scope="row" th:text="${inmueble.provincia}"></th>
                         <th scope="row" th:text="${inmueble.departamento}"></th>
+                        <th scope="row" th:text="${inmueble.direccion}"></th>
                         <th scope="row" th:text="${inmueble.mts2}"></th>
                         <th scope="row" th:text="${inmueble.hambientes}"></th>
                         <th scope="row" th:text="${inmueble.precio}"></th>
@@ -47,7 +48,7 @@
                 
                      
                         <td>
-                            <div th:if="${inmueble.cliente == null}" >
+                            <div th:if="${inmueble.cliente != null}" >
                             <a class="boton-modificar" sec:authorize="hasAnyRole('ADMIN','ENTE')" th:href="@{/inmueble/modificar/__${inmueble.id}__}">Modificar</a>
                             <br>
                             <br>

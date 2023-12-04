@@ -34,17 +34,17 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class ServicioCliente implements UserDetailsService {
 
-         @Autowired
-          private RepositorioCliente repositorioCliente;
+    @Autowired
+    private RepositorioCliente repositorioCliente;
 
-          @Autowired
-         private ServicioImagen servicioImagen;
+    @Autowired
+    private ServicioImagen servicioImagen;
 
-           @Autowired
-          private ServicioInmueble servicioInmueble;
+    @Autowired
+    private ServicioInmueble servicioInmueble;
 
-     @Transactional
-     public void registrar(MultipartFile archivo, String nombre, String dni, String mail,
+    @Transactional
+    public void registrar(MultipartFile archivo, String nombre, String dni, String mail,
             String password, String password2, Rol rol) throws MiException {
         validar(nombre, mail, password, password2, dni);
         Cliente cliente = new Cliente();
@@ -100,7 +100,21 @@ public class ServicioCliente implements UserDetailsService {
         if (respuesta.isPresent()) {
             Cliente cliente = respuesta.get();
             repositorioCliente.delete(cliente);
-           
+
+        }
+    }
+
+    @Transactional
+    public void baja(String id) {
+        Optional<Cliente> respuesta = repositorioCliente.findById(id);
+        if (respuesta.isPresent()) {
+            Cliente cliente = respuesta.get();
+            if (cliente.getBaja() == false) {
+                cliente.setBaja(Boolean.TRUE);
+            } else if (cliente.getBaja() == true) {
+                cliente.setBaja(Boolean.FALSE);
+            }
+
         }
     }
 
