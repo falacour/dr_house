@@ -103,9 +103,9 @@ public class ClienteControlador {
      @GetMapping("/baja/{id}")
 public String baja(@PathVariable String id, @PathVariable Boolean baja ){
     servicioCliente.baja(id);
-    if(baja == id){
-        
-    }
+  if(baja==true){
+      
+  }
     return "cliente_lista.html";
 }
 }
