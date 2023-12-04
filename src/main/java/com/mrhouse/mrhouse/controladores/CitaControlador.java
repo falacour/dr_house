@@ -103,10 +103,10 @@ public class CitaControlador {
                                         LocalTime horaInicio = rango.getHoraInicio();
                                         LocalTime horaFin = rango.getHoraFin();
 
-                                        while (horaInicio.isBefore(horaFin) || horaInicio.equals(horaFin)) {
-                                            horas.add(horaInicio);
-                                            horaInicio = horaInicio.plusMinutes(30);
-                                        }
+                            while (horaInicio.isBefore(horaFin) || horaInicio.equals(horaFin)) {
+                                horas.add(horaInicio);
+                                horaInicio = horaInicio.plusMinutes(30);
+                            }
 
                                         return horas;
                                     },

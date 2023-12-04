@@ -34,7 +34,8 @@ public class InmuebleControlador {
     private ServicioImagen servicioImagen;
     @Autowired
     private ServicioCliente servicioCliente;
-
+    
+    //////////////////////////////////////REGISTRO///////////////////////////////////////
     @GetMapping("/registrar")
     public String registrar(ModelMap modelo) {
         return "inmueble_form.html";
@@ -45,37 +46,85 @@ public class InmuebleControlador {
     public String registro(@RequestParam(required = false) Long id, @RequestParam String tipo,
             @RequestParam(required = false) Integer antiguedad, @RequestParam(required = false) Long mts2,
             @RequestParam String direccion, ModelMap modelo, MultipartFile archivo, Double precio,
-            String provincia, String departamento, String descripcion, HttpSession session) {
+            String provincia, String departamento, String descripcion, HttpSession session,
+            String transaccion, Integer hambientes ) {
 
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
 
         try {
             servicioInmueble.crearInmueble(archivo, id, tipo, antiguedad, mts2, direccion,
-                    precio, provincia, departamento, descripcion, cliente.getId());
+                    precio, provincia, departamento, descripcion, cliente.getId(), transaccion,
+                    hambientes);
             modelo.put("exelente", "se cargo tu inmueble");
         } catch (MiException e) {
             modelo.put("error", e.getMessage());
+            System.out.println(e.getMessage());
             return "inmueble_form.html";
         }
         return "redirect:/";
     }
-
-    @GetMapping("/lista")
-    public String listar(ModelMap modelo, HttpSession session) {
+    
+    //////////////////////////////////////LISTAS//////////////////////////////////////////
+    @GetMapping("/listarTodosLosInmueblesAVender")
+    public String listaTodosLosInmueblesAVender(ModelMap modelo, HttpSession session) {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
-        List<Inmueble> inmuebles = repositorioInmueble.inmueblesPorEnteVender(cliente.getId());
+        List<Inmueble> inmuebles = repositorioInmueble.todosLosInmueblesAVender();
+        modelo.addAttribute("inmuebles", inmuebles);
+        modelo.addAttribute("cliente", cliente);
+        return "inmueble_lista.html";
+    }
+    
+    @GetMapping("/listarTodosLosInmueblesVendidos")
+    public String listaTodosLosInmueblesVendidos(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List<Inmueble> inmuebles = repositorioInmueble.todosLosInmueblesVendidos();
+        modelo.addAttribute("inmuebles", inmuebles);
+        modelo.addAttribute("cliente", cliente);
+        return "inmueble_lista.html";
+    }
+    
+    @GetMapping("/listaInmueblesNoComprados")
+    public String listaEnteInmuebleNoComprados(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List<Inmueble> inmuebles = repositorioInmueble.inmueblesNoComprados();
+        modelo.addAttribute("inmuebles", inmuebles);
+        modelo.addAttribute("cliente", cliente);
+        return "inmueble_lista.html";
+    }
+    
+    @GetMapping("/listaEnteInmuebleAVender")
+    public String listaEnteInmuebleAVender(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List<Inmueble> inmuebles = repositorioInmueble.inmueblesPorEnteAVender(cliente.getId());
         modelo.addAttribute("inmuebles", inmuebles);
         return "inmueble_lista.html";
     }
 
-    @GetMapping("/vendidos")
-    public String listarVendidos(ModelMap modelo, HttpSession session) {
+    @GetMapping("/listaVendidos")
+    public String listarEnteInmueblesVendidos(ModelMap modelo, HttpSession session) {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
         List<Inmueble> inmuebles = repositorioInmueble.inmueblesPorEnteComprados(cliente.getId());
         modelo.addAttribute("inmuebles", inmuebles);
         return "inmueble_lista.html";
     }
-
+    
+    @GetMapping("/listaComprados")
+    public String listarClienteInmueblesComprados(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List<Inmueble> inmuebles = repositorioInmueble.inmueblesPorCliente(cliente.getId());
+        modelo.addAttribute("inmuebles", inmuebles);
+        return "inmueble_lista.html";
+    }
+    
+    @GetMapping("/listaInmueblesPorEnteAVender")
+    public String listarinmueblesPorEnteAVenders(ModelMap modelo, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("clientesession");
+        List<Inmueble> inmuebles = repositorioInmueble.inmueblesPorCliente(cliente.getId());
+        modelo.addAttribute("inmuebles", inmuebles);
+        return "inmueble_lista.html";
+    }
+    
+    /////////////////////////////////MODIFICAR/////////////////////////////////////
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable Long id, ModelMap modelo) {
 
@@ -87,22 +136,25 @@ public class InmuebleControlador {
     @PostMapping("/modificar/{id}")
     public String modificar(@PathVariable MultipartFile archivo, Long idInmueble, ModelMap modelo,
             String idImagen, String tipo, Integer antiguedad, Long mts2, String direccion,
-            Double precio, String provincia, String departamento, String alta) {
+            Double precio, String provincia, String departamento, String alta, String transaccion,
+            Integer hambientes) {
 
         try {
             servicioImagen.actualizar(archivo, idImagen);
             Imagen imagen = servicioImagen.getOne(idImagen);
             servicioInmueble.modificar(archivo, idInmueble, tipo, antiguedad, mts2,
-                    direccion, precio, provincia, departamento, alta, imagen);
+                    direccion, precio, provincia, departamento, alta, imagen, transaccion,
+                    hambientes);
 
         } catch (MiException ex) {
             modelo.put("error", ex);
             return "inmueble_modificar.html";
         }
 
-        return "redirect:/inmueble/lista";
+        return "redirect:/inmueble/listaEnteInmuebleAVender";
     }
-
+    
+    //////////////////////////////////////COMPRAR///////////////////////////////////////
     @GetMapping("/comprar/{id}")
     public String comprar(Long idInmueble, String idCliente) {
 
@@ -110,10 +162,11 @@ public class InmuebleControlador {
 
         return "index.html";
     }
-
+    
+    //////////////////////////////////////Calendario///////////////////////////////////////
     @GetMapping("/calendario")
     public String definirReunion(ModelMap modelo) {
 
         return "calendario.html";
-    }
+    }    
 }

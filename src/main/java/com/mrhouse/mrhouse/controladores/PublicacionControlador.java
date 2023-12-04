@@ -3,6 +3,7 @@ package com.mrhouse.mrhouse.controladores;
 import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.Entidades.Publicacion;
 import com.mrhouse.mrhouse.excepciones.MiException;
+import com.mrhouse.mrhouse.servicios.ServicioCliente;
 import com.mrhouse.mrhouse.servicios.ServicioPublicacion;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -21,17 +22,24 @@ public class PublicacionControlador {
     
     @Autowired
     ServicioPublicacion servicioPublicacion;
+    @Autowired
+    ServicioCliente servicioCliente;
     
-    @GetMapping("/registrar")
-    public String registrar(){
+    @PostMapping("/registrar")
+    public String registrar(@RequestParam String id, ModelMap modelo){       
+        modelo.put("idEnte", id);
+        
         return "publicacion_form.html";   
     }
     
     @PostMapping("/registro")
     public String registro(@RequestParam String asunto,@RequestParam String mensaje,
-            @RequestParam String idEmisor,@RequestParam String idReceptor, ModelMap modelo){
+            @RequestParam String idReceptor, ModelMap modelo, HttpSession session){
         try {
-            servicioPublicacion.crearPublicacion(asunto, mensaje, idEmisor, idReceptor);
+            
+            Cliente emisor = (Cliente) session.getAttribute("clientesession");            
+            
+            servicioPublicacion.crearPublicacion(asunto, mensaje, emisor.getId(), idReceptor);
             
             modelo.put("exito", "La publicacion se registro correctamente!!");
              return "redirect:/";
@@ -47,7 +55,7 @@ public class PublicacionControlador {
     //Se listaran todas las publicaciones dirigidas al id del cliente registrado
     //no se necesitan parametros ya que se toman del session
     @GetMapping("/recibidos")
-    public String listarPublicacionesMias(ModelMap modelo, HttpSession session) {
+    public String listarPublicacionesRecibidas(ModelMap modelo, HttpSession session) {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
         
         List <Publicacion> publicaciones = servicioPublicacion.listarPorIdReceptor(cliente.getId());
@@ -56,19 +64,23 @@ public class PublicacionControlador {
     }
     
     @GetMapping("/enviadas")
-    public String listarPublicacionesRecibidas(ModelMap modelo, HttpSession session) {
+    public String listarPublicacionesEnviadas(ModelMap modelo, HttpSession session) {
         Cliente cliente = (Cliente) session.getAttribute("clientesession");
         
         List <Publicacion> publicaciones = servicioPublicacion.listarPorIdEmisor(cliente.getId());
+        
         modelo.addAttribute("publicaciones", publicaciones);
         return "publicaciones_lista_recibidos.html";
     }
     
-    @GetMapping("/modificar/{id}")
+    @GetMapping("/visualizar/{id}")
     public String modificar(@PathVariable String id,ModelMap modelo, HttpSession session){
         
             Cliente cliente = (Cliente) session.getAttribute("clientesession");
             Publicacion publicacion = servicioPublicacion.getReferenceById(id);
+            
+            //la persona a la cual le tendria que responder el mail
+            Cliente emisor = servicioCliente.getOne(publicacion.getEmisor().getId());
             
             //esto es para que si el que abre el mensaje es al que va dirigido, se marca como leido
             if(cliente.getId().equals(publicacion.getId())){
@@ -77,17 +89,21 @@ public class PublicacionControlador {
         
         
         modelo.addAttribute("publicacion", publicacion);
+        modelo.put("emisor", emisor);
         
-        return "publicacion_modificar.html";
+        return "publicacion_visualizar.html";
     }
     
-    @PostMapping("/modificar/{id}")
+    @PostMapping("/responder/{id}")
     public String modificar(@PathVariable String id,@RequestParam String asunto,
             @RequestParam String mensaje, @RequestParam String idEmisor,@RequestParam String idReceptor,ModelMap modelo){
         
         try {           
+            System.out.println("idEmisor" + idEmisor);
+            System.out.println("idReceptor" + idReceptor);
             
-            servicioPublicacion.modificarPublicacion(id, asunto, mensaje, idEmisor, idReceptor);
+            //se invierten los id porque se tiene que responder
+            servicioPublicacion.crearPublicacion(asunto, mensaje, idReceptor, idEmisor);
             modelo.put("exito", "Publicacion modificada con exito");
         
         } catch (MiException ex) {
@@ -95,7 +111,7 @@ public class PublicacionControlador {
             modelo.put("asunto", asunto);
             modelo.put("mensaje", mensaje);
         
-            return "publicacion_modificar.html";
+            return "publicacion_visualizar.html";
         }       
         
         return "redirect:/lista";

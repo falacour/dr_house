@@ -13,28 +13,28 @@
             <div>
                 <img
                     class="slider-images"
-                    src="/img/AdobeStock_169692156.webp"
+                    src="/img/imagen3.jpg"
                     alt="Imagen 1"
                     />
             </div>
             <div>
                 <img
                     class="slider-images"
-                    src="/img/architecture-1836070_960_720-1.jpg"
+                    src="/img/imagen5.jpg"
                     alt="Imagen 2"
                     />
             </div>
             <div>
                 <img
                     class="slider-images"
-                    src="/img/Compraventa-de-bienes-inmuebles-en-Panamá.jpg"
-                    alt="Imagen 3"
+                    src="/img/imagen1.jpg"
+                    alt="Imagen5"
                     />
             </div>
             <div>
                 <img
                     class="slider-images"
-                    src="/img/tipos-inmuebles-nexo-inmobiliaria.jpg"
+                    src="/img/imagent7.jpg"
                     alt="Imagen 3"
                     />
             </div>
@@ -45,84 +45,90 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
         <script>
             $(document).ready(function () {
-                $(".slider").slick({
-                    autoplay: true,
-                    autoplaySpeed: 2000,
-                    dots: true,
-                    arrows: false
-                });
+            $(".slider").slick({
+            autoplay: true,
+            autoplaySpeed: 2000,
+            dots: true,
+            arrows: false
+            });
             });
         </script>
-        
-        
+
+
         <!-- Seccion de ofertas -->
         <div class="titulo-seccion">
             <h2>¡Ofertas Especiales!</h2>
         </div>
 
         <section class="ofertas">
-            <div class="contenedorTarjetas" th:each="inmueble : ${inmuebles}">
-                <a  th:href="@{/vistaInmueble/__${inmueble.id}__}">
+            <div class="contenedorDeTarjetas" >
+                <div class="contenedorTarjetas" th:each="inmueble : ${inmuebles}">
+                    <a  th:href="@{/vistaInmueble/__${inmueble.id}__}">
 
-                    <div class="tarjeta" th:if="@{/imagen/inmueble/__${inmueble.imagen.id}__} != null">
-                        <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
-                        <!-- Otros elementos de la tarjeta -->
-                        <p th:text="'Tipo:  ' + ${inmueble.tipo}"></p>
-                        <p th:text="'Provincia:  ' + ${inmueble.provincia}"></p>
-                        <br>
+                        <div class="tarjeta" th:if="@{/imagen/inmueble/__${inmueble.imagen.id}__} != null">
+                            <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
+                            <!-- Otros elementos de la tarjeta -->
+                            <p th:text="'Tipo:  ' + ${inmueble.tipo}"></p>
+                            <p th:text="'Provincia:  ' + ${inmueble.provincia}"></p>
+                            <br>
 
-                        <!-- Formulario para cliente autenticado -->
-                         <!--
-                        <div th:if="${cliente != null}">
-                            <form th:action="@{/inmueble/comprar/__${inmueble.id}__}" method="get">
-                                <input type="hidden" th:value="${cliente.id}" name="id"/>
-                                <input type="hidden" th:value="${inmueble.id}" name="idInmueble"/>
-                                <button type="submit" th:if="${cliente.rol == rol}">Comprar</button>
-                            </form>
+                                <!-- Formulario para cliente autenticado -->
+                                <!--
+                               <div th:if="${cliente != null}">
+                                   <form th:action="@{/inmueble/comprar/__${inmueble.id}__}" method="get">
+                                       <input type="hidden" th:value="${cliente.id}" name="id"/>
+                                       <input type="hidden" th:value="${inmueble.id}" name="idInmueble"/>
+                                       <button type="submit" th:if="${cliente.rol == rol}">Comprar</button>
+                                   </form>
+                               </div>
+                                <!-- Formulario para cliente no autenticado --
+                                <div th:if="${cliente == null}">
+                                    !-- Formulario para cliente no autenticado --
+                                    <form th:action="@{/login}" method="get">
+                                        <button type="submit" th:if="${inmueble.ente != '' }">Comprar</button>
+                                    </form>
+                                </div>-->
+                                <p><a th:href="@{/vistaInmueble/__${inmueble.id}__}"class="oferta-especial-btn">Conoce más</a></p>
                         </div>
-                        <!-- Formulario para cliente no autenticado --
-                        <div th:if="${cliente == null}">
-                            !-- Formulario para cliente no autenticado --
-                            <form th:action="@{/login}" method="get">
-                                <button type="submit" th:if="${inmueble.ente != '' }">Comprar</button>
-                            </form>
-                        </div>-->
-                        <p><a th:href="@{/vistaInmueble/__${inmueble.id}__}"class="oferta-especial-btn">Conoce más</a></p>
-                    </div>
 
 
-                    <div th:if="@{/imagen/inmueble/__${inmueble.id}__} == null" >
-                        <p>error</p>
-                    </div></a>
+                        <div th:if="@{/imagen/inmueble/__${inmueble.id}__} == null" >
+                            <p>error</p>
+                        </div></a>
+                </div>
             </div>
+
         </section> 
-        
+        <br/><br/>
         <!--ES PARA LA LISTA DE TODOS LOS INMUEBLES-->
         <div class="titulo-seccion">
             <h2>Inmuebles</h2>
         </div>
-        <section>
-            <div class="contenedorTarjetas" th:each="inmueble : ${inmuebles}">
-                <a  th:href="@{/vistaInmueble/__${inmueble.id}__}">
+        <section class="ofertas">
+            <div class="contenedorDeTarjetas" >
+                <div class="contenedorTarjetas" th:each="inmueble : ${inmuebles}">
+                    <a  th:href="@{/vistaInmueble/__${inmueble.id}__}">
 
-                    <div class="tarjeta" th:if="@{/imagen/inmueble/__${inmueble.imagen.id}__} != null">
-                        <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
-                        <!-- Otros elementos de la tarjeta -->
-                        <p th:text="'Tipo:  ' + ${inmueble.tipo}"></p>
-                        <p th:text="'Provincia:  ' + ${inmueble.provincia}"></p>
-                        <p th:text="'Departamento:  ' + ${inmueble.departamento}"></p>
-                        <p th:text="'Precio:  ' + ${inmueble.precio} + '$'"></p>
+                        <div class="tarjeta" th:if="@{/imagen/inmueble/__${inmueble.imagen.id}__} != null">
+                            <img th:src="@{/imagen/inmueble/__${inmueble.imagen.id}__}" alt="imagen inmueble"/>
+                            <!-- Otros elementos de la tarjeta -->
+                            <p th:text="'Tipo:  ' + ${inmueble.tipo}"></p>
+                            <p th:text="'Provincia:  ' + ${inmueble.provincia}"></p>
+                            <p th:text="'Departamento:  ' + ${inmueble.departamento}"></p>
+                            <p th:text="'Precio:  ' + ${inmueble.precio} + '$'"></p>
 
-                    </div>
+                        </div>
 
 
-                    <div th:if="@{/imagen/inmueble/__${inmueble.id}__} == null" >
-                        <p>error</p>
-                    </div></a>
+                        <div th:if="@{/imagen/inmueble/__${inmueble.id}__} == null" >
+                            <p>error</p>
+                        </div></a>
+                </div>
             </div>
-        </section>
 
-        
+        </section>
+        <br/><br/><br/>
+
 
         <!-- Seccion del Footer -->
         <footer th:replace="/fragments/footer :: footer" />
