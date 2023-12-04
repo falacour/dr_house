@@ -73,3 +73,26 @@ input[type="input"]:hover{
       border: 2px solid #e44d26;
   border-radius: 5px;
 }
+
+
+.container button {
+    width: 100%;
+    margin-top: 5px;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #e44d26;;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.2s;
+}
+.container button:hover{
+    background-color: white;
+    color: #e44d26;;
+    opacity: 0.8;
+      border: 2px solid #e44d26;
+  border-radius: 5px;
+}
