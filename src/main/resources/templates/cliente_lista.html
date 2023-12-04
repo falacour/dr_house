@@ -24,13 +24,14 @@
                         <td th:text="${cliente.email}"></td>
                         <td th:text="${cliente.rol}"></td>
                         <td>Imagen</td>
+                        
                         <td sec:authorize = "hasRole('ADMIN')">
-                            <a th:href="@{/admin/cambiarRol/__${cliente.id}__}">
-                                <i class="bi bi-feather"></i>Modificar
+                            <a class="elim" th:href="@{/admin/cambiarRol/__${cliente.id}__}">
+                                <i ></i>Modificar
                             </a>
                             <td sec:authorize = "hasRole('ADMIN')">
-                                <a th:href="@{/admin/eliminar/__${cliente.id}__}">
-                                    <i class="bi bi-feather"></i>Eliminar
+                                <a class="elim" th:href="@{/admin/eliminar/__${cliente.id}__}">
+                                    <i ></i>Eliminar
                                 </a>
                             </td>
                     </tr>
