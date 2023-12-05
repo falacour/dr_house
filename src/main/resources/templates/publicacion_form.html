@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    
+    <head th:replace = "/fragments/head :: head"/>
+<body>
+    <header th:replace="/fragments/header :: header" />
+    <nav th:replace="/fragments/nav :: nav"/>
+
+    <div class="container">
+        <h2>Nueva publicación</h2>
+
+        <form th:action="@{/publicacion/registro}" method="POST">
+            <input type="text" th:value="${idEnte}" id="idEnte" name="idReceptor" hidden/>
+            <div class="form-group">
+                <label for="asunto">Asunto</label>
+                <input type="text" id="nombre" name="asunto"/>
+            </div>
+
+            <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="nombre" name="mensaje" rows="7" cols="65"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Enviar"/>
+            </div>
+        </form>
+    </div>
+
+    <footer th:replace="/fragments/footer :: footer" />
+</body>
+</html>

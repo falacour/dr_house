@@ -4,11 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/registrar.css" />
-        <title>Formulario de Registro</title>
+        <title>Ingresa tus datos</title>
     </head>
     <body>
         <div class="container">
-            <h2>Registro</h2>
+            <h2>Log In</h2>
             <form method="POST" th:action="@{/logincheck}">
 
                 <div>
@@ -16,13 +16,13 @@
                     <input type="password" name="password" placeholder="Contraseña">
                 </div>
 
-                <button type="submit">comprobar</button>
+                <button type="submit">Ingresar</button>
 
             </form>
 
             <p th:text="${error}"></p>
             <div>
-                <a th:href="@{/registro}"><p>No tienes una cuenta? Registrate acá</p></a>
+                <a th:href="@{/registro}"><p>¿No tienes una cuenta? Registrate acá</p></a>
             </div>
         </div>
 

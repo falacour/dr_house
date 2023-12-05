@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace="/fragments/head :: head"/>
+
+    <body>
+        <header th:replace="/fragments/header :: header" />
+        <nav th:replace="/fragments/nav :: nav"/>
+        <<h1>error</h1>
+           <div class="">
+                    <a class="navbar-brand" th:text="'Error ' + ${codigo}">MR House</a>
+                    <p class="tituloLibros" th:text="${mensaje}"></p>
+                    
+                </div>
+        <footer th:replace="/fragments/footer :: footer" />
+        <script src="index.js"></script>
+    </body>
+
+</html>

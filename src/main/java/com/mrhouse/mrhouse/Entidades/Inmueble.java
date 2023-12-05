@@ -1,8 +1,8 @@
 package com.mrhouse.mrhouse.Entidades;
 
+import java.util.List;
 import javax.persistence.*;
 import lombok.*;
-
 
 @Entity
 @Data
@@ -19,12 +19,20 @@ public class Inmueble {
     private String provincia;
     private String departamento;
     private Double precio;
-    @ManyToOne
-    private Ente ente;
-    @ManyToOne
+    private Double oferta;
+    private String descripcion;
+    private String transaccion;
+    private Integer hambientes;
+  @OneToOne
+    private Cliente ente;
+    @OneToOne
     private Cliente cliente;
     @OneToOne
     private Imagen imagen;
     private Boolean alta;
+    
+   @OneToMany(mappedBy = "inmueble")
+    private List<RangoHorario> rangosHorarios;
+
 
 }

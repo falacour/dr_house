@@ -6,11 +6,9 @@ package com.mrhouse.mrhouse.servicios;
 
 import com.mrhouse.mrhouse.Entidades.Cliente;
 import com.mrhouse.mrhouse.Entidades.Imagen;
-import com.mrhouse.mrhouse.Entidades.Inmueble;
 import com.mrhouse.mrhouse.enumeraciones.Rol;
 import com.mrhouse.mrhouse.excepciones.MiException;
 import com.mrhouse.mrhouse.repositorios.RepositorioCliente;
-import com.mrhouse.mrhouse.repositorios.RepositorioInmueble;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -41,20 +39,33 @@ public class ServicioCliente implements UserDetailsService {
 
     @Autowired
     private ServicioImagen servicioImagen;
-    
+
     @Autowired
     private ServicioInmueble servicioInmueble;
 
     @Transactional
     public void registrar(MultipartFile archivo, String nombre, String dni, String mail,
-            String password, String password2) throws MiException {
+            String password, String password2, Rol rol) throws MiException {
+
         validar(nombre, mail, password, password2, dni);
+
+        List<Cliente> clientes = repositorioCliente.todosLosUsuarios();
         Cliente cliente = new Cliente();
+
+        for (Cliente client : clientes) {
+            if (client.getDni().equals(dni)) {
+                throw new MiException("ya existe ese dni");
+            }
+            if (client.getEmail().equals(mail)) {
+                throw new MiException("ya existe ese mail");
+            }
+        }
         cliente.setNombre(nombre);
         cliente.setDni(dni);
         cliente.setEmail(mail);
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
-        cliente.setRol(Rol.CLIENTE);
+        cliente.setRol(rol);
+        cliente.setBaja(Boolean.FALSE);
         Imagen imagen = servicioImagen.guardar(archivo);
         cliente.setImagen(imagen);
         repositorioCliente.save(cliente);
@@ -62,13 +73,14 @@ public class ServicioCliente implements UserDetailsService {
     }
 
     public void actualizar(MultipartFile archivo, String idCliente, String nombre, String mail,
-            String password, String password2, String dni) throws MiException {
-        validar(nombre, mail, password, password2,dni);
+            String password, String password2, String dni, Rol rol) throws MiException {
+        validar(nombre, mail, password, password2, dni);
         Optional<Cliente> respuesta = repositorioCliente.findById(idCliente);
         if (respuesta.isPresent()) {
             Cliente cliente = respuesta.get();
             cliente.setEmail(mail);
             cliente.setPassword(new BCryptPasswordEncoder().encode(password));
+            cliente.setRol(rol);
             String idImagen = null;
             if (cliente.getImagen() != null) {
                 idImagen = cliente.getImagen().getId();
@@ -89,15 +101,54 @@ public class ServicioCliente implements UserDetailsService {
         clientes = repositorioCliente.findAll();
         return clientes;
     }
-    
+
     @Transactional
-    public void compra(Long idInmueble, String id){
-        Inmueble inmueble = servicioInmueble.getOne(idInmueble);
-        Cliente cliente = repositorioCliente.getOne(id);
-        List<Inmueble> inmuebles = cliente.getInmueble();
-        inmuebles.add(inmueble);
-        cliente.setInmueble(inmuebles);
-        
+    public void compra(Long idInmueble, String id) {
+        servicioInmueble.compra(id, idInmueble);
+    }
+
+    @Transactional
+    public void eliminarPorId(String id) {
+        Optional<Cliente> respuesta = repositorioCliente.findById(id);
+        if (respuesta.isPresent()) {
+            Cliente cliente = respuesta.get();
+            repositorioCliente.delete(cliente);
+
+        }
+    }
+
+    @Transactional
+    public void baja(String id) {
+        Optional<Cliente> respuesta = repositorioCliente.findById(id);
+        if (respuesta.isPresent()) {
+            Cliente cliente = respuesta.get();
+            if (cliente.getBaja() == false) {
+                cliente.setBaja(Boolean.TRUE);
+            } else if (cliente.getBaja() == true) {
+                cliente.setBaja(Boolean.FALSE);
+            }
+
+        }
+    }
+
+    public void cambiarRol(String id) {
+        Optional<Cliente> respuesta = repositorioCliente.findById(id);
+
+        if (respuesta.isPresent()) {
+
+            Cliente cliente = respuesta.get();
+
+            if (cliente.getRol().equals(Rol.CLIENTE)) {
+
+                cliente.setRol(Rol.ENTE);
+
+            } else if (cliente.getRol().equals(Rol.ENTE)) {
+                cliente.setRol(Rol.CLIENTE);
+
+            }
+            repositorioCliente.save(cliente);
+        }
+
     }
 
     public void validar(String nombre, String email, String password, String password2, String dni) throws MiException {
@@ -116,8 +167,9 @@ public class ServicioCliente implements UserDetailsService {
         if (!password.equals(password2)) {
             throw new MiException("Las contraseñas deben ser iguales");
         }
-        if(dni== null ){
-            throw new MiException("el dni no puede estar vacio");}
+        if (dni == null) {
+            throw new MiException("el dni no puede estar vacio");
+        }
     }
 
     @Override
