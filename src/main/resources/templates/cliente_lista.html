@@ -33,6 +33,16 @@
                                     <i class="bi bi-feather"></i>Eliminar
                                 </a>
                             </td>
+                            <td sec:authorize = "hasRole('ENTE')">
+                                <a th:href="@{/cliente/baja/__${cliente.id}__}">
+                                    <i class="bi bi-feather"></i>Dar de baja
+                                </a>
+                            </td>
+                            <td sec:authorize = "hasRole('ENTE')">
+                                <a th:href="@{/cliente/baja/__${cliente.id}__}">
+                                    <i class="bi bi-feather"></i>Dar de alta
+                                </a>
+                            </td>
                     </tr>
                 </tbody>
             </table>
