@@ -24,17 +24,32 @@
                         <td th:text="${cliente.email}"></td>
                         <td th:text="${cliente.rol}"></td>
                         <td>Imagen</td>
-                        
+
                         <td sec:authorize = "hasRole('ADMIN')">
-                            <a class="elim" th:href="@{/admin/cambiarRol/__${cliente.id}__}">
-                                <i ></i>Modificar
+
+                      
+
+                            <a th:href="@{/admin/cambiarRol/__${cliente.id}__}">
+                                <i class="bi bi-feather"></i>Modificar
                             </a>
                             <td sec:authorize = "hasRole('ADMIN')">
                                 <a class="elim" th:href="@{/admin/eliminar/__${cliente.id}__}">
                                     <i ></i>Eliminar
                                 </a>
+
                             </td>
-                    </tr>
+                            <td sec:authorize = "hasRole('ENTE')">
+                                <a th:href="@{/cliente/baja/__${cliente.id}__}">
+                                    <i class="bi bi-feather"></i>Dar de baja
+                                </a>
+                            </td>
+                            <td sec:authorize = "hasRole('ENTE')">
+                                <a th:href="@{/cliente/baja/__${cliente.id}__}">
+                                    <i class="bi bi-feather"></i>Dar de alta
+                                </a>
+                            </td>
+
+                            
                 </tbody>
             </table>
 
